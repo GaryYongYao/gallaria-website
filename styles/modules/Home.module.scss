@@ -1,0 +1,41 @@
+@import '../mixins';
+@import '../animation';
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  &-hero {
+    margin-top: -100px;
+    background-color: $primary;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+
+    .down-button {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &:hover {
+        img {
+          transition: all ;
+          animation-duration: 1.5s;
+          animation-iteration-count: infinite;
+          animation-name: bounce;
+          animation-timing-function: linear;
+        }
+      }
+
+      img {
+        width: 48px;
+      }
+    }
+  }
+}

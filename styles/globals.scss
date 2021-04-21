@@ -1,13 +1,17 @@
 @import './mixins';
-@import './components/snackbar.scss';
+@import './components/breadcrumbs.scss';
+@import './components/button.scss';
+@import './components/dropdown.scss';
 @import './components/footer.scss';
+@import './components/header.scss';
+@import './components/input.scss';
+@import './components/snackbar.scss';
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Helvetica Neue, Arial, sans-serif;
 }
 
 a {
@@ -20,11 +24,40 @@ a {
   color: $text-primary;
 }
 
+span {
+  letter-spacing: 5%;
+}
+
 p {
   margin: 0;
+}
+
+h3 {
+  font-size: 26px;
+  line-height: 31.75px;
+  letter-spacing: 5%;
+  margin: 0;
+  
+  @media screen and (max-width: $sm-max) {
+    font-size: 20px;
+    line-height: 24.42px;
+  }
 }
 
 .container {
   margin: 0 auto;
   width: 80%;
+}
+
+.no-bg {
+  background-color: unset !important;
+  background: unset !important;
+}
+
+.only-mobile {
+  display: none;
+  
+  @media screen and (max-width: $sm-max) {
+    display: block;
+  }
 }

@@ -1,0 +1,28 @@
+.number-input {
+  width: 100%;
+  border-radius: 5px;
+  border: 0.5px solid $grey;
+  text-align: center;
+  padding: 5.25px 13px;
+  display: flex;
+
+  .minus {
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  input {
+    width: 100%;
+    text-align: center;
+    border: 0;
+  
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .plus {
+    font-size: 18px;
+    cursor: pointer;
+  }
+}

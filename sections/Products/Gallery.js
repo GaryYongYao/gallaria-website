@@ -1,0 +1,31 @@
+import { useState } from 'react'
+import styles from 'styles/modules/ProductDetail.module.scss'
+
+function Gallery({ data }) {
+  const { primaryImage, images } = data
+  const [selected, setSelected] = useState(primaryImage)
+
+  return (
+    <div className={styles['section-gallery']}>
+      <div>
+        <div className={styles['selected-image']}>
+          <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected)}`} />
+        </div>
+        <div className={styles['image-gallery']}>
+          <div>
+            {images.map(image => (
+              <div
+                onClick={() => setSelected(image)}
+                className={(selected === image) ? styles['selected'] : ''}
+              >
+                <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image)}`} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Gallery

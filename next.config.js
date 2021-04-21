@@ -6,12 +6,17 @@ module.exports = withImages({
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  rewrites: async () => [
+  /* rewrites: async () => [
     {
       source: '/api/:path*',
       destination: 'https://desksit.chativo.io/api/:path*' // Proxy to Backend
     }
-  ],
+  ], */
+  exportPathMap: function (defaultPathMap) {
+    return {
+      '/': { page: '/' },
+    }
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config

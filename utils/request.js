@@ -1,24 +1,17 @@
 import axios from 'axios'
-import { API_KEY } from './env'
 
 axios.defaults.baseURL = '/api'
 
-function request(type, url, lang = 'en-US', data = null) {
+function request(gql = null, params) {
   const promise = new Promise((resolve, reject) => {
     const perms = {
-      url: `${url}`,
-      method: `${type}`,
-      headers: {
-        'X-API-KEY': API_KEY,
-        'Accept-Language': lang,
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-ORIGIN': 'DwCzATbtYQvX2440hcAymGZBfMZi3F0l'
+      url: process.env.NEXT_PUBLIC_SITE_API,
+      method: 'post',
+      responseType: 'json',
+      data: {
+        query: gql,
+        variables: params
       }
-    }
-    if (type !== 'GET' && data) {
-      perms.data = data
-    } else if (type === 'GET' && data) {
-      perms.params = data
     }
 
     axios(perms)
@@ -39,16 +32,5 @@ function errorHandler(resolve, reject) {
     reject(error.response.data)
   }
 }
-
-/*
-How to use request
-  request('(request type)', '(api path)', { params })
-    .then(res => {
-      // process
-    })
-    .catch(() => {
-      // error handling
-    })
-*/
 
 export default request

@@ -9,7 +9,7 @@ function Footer() {
             <Link href="/">
               ABOUT GALLARIA
             </Link>
-            <Link href="/">
+            <Link href="/products">
               PRODUCTS
             </Link>
             <Link href="/">
@@ -25,16 +25,16 @@ function Footer() {
         </div>
         <div className="footer-right">
           <div className="social-container">
-            <Link href="/">
-              <img src="/svg/Icons_Insta.svg" alt="Instagram" />
-            </Link>
-            <Link href="/">
-              <img src="/svg/Icons_LinkedIn.svg" alt="LinkedIn" />
-            </Link>
+            <a target="_blank" href="https://www.instagram.com/gallariaaustralia/" rel="noopener noreferrer">
+              <img src="/svg/insta.svg" alt="Instagram" />
+            </a>
+            <a target="_blank" href="https://www.linkedin.com/company/gallaria-bathware/" rel="noopener noreferrer">
+              <img src="/svg/linkedIn.svg" alt="LinkedIn" />
+            </a>
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container mobile-break">
         <div className="footer-left">
           <div className="phone-container">
             <p className="contact-text">(02) 8985 2619 / 1300 961 239</p>
@@ -46,13 +46,15 @@ function Footer() {
             <div className="address-half">
               <div className="address">
                 <p>HEAD OFFICE:</p>
-                <p>27 HELLES AVENUE, MOOREBANK, NSW 2170</p>
+                <p>27 HELLES AVENUE,</p>
+                <p>MOOREBANK, NSW 2170</p>
               </div>
             </div>
             <div className="address-half">
               <div className="address">
-                <p>Sydney Showroom:</p>
-                <p>1F Danks Street, Waterloo, NSW 2017</p>
+                <p>SYDNEY SHOWROOM:</p>
+                <p>1F Danks Street,</p>
+                <p>Waterloo, NSW 2017</p>
               </div>
             </div>
           </div>

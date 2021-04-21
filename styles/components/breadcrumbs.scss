@@ -1,0 +1,37 @@
+.breadcrumbs {
+  display: flex;
+  padding: 46px 0;
+
+  @media screen and (max-width: $sm-max) {
+    padding: 15px 0 15px 0;
+
+    .slash {
+      display: none;
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  a {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 12.21px;
+    letter-spacing: 5%;
+
+    img {
+      height: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  .slash {
+    margin: 0 7.37px;
+  }
+
+  span {
+    font-size: 10px;
+    line-height: 11.93px;
+  }
+}
