@@ -11,12 +11,13 @@ module.exports = withImages({
       source: '/api/:path*',
       destination: 'https://desksit.chativo.io/api/:path*' // Proxy to Backend
     }
-  ], */
+  ],
   exportPathMap: function (defaultPathMap) {
     return {
       '/': { page: '/' },
+      '/': { page: '/' },
     }
-  },
+  }, */
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config
