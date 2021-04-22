@@ -7,7 +7,7 @@ import request from 'utils/request'
 import { queryGetProductByCode } from 'utils/graphql'
 import Error from '../_error'
 
-function Home({ data }) {
+function Product({ data }) {
   const router = useRouter()
   const { status } = router.query
 
@@ -36,7 +36,7 @@ function Home({ data }) {
   )
 }
 
-Home.getInitialProps = async (ctx) => {
+/* Product.getInitialProps = async (ctx) => {
   try {
     const { code, res } = ctx.query
 
@@ -48,6 +48,44 @@ Home.getInitialProps = async (ctx) => {
   } catch (err) {
     return err
   }
+} */
+
+export async function getStaticProps(ctx) {
+  const { code, res } = ctx.params
+
+  const response = await request(queryGetProductByCode, { code })
+  const data = response.data.data.getProductByCode
+  if (!data && res) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { data }, // will be passed to the page component as props
+  }
 }
 
-export default Home
+export async function getStaticPaths() {
+  const response = await request(`
+  query {
+    getProducts {
+      code
+      isDraft
+    }
+  }
+  `)
+
+  const { getProducts } = (response.data || {}).data
+
+  const paths = await getProducts.map(product => ({
+    params: { code: product.code }
+  }))
+
+  return {
+    paths,
+    fallback: false // See the "fallback" section below
+  }
+}
+
+export default Product

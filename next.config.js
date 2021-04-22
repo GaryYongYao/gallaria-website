@@ -1,6 +1,38 @@
 /* eslint-disable */
 const withImages = require('next-images')
 const path = require('path')
+const axios = require('axios')
+
+function request(gql = null, params) {
+  const promise = new Promise((resolve, reject) => {
+    const perms = {
+      url: process.env.NEXT_PUBLIC_SITE_API,
+      method: 'post',
+      responseType: 'json',
+      data: {
+        query: gql,
+        variables: params
+      }
+    }
+
+    axios(perms)
+      .then(successHandler(resolve, reject))
+      .catch(errorHandler(resolve, reject))
+  })
+  return promise
+}
+
+function successHandler(resolve) {
+  return (response) => {
+    resolve(response)
+  }
+}
+
+function errorHandler(resolve, reject) {
+  return (error) => {
+    reject(error.response.data)
+  }
+}
 
 module.exports = withImages({
   sassOptions: {
@@ -12,12 +44,11 @@ module.exports = withImages({
       destination: 'https://desksit.chativo.io/api/:path*' // Proxy to Backend
     }
   ], */
-  exportPathMap: function (defaultPathMap) {
+  /* exportPathMap: async (defaultPathMap) => {
     return {
-      '/': { page: '/' },
-      'products/6767': { page: 'products/[code]', query: { code: '6767' } },
+      '/': { page: '/' }
     }
-  },
+  }, */
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config
