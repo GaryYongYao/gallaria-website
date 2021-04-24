@@ -25,7 +25,7 @@ a {
 }
 
 span {
-  letter-spacing: 5%;
+  letter-spacing: 0.05rem;
 }
 
 p {
@@ -35,18 +35,13 @@ p {
 h3 {
   font-size: 26px;
   line-height: 31.75px;
-  letter-spacing: 5%;
+  letter-spacing: 0.05rem;
   margin: 0;
   
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $md-max) {
     font-size: 20px;
     line-height: 24.42px;
   }
-}
-
-.container {
-  margin: 0 auto;
-  width: 80%;
 }
 
 .no-bg {
@@ -57,7 +52,7 @@ h3 {
 .only-mobile {
   display: none;
   
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $md-max) {
     display: block;
   }
 }

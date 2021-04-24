@@ -1,4 +1,13 @@
 // graphql
+export const queryProductPaths = `
+query {
+  getProducts {
+    code
+    isDraft
+  }
+}
+`
+
 export const queryGetProductByCode = `
 query getProductByCode($code: String!) {
   getProductByCode(code: $code) {
@@ -20,7 +29,18 @@ query getProductByCode($code: String!) {
     file
     images
     primaryImage
+    features
     isDraft
+  }
+}
+`
+
+export const queryGetRecommendedProducts = `
+query getRecommendedProducts($code: String!) {
+  getRecommendedProducts(code: $code) {
+    code
+    name
+    primaryImage
   }
 }
 `

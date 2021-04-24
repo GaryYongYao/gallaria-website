@@ -2,12 +2,12 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import { Breadcrumbs, Footer, Header } from 'components/components'
-import { Details, Gallery } from 'sections/Products/sections'
+import { Details, Features, Gallery, Recommendation } from 'sections/Products/sections'
 import request from 'utils/request'
-import { queryGetProductByCode } from 'utils/graphql'
+import { queryProductPaths, queryGetProductByCode, queryGetRecommendedProducts } from 'utils/graphql'
 import Error from '../_error'
 
-function Product({ data }) {
+function Product({ data, recommendations }) {
   const router = useRouter()
   const { status } = router.query
 
@@ -29,8 +29,11 @@ function Product({ data }) {
       <Breadcrumbs crumbs={breadcrumbs} />
       <div className={`container ${styles['section-main-container']}`}>
         <Gallery data={data} />
+        <div className="col-md-1" />
         <Details data={data} />
       </div>
+      {data.features && <Features data={data} />}
+      {recommendations && <Recommendation recommendation={recommendations} />}
       <Footer />
     </div>
   )
@@ -55,6 +58,8 @@ export async function getStaticProps(ctx) {
 
   const response = await request(queryGetProductByCode, { code })
   const data = response.data.data.getProductByCode
+  const reList = await request(queryGetRecommendedProducts, { code })
+  const recommendations = reList.data.data.getRecommendedProducts
   if (!data && res) {
     return {
       notFound: true,
@@ -62,20 +67,12 @@ export async function getStaticProps(ctx) {
   }
 
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data, recommendations }, // will be passed to the page component as props
   }
 }
 
 export async function getStaticPaths() {
-  const response = await request(`
-  query {
-    getProducts {
-      code
-      isDraft
-    }
-  }
-  `)
-
+  const response = await request(queryProductPaths)
   const { getProducts } = (response.data || {}).data
 
   const paths = await getProducts.map(product => ({

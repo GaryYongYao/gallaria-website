@@ -17,9 +17,11 @@ function Header() {
           </Link>
           <div className="navigation">
             <div className="search">
-              <img src="/svg/search.svg" alt="Search" />
               <div>
-                <input required placeholder="Search..." />
+                <img src="/svg/search.svg" alt="Search" />
+              </div>
+              <div>
+                <input required placeholder="SEARCH" />
               </div>
             </div>
             <Link href="/">

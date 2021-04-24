@@ -1,4 +1,5 @@
 import Link from 'components/Link'
+import React from 'react'
 
 function Breadcrumbs({ crumbs }) {
   return (
@@ -8,14 +9,14 @@ function Breadcrumbs({ crumbs }) {
       </Link>
       {crumbs.map((crumb, i) => (
         (i === crumbs.length - 1) ? (
-          <>
+          <React.Fragment key={crumb.name}>
             <span className="slash">/</span>
             <span>
               {`${crumb.name}`}
             </span>
-          </>
+          </React.Fragment>
         ) : (
-          <Link href={crumb.link}>
+          <Link key={crumb.name} href={crumb.link}>
             {`${crumb.name}`}
           </Link>
         )

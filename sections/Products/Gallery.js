@@ -6,7 +6,7 @@ function Gallery({ data }) {
   const [selected, setSelected] = useState(primaryImage)
 
   return (
-    <div className={styles['section-gallery']}>
+    <div className={`col-lg-6 ${styles['section-gallery']}`}>
       <div>
         <div className={styles['selected-image']}>
           <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected)}`} />
@@ -15,11 +15,11 @@ function Gallery({ data }) {
           <div>
             {images.map(image => (
               <div
+                key={image}
                 onClick={() => setSelected(image)}
                 className={(selected === image) ? styles['selected'] : ''}
-              >
-                <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image)}`} />
-              </div>
+                style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image)})` }}
+              />
             ))}
           </div>
         </div>

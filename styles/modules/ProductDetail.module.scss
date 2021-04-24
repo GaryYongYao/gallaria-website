@@ -10,27 +10,24 @@
     display: flex;
     margin-bottom: 68.57px;
 
-    @media screen and (max-width: $sm-max) {
+    @media screen and (max-width: $md-max) {
       flex-direction: column;
     }
   }
 
   &-gallery {
-    width: 50%;
-
-    @media screen and (max-width: $sm-max) {
-      width: 100%;
-    }
 
     > div {
-      width: 580px;
+      max-width: 580px;
+      margin-right: 15px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
 
-      @media screen and (max-width: $sm-max) {
+      @media screen and (max-width: $md-max) {
         width: 100%;
+        max-width: 100%;
       }
 
       .selected-image {
@@ -41,35 +38,57 @@
         align-items: center;
         margin-bottom: 20.25px;
 
-        @media screen and (max-width: $sm-max) {
-          height: 432px;
+        @media screen and (max-width: $md-max) {
+          height: auto;
         }
       }
 
       .image-gallery {
         width: 100%;
+        height: 135px;
         overflow-x: hidden;
         position: relative;
+  
+        @media screen and (max-width: $md-max) {
+          height: 81px;
+        }
 
         > div {
+          position: absolute;
+          width: 100%;
+          top: 0;
+          left: 0;
           display: flex;
-          width: fit-content;
+          justify-content: flex-start;
+          align-items: center;
 
           > div {
             height: 135px;
             margin-right: 20px;
             cursor: pointer;
+            width: calc(33% - 20px);
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            background-position: center;
+            background-position-x: center;
+            background-repeat: no-repeat;
+            background-size: cover;
   
             &.selected {
-              border: 3px solid $primary;
+              opacity: 0.5;
+            }
+
+            &:last-child {
+              width: 33%;
+              margin-right: 0;
             }
   
-            @media screen and (max-width: $sm-max) {
+            @media screen and (max-width: $md-max) {
               height: 81px;
-            }
-  
-            img {
-              height: 100%;
+              width: calc(33% - 10px);
+              margin-right: 10px;
+              min-width: 109px;
             }
           }
         }
@@ -78,15 +97,10 @@
   }
 
   &-details {
-    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-
-    @media screen and (max-width: $sm-max) {
-      width: 100%;
-    }
 
     .container {
       &-code {
@@ -94,7 +108,7 @@
         line-height: 16.1px;
         margin-bottom: 21px;
 
-        @media screen and (max-width: $sm-max) {
+        @media screen and (max-width: $md-max) {
           margin-top: 29px;
         }
 
@@ -104,11 +118,12 @@
       }
 
       &-name {
+        text-transform: uppercase;
         padding-bottom: 12px;
-        min-width: 380px;
+        width: 80%;
         border-bottom: 0.5px solid $primary;
 
-        @media screen and (max-width: $sm-max) {
+        @media screen and (max-width: $md-max) {
           min-width: 100%;
         }
       }
@@ -127,6 +142,7 @@
 
       &-desc {
         min-height: 74px;
+        max-width: 80%;
         padding-top: 12px;
         padding-bottom: 12px;
 
@@ -141,19 +157,19 @@
 
       &-variant {
         min-height: 26px;
-        width: 280px;
+        width: 60%;
         position: relative;
 
-        @media screen and (max-width: $sm-max) {
+        @media screen and (max-width: $md-max) {
           width: 100%;
         }
       }
 
       &-number {
         margin-top: 36.75px;
-        min-width: 280px;
+        width: 60%;
   
-        @media screen and (max-width: $sm-max) {
+        @media screen and (max-width: $md-max) {
           min-width: 100%;
           width: 100%;
         }
@@ -162,9 +178,9 @@
       &-button {
         margin-top: 15px;
         margin-bottom: 42.23px;
-        min-width: 280px;
+        width: 60%;
   
-        @media screen and (max-width: $sm-max) {
+        @media screen and (max-width: $md-max) {
           min-width: 100%;
           width: 100%;
         }
@@ -188,7 +204,7 @@
             margin-left: 42.35px;
             margin-right: 33.88px;
   
-            @media screen and (max-width: $sm-max) {
+            @media screen and (max-width: $md-max) {
               margin-left: 15px;
               margin-right: 15px;
             }
@@ -203,8 +219,13 @@
       &-details {
         max-height: 348px;
         margin-bottom: 48px;
-        padding-right: 94px;
         overflow-y: scroll;
+        width: 100%;
+        padding-right: 20%;
+  
+        @media screen and (max-width: $md-max) {
+          width: 100%;
+        }
 
         
         &::-webkit-scrollbar {
@@ -224,7 +245,7 @@
           background: #858585; 
         }
   
-        @media screen and (max-width: $sm-max) {
+        @media screen and (max-width: $md-max) {
           overflow-y: auto;
           max-height: unset;
           padding-right: 0;
@@ -235,12 +256,7 @@
           padding: 8.37px 0;
           display: flex;
           align-items: flex-start;
-          width: 381px;
           border-bottom: 0.25px solid $primary-light;
-  
-          @media screen and (max-width: $sm-max) {
-            width: 100%;
-          }
 
           .title {
             color: $text-primary;
@@ -263,6 +279,55 @@
           }
         }
       }
+    }
+  }
+
+  &-features {
+    .title-container {
+      display: flex;
+      margin-bottom: 17px;
+  
+      @media screen and (max-width: $md-max) {
+        width: 100%;
+      }
+
+      span {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 17.09px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid $grey;
+      }
+    }
+
+    img {
+      margin-bottom: 10px;
+      width: 100%;
+
+      @media screen and (max-width: $md-max) {
+        padding: 0 15px;
+      }
+    }
+  }
+
+  &-recommendation {
+    margin-top: 87.02px;
+    margin-bottom: 57.43px;
+
+    .title-container {
+      margin-bottom: 30.98px;
+      
+      span {
+        font-size: 14px;
+        line-height: 17.09px;
+        font-weight: 700;
+      }
+    }
+
+    .items-container {
+      width: 100%;
+
     }
   }
 }

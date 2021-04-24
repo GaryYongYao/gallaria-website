@@ -8,7 +8,7 @@ function Details({ data }) {
   const [selected, setSelected] = useState(variants[0] || '')
 
   return (
-    <div className={styles['section-details']}>
+    <div className={`col-lg-5 ${styles['section-details']}`}>
       <div className={styles['container-code']}>
         <span>
           Code: {code}
@@ -53,7 +53,7 @@ function Details({ data }) {
       <div className={styles['container-details']}>
         <div>
           {details.map(detail => (
-            <div className={styles['detail']}>
+            <div key={detail.title} className={styles['detail']}>
               <div className={styles['title']}>{detail.title}</div>
               <div className={styles['info']}>{detail.info}</div>
             </div>
@@ -61,7 +61,7 @@ function Details({ data }) {
           {variants && (
             <div className={styles['detail']}>
               <div className={styles['title']}>Variant</div>
-              <div className={styles['info']}>{variants.map(variant => <p>{variant}</p>)}</div>
+              <div className={styles['info']}>{variants.map(variant => <p key={variant}>{variant}</p>)}</div>
             </div>
           )}
         </div>

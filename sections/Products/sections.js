@@ -1,7 +1,11 @@
 import Details from './Details'
+import Features from './Features'
 import Gallery from './Gallery'
+import Recommendation from './Recommendation'
 
 export {
   Details,
-  Gallery
+  Features,
+  Gallery,
+  Recommendation
 }
