@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from 'styles/modules/ProductDetail.module.scss'
-import { DropdownUnderline, NumberInput } from 'components/components'
+import { DropdownUnderline, NumberInput } from 'components'
 
 function Details({ data }) {
   const { code, name, price, desc, forSale, details, variants } = data

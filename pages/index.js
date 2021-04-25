@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from 'styles/modules/Home.module.scss'
-import { Footer, HeaderWhite } from 'components/components'
-import Hero from 'sections/Home/Hero'
+import { Footer, HeaderWhite } from 'components'
+import { Design, Hero, Project } from 'sections/Home'
 
 export default function Home() {
   return (
@@ -13,6 +13,8 @@ export default function Home() {
 
       <HeaderWhite />
       <Hero />
+      <Project />
+      <Design />
       <Footer />
     </div>
   )
