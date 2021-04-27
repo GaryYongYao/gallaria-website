@@ -12,12 +12,12 @@ function Gallery({ data }) {
           <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected)}`} />
         </div>
         <div className={styles['image-gallery']}>
-          <div>
+          <div className="row" style={{ flexWrap: 'nowrap' }} >
             {images.map(image => (
               <div
                 key={image}
                 onClick={() => setSelected(image)}
-                className={(selected === image) ? styles['selected'] : ''}
+                className={`${(selected === image) ? styles['selected'] : ''} col-4`}
                 style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image)})` }}
               />
             ))}

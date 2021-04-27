@@ -33,7 +33,7 @@ function Product({ data, recommendations }) {
         <Details data={data} />
       </div>
       {data.features && <Features data={data} />}
-      {recommendations && <Recommendation recommendation={recommendations} />}
+      {recommendations && <Recommendation recommendations={recommendations} />}
       <Footer />
     </div>
   )

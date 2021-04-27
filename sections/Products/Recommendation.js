@@ -1,5 +1,6 @@
 // import { useState } from 'react'
 import styles from 'styles/modules/ProductDetail.module.scss'
+import { Link } from 'components'
 
 function Recommendation({ recommendations }) {
   return (
@@ -9,7 +10,25 @@ function Recommendation({ recommendations }) {
           PRODUCTS YOU MIGHT LIKE
         </span>
       </div>
-      <div className={styles['items-container']}>
+      <div className={`row ${styles['items-container']}`}>
+        {recommendations.map(recommendation => (
+          <div
+            key={recommendation.code}
+            className="col-6 col-lg-3"
+          >
+            <Link href={`/product/${recommendation.code}`}>
+              <div
+                className={styles['image']}
+                style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(recommendation.primaryImage)}')` }}
+              >
+                <div className={styles['img-overlay']} />
+                <span className={styles['view']}>VIEW PRODUCT</span>
+                <span className={styles['name']}>{recommendation.name}</span>
+                <span className={styles['code']}>Code: {recommendation.code}</span>
+              </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   )

@@ -66,8 +66,6 @@
             height: 135px;
             margin-right: 20px;
             cursor: pointer;
-            width: calc(33% - 20px);
-            min-width: 180px;
             display: flex;
             align-items: center;
             background-position: center;
@@ -326,8 +324,103 @@
     }
 
     .items-container {
-      width: 100%;
 
+      .image {
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+        height: 350px;
+        position: relative;
+
+        @media screen and (max-width: $md-max) {
+          height: 209px;
+        }
+
+        .img-overlay {
+          width: 100%;
+          height: 100%;
+          transition: all 0.3s ease-in-out;
+
+          @media screen and (max-width: $md-max) {
+            display: none;
+          }
+        }
+
+        .view {
+          position: absolute;
+          top: 21px;
+          left: 5%;
+          font-size: 12px;
+          line-height: 13.8px;
+          font-weight: 700;
+          color: $text-secondary;
+          opacity: 0;
+          transition: all 0.3s ease-in-out;
+
+          @media screen and (max-width: $md-max) {
+            display: none;
+          }
+        }
+
+        .name {
+          position: absolute;
+          bottom: 38px;
+          left: 5%;
+          font-size: 14px;
+          line-height: 18.4px;
+          font-weight: 700;
+          color: $text-secondary;
+          opacity: 0;
+          transition: all 0.3s ease-in-out;
+
+          @media screen and (max-width: $md-max) {
+            opacity: 1;
+            color: $text-primary;
+            bottom: -24px;
+            left: 0;
+            font-size: 8px;
+            line-height: 9.77px;
+          }
+        }
+
+        .code {
+          position: absolute;
+          bottom: 21px;
+          left: 5%;
+          font-size: 10px;
+          line-height: 11.5px;
+          color: $text-secondary;
+          opacity: 0;
+          transition: all 0.3s ease-in-out;
+
+          @media screen and (max-width: $md-max) {
+            opacity: 1;
+            color: $text-primary;
+            bottom: -12px;
+            left: 0;
+            font-size: 6px;
+            line-height: 7.16px;
+          }
+        }
+        
+        &:hover {
+          .img-overlay {
+            background-color: $primary-light;
+          }
+
+          .view {
+            opacity: 1;
+          }
+
+          .name {
+            opacity: 1;
+          }
+
+          .code {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }
