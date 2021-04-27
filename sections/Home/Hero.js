@@ -6,7 +6,7 @@ export default function HeroSection() {
     <div className={styles['section-hero']}>
       <div className={styles['overlay']} />
       <div className={styles['down-button']}>
-        <Link href="/#">
+        <Link href="/#content">
           <img src="/svg/inverted-down.svg" alt="Down" />
         </Link>
       </div>

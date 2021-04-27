@@ -19,8 +19,8 @@ function HeaderWhite() {
             <a target="_blank" href="https://www.instagram.com/gallariaaustralia/" rel="noopener noreferrer">
               <img src="/svg/inverted-insta.svg" alt="Instagram" className="social" />
             </a>
-            <a target="_blank" href="https://www.facebook.com/gallariaAU" rel="noopener noreferrer">
-              <img src="/svg/inverted-facebook.svg" alt="Facebook" className="social" />
+            <a target="_blank" href="https://www.linkedin.com/company/gallaria-bathware/" rel="noopener noreferrer">
+              <img src="/svg/inverted-linkedIn.svg" alt="LinkedIn" className="social" />
             </a>
           </div>
           <div className="only-mobile">

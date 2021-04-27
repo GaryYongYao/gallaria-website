@@ -6,7 +6,7 @@ export default function ProjectSection() {
     <div className={styles['section-project']}>
       <div className={`container ${styles['title-box']}`}>
         <div className="col-12">
-          <div className="container">
+          <div className={`container ${styles['title-padding']}`}>
             <div className={styles['title']}>
               <span>LATEST PROJECTS</span>
             </div>
