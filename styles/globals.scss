@@ -63,12 +63,15 @@ h3 {
 
 .featured-container {
   .row {
-    margin-left: 0;
-    margin-right: 0;
-    
-    > * {
-      padding-left: 0;
-      padding-right: 0;
+
+    @media screen and (max-width: $md-max) {
+      margin-left: 0;
+      margin-right: 0;
+  
+      > * {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 }
