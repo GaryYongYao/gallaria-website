@@ -13,7 +13,7 @@ export default function HighlightSection() {
   )
 
   return (
-    <div id="content" className={styles['section-highlight']}>
+    <div id="content" className={`section-highlight ${styles['section-highlight']}`}>
       <div className="container">
         <div className={styles['text-container']}>
           <span className={styles['title']}>

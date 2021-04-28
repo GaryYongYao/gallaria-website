@@ -102,7 +102,7 @@
 
     .container {
       &-code {
-        font-size: 14px;
+        font-size: 1rem;
         line-height: 16.1px;
         margin-bottom: 21px;
 
@@ -121,6 +121,11 @@
         width: 80%;
         border-bottom: 0.5px solid $primary;
 
+        h3 {
+          font-size: 2rem;
+          font-weight: 700;
+        }
+
         @media screen and (max-width: $md-max) {
           min-width: 100%;
         }
@@ -131,22 +136,21 @@
         padding-bottom: 27px;
 
         span {
-          font-size: 14px;
+          font-size: 1rem;
           margin-right: 16px;
-          font-weight: 600;
           line-height: 17.09px;
         }
       }
 
       &-desc {
-        min-height: 74px;
+        min-height: 195.5px;
         max-width: 80%;
         padding-top: 12px;
         padding-bottom: 12px;
 
         span {
           color: #3F3F3F;
-          font-size: 14px;
+          font-size: 1.125rem;
           margin-right: 16px;
           font-weight: 400;
           line-height: 18px;
@@ -177,6 +181,9 @@
         margin-top: 15px;
         margin-bottom: 42.23px;
         width: 60%;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 17.09px;
   
         @media screen and (max-width: $md-max) {
           min-width: 100%;
@@ -193,7 +200,7 @@
           border-bottom: 2px solid $grey;
 
           span {
-            font-size: 14px;
+            font-size: 1.125rem;
             font-weight: 700;
             line-height: 17.09px;
           }
@@ -210,7 +217,7 @@
           }
         }
         a {
-          font-size: 14px;
+          font-size: 1.125rem;
           line-height: 16.7px;
         }
       }
@@ -259,7 +266,7 @@
 
           .title {
             color: $text-primary;
-            font-size: 10px;
+            font-size: 1rem;
             font-weight: 700;
             line-height: 12.21px;
             text-transform: uppercase;
@@ -268,8 +275,8 @@
 
           .info {
             color: $text-primary;
-            font-size: 10px;
-            line-height: 12.21px;
+            font-size: 1rem;
+            line-height: 15px;
             width: 50%;
 
             p {
@@ -292,7 +299,7 @@
 
       span {
         display: block;
-        font-size: 14px;
+        font-size: 1.125rem;
         font-weight: 700;
         line-height: 17.09px;
         padding-bottom: 16px;
@@ -318,7 +325,7 @@
       margin-bottom: 30.98px;
       
       span {
-        font-size: 14px;
+        font-size: 1.125rem;
         line-height: 17.09px;
         font-weight: 700;
       }
@@ -351,7 +358,7 @@
           position: absolute;
           top: 21px;
           left: 5%;
-          font-size: 12px;
+          font-size: 1rem;
           line-height: 13.8px;
           font-weight: 700;
           color: $text-secondary;
@@ -367,7 +374,7 @@
           position: absolute;
           bottom: 38px;
           left: 5%;
-          font-size: 14px;
+          font-size: 1rem;
           line-height: 18.4px;
           font-weight: 700;
           color: $text-secondary;

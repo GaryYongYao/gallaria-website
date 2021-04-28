@@ -1,7 +1,8 @@
-const page = () => window.innerHeight - 50
+const page = () => window.innerHeight - 200
 
 export const showFromBottom = (id, classes = '') => {
   const ele = document.getElementById(id)
+  console.log(ele, ele.getBoundingClientRect().top < page(), ele.className)
 
   if (ele) {
     if (ele.getBoundingClientRect().top < page()) {

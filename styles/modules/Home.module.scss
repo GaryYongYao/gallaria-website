@@ -20,6 +20,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 
+
     .overlay {
       position: absolute;
       top: 0;
@@ -35,24 +36,19 @@
       left: 50%;
       transform: translateX(-50%);
 
-      &:hover {
-        img {
-          transition: all ;
-          animation-duration: 1.5s;
-          animation-iteration-count: infinite;
-          animation-name: bounce;
-          animation-timing-function: linear;
-        }
-      }
-
       img {
         width: 48px;
+        transition: all ;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-name: bounce;
+        animation-timing-function: linear;
       }
     }
   }
 
   &-highlight {
-    margin-top: 95px;
+    padding-top: 95px;
     width: 100%;
 
     @media screen and (max-width: $md-max) {
@@ -189,6 +185,7 @@
             line-height: 18.4px;
             letter-spacing: 0.05em;
             color: $text-secondary;
+            text-align: right;
           }
       }
     }
@@ -306,6 +303,7 @@
       .title {
         font-size: 36px;
         line-height: 48px;
+        font-weight: 500;
         letter-spacing: 0.1em;
 
         @media screen and (max-width: $md-max) {
@@ -473,7 +471,7 @@
         height: 3px;
         background-color: $text-primary;
         margin-top: 34px;
-        margin-bottom: 23px;
+        margin-bottom: 34px;
 
         @media screen and (max-width: $md-max) {
           height: 1px;
@@ -602,6 +600,9 @@
       text-align: center;
       padding-top: 86px;
       padding-bottom: 90px;
+      opacity:0;
+      transform: translateY(100px);
+      transition: all .4s linear;
 
       @media screen and (max-width: $md-max) {
         padding-top: 89px;

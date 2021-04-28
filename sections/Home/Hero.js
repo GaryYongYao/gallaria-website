@@ -3,7 +3,7 @@ import { Link } from 'components'
 
 export default function HeroSection() {
   return (
-    <div className={styles['section-hero']}>
+    <div id="hero" className={styles['section-hero']} onScroll={() => console.log('lol')}>
       <div className={styles['overlay']} />
       <div className={styles['down-button']}>
         <Link href="/#content">

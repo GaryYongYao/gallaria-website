@@ -1,10 +1,12 @@
 @import './mixins';
+@import './animation.scss';
 @import './components/breadcrumbs.scss';
 @import './components/button.scss';
 @import './components/dropdown.scss';
 @import './components/footer.scss';
 @import './components/header.scss';
 @import './components/input.scss';
+@import './components/menu.scss';
 @import './components/snackbar.scss';
 
 html,
@@ -73,5 +75,13 @@ h3 {
         padding-right: 0;
       }
     }
+  }
+}
+
+.react-multi-carousel-dot-list {
+  bottom: 34.44px !important;
+
+  @media screen and (max-width: $md-max) {
+    bottom: 18.44px !important;
   }
 }

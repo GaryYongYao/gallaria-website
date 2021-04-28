@@ -32,8 +32,8 @@ function Product({ data, recommendations }) {
         <div className="col-md-1" />
         <Details data={data} />
       </div>
-      {data.features && <Features data={data} />}
-      {recommendations && <Recommendation recommendations={recommendations} />}
+      {data.features.length > 0 && <Features data={data} />}
+      {recommendations.length > 0 && <Recommendation recommendations={recommendations} />}
       <Footer />
     </div>
   )

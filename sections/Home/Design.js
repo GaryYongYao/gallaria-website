@@ -1,9 +1,23 @@
+import { useEffect } from 'react'
 import styles from 'styles/modules/Home.module.scss'
+import { showFromBottom } from 'utils/animationUtils'
 
 export default function DesignSection() {
+  const showElement = () => {
+    showFromBottom('our-design', styles['text-box'])
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', showElement)
+
+    // returned function will be called on component unmount
+    return () => {
+      window.removeEventListener('scroll', showElement)
+    }
+  }, [])
   return (
     <div className={`container ${styles['section-design']}`}>
-      <div className={styles['text-box']}>
+      <div id="our-design" className={styles['text-box']}>
         <div className={styles['title']}>
           <span>ALL DESIGN</span>
         </div>
