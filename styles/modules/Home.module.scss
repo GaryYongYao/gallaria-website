@@ -117,8 +117,6 @@
 
     .video-container {
       width: 100%;
-      height: 650px;
-      background-color: $primary;
       margin-bottom: 20px;
   
       @media screen and (max-width: $md-max) {
@@ -336,11 +334,112 @@
 
     .experience-image {
       width: 100%;
-      height: 950px;
       background-color: $primary-light;
 
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &-featured {
+    width: 100%;
+    margin-bottom: 53px;
+    position: relative;
+
+    @media screen and (max-width: $md-max) {
+      margin-bottom: 59px;
+    }
+
+    .title-box {
+      display: flex;
+      margin-bottom: 40px;
+
       @media screen and (max-width: $md-max) {
-        height: 500px;
+        margin-bottom: 18px;
+      }
+
+      .title-padding {
+        @media screen and (max-width: $md-max) {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+
+      .title {
+        font-size: 26px;
+        line-height: 31.75px;
+        font-weight: 700;
+        margin-bottom: 34px;
+        letter-spacing: 0.05em;
+
+        @media screen and (max-width: $md-max) {
+          font-size: 18px;
+          line-height: 20px;
+          margin-bottom: 15px;
+          width: calc(100% + 15%);
+        }
+      }
+
+      .divider {
+        width: 40px;
+        height: 3px;
+        background-color: $text-primary;
+
+        @media screen and (max-width: $md-max) {
+          height: 1px;
+          width: 48.87px;
+        }
+      }
+    }
+
+    .featured-items {
+      height: 425px;
+      background-position: center;
+      background-size: cover;
+      margin-bottom: 20px;
+      position: relative;
+
+      @media screen and (max-width: $md-max) {
+        margin-bottom: 0px;
+        height: 180px;
+
+        .img-overlay {
+          display: none;
+        }
+
+        .name {
+          bottom: 15px;
+          opacity: 1;
+        }
+      }
+
+      .img-overlay {
+        width: 100%;
+        height: 100%;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .name {
+        position: absolute;
+        bottom: 28px;
+        left: 5%;
+        font-size: 16px;
+        line-height: 18.4px;
+        font-weight: 700;
+        color: $text-secondary;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+      }
+      
+      &:hover {
+        .img-overlay {
+          background-color: $primary-light;
+        }
+
+        .name {
+          opacity: 1;
+        }
       }
     }
   }

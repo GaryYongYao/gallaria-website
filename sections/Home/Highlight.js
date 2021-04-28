@@ -24,7 +24,12 @@ export default function HighlightSection() {
           </span>
           <div className={`col-1 ${styles['divider']}`} />
         </div>
-        <div className={`col-12 ${styles['video-container']}`} />
+        <div className={`col-1 ${styles['video-container']}`}>
+          <video autoPlay loop muted>
+            <source src="/video/video-2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <div className={`col-12 ${styles['flex-container']}`}>
           <Link href="/#" style={styles['item-wrapper']}>
             <div className={`container ${styles['item-name']}`}>WALL HUNG PAN</div>
@@ -58,7 +63,12 @@ export default function HighlightSection() {
           </span>
           <div className={`col-1 ${styles['divider']}`} />
         </div>
-        <div className={`col-1 ${styles['video-container']}`} />
+        <div className={`col-1 ${styles['video-container']}`}>
+          <video autoPlay loop muted>
+            <source src="/video/video-2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <div className={`col-12 ${styles['images-container']}`}>
           <div className="row">
             <Link href="/#" style="col-4">

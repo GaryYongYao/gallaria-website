@@ -186,6 +186,7 @@
 
       &-title-download {
         display: flex;
+        align-items: baseline;
         margin-bottom: 22.26px;
 
         div {
@@ -207,10 +208,10 @@
               margin-right: 15px;
             }
           }
-          &:nth-child(3) {
-            font-size: 14px;
-            line-height: 16.7px;
-          }
+        }
+        a {
+          font-size: 14px;
+          line-height: 16.7px;
         }
       }
 

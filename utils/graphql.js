@@ -1,4 +1,14 @@
 // graphql
+export const queryGetFeatureProducts = `
+query {
+  getFeatureProducts {
+    code
+    name
+    primaryImage
+  }
+}
+`
+
 export const queryProductPaths = `
 query {
   getProducts {

@@ -15,7 +15,9 @@ export default function ExperienceSection() {
           </div>
         </div>
       </div>
-      <div className={styles['experience-image']} />
+      <div className={styles['experience-image']}>
+        <img src="/images/experience.jpg" />
+      </div>
     </div>
   )
 }

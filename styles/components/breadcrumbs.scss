@@ -4,7 +4,8 @@
   padding-bottom: 46px;
 
   @media screen and (max-width: $md-max) {
-    padding: 15px 0 15px 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     .slash {
       display: none;

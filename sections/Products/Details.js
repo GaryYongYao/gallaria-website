@@ -3,7 +3,7 @@ import styles from 'styles/modules/ProductDetail.module.scss'
 import { DropdownUnderline, NumberInput } from 'components'
 
 function Details({ data }) {
-  const { code, name, price, desc, forSale, details, variants } = data
+  const { code, name, price, desc, forSale, details, variants, file } = data
   const [number, setNumber] = useState(0)
   const [selected, setSelected] = useState(variants[0] || '')
 
@@ -25,7 +25,7 @@ function Details({ data }) {
         <span>{desc}</span>
       </div>
       <div className={styles['container-variant']}>
-        {variants && (
+        {variants.length > 0 && (
           <DropdownUnderline
             value={selected}
             items={variants}
@@ -48,17 +48,23 @@ function Details({ data }) {
           <span>PRODUCT DETAILS</span>
         </div>
         <span className="slash">/</span>
-        <span>DOWNLOAD</span>
+        <a
+          href={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(file)}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          DOWNLOAD
+        </a>
       </div>
       <div className={styles['container-details']}>
         <div>
           {details.map(detail => (
             <div key={detail.title} className={styles['detail']}>
               <div className={styles['title']}>{detail.title}</div>
-              <div className={styles['info']}>{detail.info}</div>
+              <div className={styles['info']} dangerouslySetInnerHTML={{ __html: detail.info.replace(/\n/g, '<br />') }} />
             </div>
           ))}
-          {variants && (
+          {variants.length > 0 && (
             <div className={styles['detail']}>
               <div className={styles['title']}>Variant</div>
               <div className={styles['info']}>{variants.map(variant => <p key={variant}>{variant}</p>)}</div>
