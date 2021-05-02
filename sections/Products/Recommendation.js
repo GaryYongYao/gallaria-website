@@ -14,7 +14,7 @@ function Recommendation({ recommendations }) {
         {recommendations.map(recommendation => (
           <div
             key={recommendation.code}
-            className="col-6 col-lg-3"
+            className={`col-6 col-lg-3 ${styles['items']}`}
           >
             <Link href={`/product/${recommendation.code}`}>
               <div
