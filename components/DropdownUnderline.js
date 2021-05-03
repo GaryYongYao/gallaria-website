@@ -12,14 +12,14 @@ function DropdownUnderline({ value, items, setValue }) {
       <div className={`dropdown-underline-items ${open ? 'opened' : ''}`}>
         {items.map(item => (
           <div
-            key={item}
+            key={item.name || item}
             className="item"
             onClick={() => {
               setValue(item)
               setOpen(false)
             }}
           >
-            {item}
+            {item.name || item}
           </div>
         ))}
       </div>

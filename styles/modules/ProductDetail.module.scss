@@ -3,6 +3,7 @@
 
 .container {
   min-height: 100vh;
+  position: relative;
 }
 
 .section {
@@ -38,6 +39,7 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 20.25px;
+        cursor: pointer;
 
         @media screen and (max-width: $md-max) {
           height: auto;
@@ -520,6 +522,53 @@
             opacity: 1;
           }
         }
+      }
+    }
+  }
+}
+
+.lightbox {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 80px;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: $secondary-light;
+  transition: all .1s linear;
+  transform: scale(0);
+  transform-origin: 50% 50%;
+
+  @media screen and (max-width: $md-max) {
+    padding-top: 30px;
+  }
+
+  &.open {
+    transform: scale(1);
+  }
+
+  .close {
+    float: right;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .image-gallery {
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: max-content;
+      width: max-content;
+
+      @media screen and (max-width: $md-max) {
+        width: 100%;
       }
     }
   }

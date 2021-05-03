@@ -5,6 +5,10 @@ query {
     code
     name
     primaryImage
+    category
+    sub
+    series
+    createdDate
   }
 }
 `

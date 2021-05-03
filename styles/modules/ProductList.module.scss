@@ -7,6 +7,62 @@
 
 .section {
 
+  &-options {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 36.17px;
+
+    .sorting {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      span {
+        font-size: 12px;
+        line-height: 14.32px;
+    
+        @media screen and (max-width: $md-max) {
+          font-size: 10px;
+          line-height: 11.93px;
+        }
+      }
+
+      > span {
+        width: 150px;
+        font-weight: 700;
+      }
+
+      :global(.dropdown-underline) {
+        span {
+          font-weight: 700;
+        }
+      }
+
+      :global(.dropdown-underline-items) {
+        position: absolute;
+        left: 0;
+        transform: translateY(60%) scaleY(0);
+        z-index: 5;
+        background-color: white;
+        border-radius: 10px;
+        transition: transform .2s ease-in-out;
+        transform-origin: top center;
+
+        > :global(.item):last-child {
+          border-bottom: 0;
+        }
+
+        &:global(.opened) {
+          height: auto;
+          transform: translateY(60%) scaleY(1);
+          padding: 5px 15px 0;
+        }
+      }
+    }
+  }
+
   &-carousel {
     margin-top: 50px;
     margin-bottom: 110px;

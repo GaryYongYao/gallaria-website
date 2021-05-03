@@ -21,7 +21,7 @@ const responsive = {
 function CarouselSection({ data }) {
   return (
     <div className={styles['section-carousel']}>
-      <div className={`container ${styles['carousel-container']}`}>
+      <div data-filter="lol" className={`container ${styles['carousel-container']}`}>
         <Carousel
           responsive={responsive}
           showDots={true}
@@ -32,7 +32,7 @@ function CarouselSection({ data }) {
           autoPlaySpeed={5000}
         >
           {data.map(d => (
-            <div key={d.name} v className={styles['item-container']}>
+            <div key={d.name} className={styles['item-container']}>
               <Link href={`/product/${d.code}`}>
                 <div
                   className={styles['item']}
