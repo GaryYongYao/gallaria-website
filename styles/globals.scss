@@ -85,7 +85,17 @@ h3 {
 .react-multi-carousel-dot-list {
   bottom: 34.44px !important;
 
+  button {
+    border-width: 0 !important;
+    background-color: $secondary;
+
+  }
+
   @media screen and (max-width: $md-max) {
     bottom: 18.44px !important;
   }
+}
+
+.react-multiple-carousel__arrow {
+  z-index: 5;
 }

@@ -20,7 +20,7 @@
       width: 100vw;
       height: 0;
       background: $primary-blur;
-      z-index: 2;
+      z-index: 5;
 
       &.opened {
         height: 100vh;
@@ -306,6 +306,8 @@
         margin: 0 0 1em;
         width: 100%;
         position: relative;
+        border-radius: 5%;
+        overflow: hidden;
 
         img {
           width: 100%;

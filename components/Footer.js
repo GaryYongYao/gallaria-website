@@ -53,8 +53,8 @@ function Footer() {
             <div className="address-half">
               <div className="address">
                 <p>SYDNEY SHOWROOM:</p>
-                <p>1F Danks Street,</p>
-                <p>Waterloo, NSW 2017</p>
+                <p>1F DANKS STREET,</p>
+                <p>WATERLOO, NSW 2017</p>
               </div>
             </div>
           </div>

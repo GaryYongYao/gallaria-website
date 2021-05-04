@@ -18,9 +18,12 @@ function Lightbox({ open, selected, setOpen }) {
           </a>
         </div>
         <div className={styles['image-gallery']}>
-          <img
-            src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected)}`}
-          />
+          <div>
+            <img
+              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected)}`}
+            />
+            <img src="/svg/logo-black.svg" className={styles['logo']} />
+          </div>
         </div>
       </div>
     </div>

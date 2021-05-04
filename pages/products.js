@@ -34,6 +34,10 @@ function Product({ products, featured, categories }) {
   }, [])
 
   useEffect(() => {
+    router.query.filterUrl && mixer.toggleOn(`.${removeSpace(router.query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+  }, [router])
+
+  useEffect(() => {
     mixer && mixer.sort(selected.value)
   }, [selected])
 
