@@ -27,13 +27,11 @@ function Product({ products, featured, categories }) {
     // eslint-disable-next-line
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
+    const masonryAnimate = mixitup(containerEl)
+    router.query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(router.query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
 
-    setMixer(mixitup(containerEl))
+    setMixer(masonryAnimate)
   }, [])
-
-  useEffect(() => {
-    mixer && router.query.filterUrl && mixer.toggleOn(`.${removeSpace(router.query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
-  }, [router])
 
   useEffect(() => {
     mixer && mixer.sort(selected.value)
