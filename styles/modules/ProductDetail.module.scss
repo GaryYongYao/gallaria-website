@@ -271,6 +271,7 @@
           transition: all .2s ease;
           transform: translateX(-50px);
           opacity: 0;
+          width: 100%;
   
           @media screen and (max-width: $md-max) {
             padding-right: 0;
@@ -288,6 +289,7 @@
           transition: all .2s ease;
           transform: translateX(50px);
           opacity: 0;
+          width: 100%;
   
           @media screen and (max-width: $md-max) {
             padding-right: 0;
