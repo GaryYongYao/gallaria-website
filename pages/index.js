@@ -36,7 +36,7 @@ export default function Home({ featured }) {
         style={{
           width: '100%',
           position: 'sticky',
-          top: 0,
+          top: '-20px',
           zIndex: 2,
           opacity: 0,
           transition: 'all .2s linear'

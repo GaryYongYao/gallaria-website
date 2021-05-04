@@ -24,10 +24,20 @@
       margin-top: 25px;
       align-items: baseline;
 
+      @media screen and (max-width: $md-max) {
+        margin-top: 0;
+      }
+
       a {
         display: flex;
         align-items: center;
         margin-right: 30%;
+
+        @media screen and (max-width: $md-max) {
+          margin-right: 0;
+          flex-direction: column;
+          text-align: center;
+        }
 
         &:hover {
           img {
@@ -43,7 +53,13 @@
           width: 100%;
           opacity: 0.6;
           transition: all .2s ease-in-out;
+
+          @media screen and (max-width: $md-max) {
+            width: 86px;
+            margin-bottom: 15.15px;
+          }
         }
+
         span {
           display: block;
           font-size: 14px;
@@ -53,6 +69,12 @@
           opacity: 0;
           transform: translateY(-10px);
           transition: all .2s ease-in-out;
+
+          @media screen and (max-width: $md-max) {
+            font-size: 11px;
+            line-height: 15px;
+            margin-left: 0;
+          }
         }
       }
     }
@@ -63,21 +85,35 @@
     letter-spacing: 0.1em;
     margin-top: 60px;
     display: block;
+
+    @media screen and (max-width: $md-max) {
+      margin-top: 0;
+    }
   }
 
   .links-container {
     margin-top: 60px;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: $md-max) {
+      margin-top: 0;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
     
     .links {
       padding-left: 10px;
       margin-top: 15px;
       margin-left: 0;
-      width: fit-content;
+      display: unset;
   
       span {
         font-weight: 700;
+
+        @media screen and (max-width: $md-max) {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -107,5 +143,9 @@
 
   &.open {
     height: calc(100vh - 107.16px);
+
+    @media screen and (max-width: $md-max) {
+      height: 100vh;
+    }
   }
 }

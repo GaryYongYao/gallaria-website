@@ -40,51 +40,51 @@ function Header() {
       </div>
       <div className={`menu${open ? ' open' : ''}`}>
         <div className="container">
-          <div className="col-lg-4">
+          <div className="col-12 col-lg-4">
             <span className="title">PRODUCTS</span>
             <div className="button">
               <div>
-                <Link href="/products?" style="col-lg-3">
+                <Link href="/products?filterUrl=INTELLIGENT-BATHROOM" style="col-6 col-lg-3">
                   <img src="/svg/bathroom.svg" />
                   <span>INTELLIGENT BATHROOM</span>
                 </Link>
-                <Link href="/products?" style="col-lg-3">
+                <Link href="/products?filterUrl=TOILET" style="col-6 col-lg-3">
                   <img src="/svg/toilet.svg" />
                   <span>TOILET</span>
                 </Link>
               </div>
               <div>
-                <Link href="/products?" style="col-lg-3">
+                <Link href="/products?filterUrl=BATHING" style="col-6 col-lg-3">
                   <img src="/svg/bathing.svg" />
                   <span>BATHING</span>
                 </Link>
-                <Link href="/products?" style="col-lg-3">
+                <Link href="/products?filterUrl=DESIGNplus" style="col-6 col-lg-3">
                   <img src="/svg/design.svg" />
                   <span>WASHING</span>
                 </Link>
               </div>
               <div>
-                <Link href="/products?" style="col-lg-3">
+                <Link href="/products?filterUrl=WASHING" style="col-6 col-lg-3">
                   <img src="/svg/washing.svg" />
                   <span>DESIGN+</span>
                 </Link>
-                <Link href="/products?" style="col-lg-3">
+                <Link href="/products?filterUrl=ACCESORIES" style="col-6 col-lg-3">
                   <img src="/svg/accessories.svg" />
                   <span>ACCESORIES</span>
                 </Link>
               </div>
             </div>
             <div className="links-container">
-              <Link href="/products?" style="col-5 col-lg-12 links">
+              <Link href="/products?" style="col-6 col-lg-12 links">
                 <span>ABOUT GALLARIA</span>
               </Link>
-              <Link href="/products?" style="col-5 col-lg-12 links">
+              <Link href="/products?" style="col-6 col-lg-12 links">
                 <span>PROJECTS</span>
               </Link>
-              <Link href="/products?" style="col-5 col-lg-12 links">
+              <Link href="/products?" style="col-6 col-lg-12 links">
                 <span>SHOWROOM</span>
               </Link>
-              <Link href="/products?" style="col-5 col-lg-12 links">
+              <Link href="/products?" style="col-6 col-lg-12 links">
                 <span>CONTACT US</span>
               </Link>
             </div>

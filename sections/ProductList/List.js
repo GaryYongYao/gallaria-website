@@ -1,9 +1,8 @@
 import styles from 'styles/modules/ProductList.module.scss'
 import { Link } from 'components'
+import { removeSpace } from 'utils/validation'
 
 function List({ data }) {
-  const removeSpace = (str) => str.replace(' ', '-')
-
   return (
     <div className={styles['section-list']}>
       <div className="container">

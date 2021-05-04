@@ -31,7 +31,7 @@ function CarouselSection({ data }) {
           infinite
           autoPlaySpeed={5000}
         >
-          {data.map(d => (
+          {data.map((d, i) => (i < 5) && (
             <div key={d.name} className={styles['item-container']}>
               <Link href={`/product/${d.code}`}>
                 <div

@@ -68,3 +68,14 @@ query getRecommendedProducts($code: String!) {
   }
 }
 `
+
+// Category
+export const queryGetCategories = `
+query {
+  getCategories {
+    _id
+    name
+    sub
+  }
+}
+`

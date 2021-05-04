@@ -13,6 +13,184 @@
     align-items: center;
     padding-bottom: 36.17px;
 
+    .backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 0;
+      background: $primary-blur;
+      z-index: 2;
+
+      &.opened {
+        height: 100vh;
+      }
+    }
+
+    .filter {
+      position: relative;
+      padding: 10px 50px 10px 0;
+
+      &-button {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        top: -5px;
+        left: -10px;
+        z-index: 5;
+        padding: 10px 40px 10px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      
+        @media screen and (max-width: $sm-max) {
+          padding: 10px 100px 10px 10px;
+        }
+
+        &.opened {
+          background: $secondary;
+        }
+
+        > .burger {
+          width: 14px;
+          margin-right: 16px;
+          margin-bottom: 3px;
+      
+          &:after,
+          &:before,
+          div {
+            background-color: $text-primary;
+            border-radius: 1px;
+            content: '';
+            display: block;
+            height: 1px;
+            margin-bottom: 6px;
+            transition: all .2s ease-in-out;
+          }
+  
+          &:after {
+            margin-bottom: 0;
+          }
+      
+          &.opened {
+            &:after {
+              transform: translateY(-6px) rotate(-135deg);
+            }
+            &:before {
+              transform: translateY(8px) rotate(135deg);
+            }
+            div {
+              transform: scale(0);
+            }
+          }
+      
+          @media screen and (max-width: $sm-max) {
+            margin-left: auto;
+            display: block;
+          }
+        }
+  
+        > span {
+          width: 150px;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 14.32px;
+      
+          @media screen and (max-width: $md-max) {
+            width: 90px;
+            font-size: 10px;
+            line-height: 11.93px;
+          }
+        }
+      }
+
+      .dropdown-items {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        left: -10px;
+        top: -2.5px;
+        transform: translateY(25px) scaleY(0);
+        z-index: 5;
+        background-color: white;
+        border-radius: 10px;
+        transition: transform .2s ease-in-out;
+        transform-origin: top center;
+          
+        &.opened {
+          height: auto;
+          transform: translateY(25px) scaleY(1);
+          padding: 5px 15px 0;
+        }
+    
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+    
+        &::-webkit-scrollbar-track {
+          background: transparent; 
+        }
+    
+        &::-webkit-scrollbar-thumb {
+          background: #D3D3D3; 
+          border-radius: 3px;
+        }
+    
+        &::-webkit-scrollbar-thumb:hover {
+          background: #858585; 
+        }
+    
+        .item {
+          min-width: 200px;
+          border-bottom: 0.25px solid #939393;
+          padding: 6px 0;
+          cursor: pointer;
+          
+          &:last-child {
+            border-bottom: 0;
+          }
+
+          span {
+            font-size: 12px;
+
+            &.selected {
+              font-weight: 700;
+            }
+          }
+        }
+    
+        .sub-item {
+          padding-left: 25px;
+
+          span {
+            color: $primary-light;
+  
+            &.selected {
+              color: $primary;
+              font-weight: 400;
+            }
+          }
+        }
+
+        .reset {
+          cursor: pointer;
+          margin: 37.89px 0;
+          padding: 6px 0;
+          text-align: center;
+          width: 145px;
+          border-radius: 2px;
+          background-color: $primary;
+          color: $text-secondary;
+          font-weight: 700;
+          line-height: 12.21px;
+          letter-spacing: 0.15em;
+          font-size: 10px;
+        }
+      }
+
+    }
+
     .sorting {
       margin-left: auto;
       display: flex;
@@ -32,11 +210,9 @@
       > span {
         width: 150px;
         font-weight: 700;
-      }
-
-      :global(.dropdown-underline) {
-        span {
-          font-weight: 700;
+    
+        @media screen and (max-width: $md-max) {
+          width: 90px;
         }
       }
 
@@ -118,6 +294,8 @@
     .masonry {
       column-count: 3;
       column-gap: 1em;
+      width: 100% !important;
+      height: 100% !important;
     
       @media screen and (max-width: $md-max) {
         column-count: 2;
