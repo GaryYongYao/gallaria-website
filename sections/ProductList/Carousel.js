@@ -21,7 +21,7 @@ const responsive = {
 function CarouselSection({ data }) {
   return (
     <div className={styles['section-carousel']}>
-      <div data-filter="lol" className={`container ${styles['carousel-container']}`}>
+      <div className={`container ${styles['carousel-container']}`}>
         <Carousel
           responsive={responsive}
           showDots={true}

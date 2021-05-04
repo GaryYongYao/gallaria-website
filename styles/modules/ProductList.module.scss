@@ -255,6 +255,8 @@
 
     .item-container {
       position: relative;
+      border-radius: 50px;
+      overflow: hidden;
 
       .item {
         background-position: center;
