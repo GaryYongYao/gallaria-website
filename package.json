@@ -9,7 +9,9 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@fullpage/react-fullpage": "^0.1.19",
     "axios": "^0.21.1",
+    "fullpage.js": "^3.1.1",
     "js-cookie": "^2.2.1",
     "mixitup": "^3.3.1",
     "next": "10.1.3",
@@ -18,7 +20,6 @@
     "react-dom": "17.0.2",
     "react-google-recaptcha": "^2.1.0",
     "react-multi-carousel": "^2.6.2",
-    "react-page-scroller": "^2.1.0",
     "sass": "^1.32.10"
   },
   "devDependencies": {

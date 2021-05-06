@@ -35,6 +35,9 @@ function errorHandler(resolve, reject) {
 }
 
 module.exports = withImages({
+  future: {
+    webpack5: true,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },

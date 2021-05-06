@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'components/Link'
 
-function Header() {
+function Header({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
+    if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])
 
   return (

@@ -7,14 +7,20 @@ export default function DesignSection() {
     showFromBottom('our-design', styles['text-box'])
   }
 
+  const getEle = () => {
+    const ele = document.getElementsByClassName('fp-scroller')[0]
+    if (ele) ele.addEventListener('wheel', showElement)
+  }
+
   useEffect(() => {
-    window.addEventListener('scroll', showElement)
+    window.addEventListener('load', getEle)
 
     // returned function will be called on component unmount
     return () => {
-      window.removeEventListener('scroll', showElement)
+      window.removeEventListener('load', getEle)
     }
   }, [])
+
   return (
     <div className={`container ${styles['section-design']}`}>
       <div id="our-design" className={styles['text-box']}>

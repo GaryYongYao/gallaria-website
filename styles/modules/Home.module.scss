@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.body {
+  overflow: hidden !important;
+}
+
 .section {
   &-hero {
     margin-top: -100px;

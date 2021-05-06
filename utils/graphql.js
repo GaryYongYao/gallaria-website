@@ -5,6 +5,7 @@ query {
     code
     name
     primaryImage
+    featureImage
     category
     sub
     series
