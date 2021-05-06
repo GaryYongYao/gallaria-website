@@ -10,10 +10,10 @@ import { queryGetFeatureProducts } from 'utils/graphql'
 export default function Home({ featured }) {
   const showElement = (e) => {
     const ele = document.getElementsByClassName('fp-scroller')[0]
-    const translatePt = parseInt(ele.style.transform.split('0px, ')[1].split('px)')[0], 10)
     const header = document.getElementById('header')
-    const transformDistance = Math.abs(translatePt) + e.deltaY
-    header.style.transform = `translateY(${transformDistance < 0 ? 0 : transformDistance}px)`
+    const transformDistance = Math.abs(ele.getBoundingClientRect().y) + e.deltaY
+    if (transformDistance < ele.getBoundingClientRect().height - window.innerHeight + 10) header.style.transform = `translateY(${(transformDistance < 0) ? 0 : transformDistance}px)`
+    else header.style.transform = `translateY(${ele.getBoundingClientRect().height - window.innerHeight}px)`
   }
 
   const showTouchElement = () => {

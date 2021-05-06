@@ -41,7 +41,7 @@ function Filter({ categories, setFilter, selection }) {
                   </span>
                 </div>
               ))}
-              {series.map(s => (
+              {(series || []).map(s => (
                 <div
                   key={s.name}
                   className={`${styles['item']} ${styles['sub-item']}`}
