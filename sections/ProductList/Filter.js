@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from 'styles/modules/ProductList.module.scss'
 
 function Filter({ categories, setFilter, selection }) {
   const [open, setOpen] = useState(false)
+
+  /* useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : 'auto'
+  }, [open]) */
 
   return (
     <>
@@ -15,7 +19,7 @@ function Filter({ categories, setFilter, selection }) {
           <span>Filter</span>
         </div>
         <div className={`${styles['dropdown-items']}${open ? ` ${styles['opened']}` : ''}`}>
-          {categories.map(({ name, id, sub }) => (
+          {categories.map(({ name, id, sub, series }) => (
             <>
               <div
                 key={name}
@@ -27,6 +31,17 @@ function Filter({ categories, setFilter, selection }) {
                 </span>
               </div>
               {sub.map(s => (
+                <div
+                  key={s.name}
+                  className={`${styles['item']} ${styles['sub-item']}`}
+                  onClick={() => setFilter(s.id)}
+                >
+                  <span className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}>
+                    {s.name}
+                  </span>
+                </div>
+              ))}
+              {series.map(s => (
                 <div
                   key={s.name}
                   className={`${styles['item']} ${styles['sub-item']}`}

@@ -1,14 +1,19 @@
 import styles from 'styles/modules/Home.module.scss'
-import { Link } from 'components'
 
-export default function HeroSection() {
+export default function HeroSection({ moveSectionDown }) {
   return (
     <div id="hero" className={styles['section-hero']} onScroll={() => console.log('lol')}>
       <div className={styles['overlay']} />
       <div className={styles['down-button']}>
-        <Link href="/#content">
+        <a
+          href="/#"
+          onClick={(e) => {
+            e.preventDefault()
+            moveSectionDown()
+          }}
+        >
           <img src="/svg/inverted-down.svg" alt="Down" />
-        </Link>
+        </a>
       </div>
     </div>
   )

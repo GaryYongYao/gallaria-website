@@ -12,6 +12,10 @@ function Product({ data, recommendations }) {
   const router = useRouter()
   const { status } = router.query
 
+  useEffect(() => {
+    document.body.className = ''
+  }, [])
+
   if (!data || (data.isDraft && status !== 'preview')) return <Error status={404} />
   const [selected, setSelected] = useState(data.primaryImage)
   const [open, setOpen] = useState(false)

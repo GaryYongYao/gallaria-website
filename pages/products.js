@@ -16,7 +16,7 @@ function Product({ products, featured, categories }) {
   const [selectors, setSelectors] = useState('')
 
   const variants = [
-    { name: 'Default', value: 'default:asc' },
+    { name: 'DEFAULT', value: 'default:asc' },
     { name: 'A - Z', value: 'name:asc' },
     { name: 'Z - A', value: 'name:desc' },
     { name: 'DATE:  NEW - OLD', value: 'date:desc' },
@@ -24,6 +24,7 @@ function Product({ products, featured, categories }) {
   ]
 
   useEffect(() => {
+    document.body.className = ''
     // eslint-disable-next-line
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
@@ -85,19 +86,22 @@ function Product({ products, featured, categories }) {
 }
 
 export async function getStaticProps(ctx) {
-  console.log(ctx.params)
   const productsQuery = await request(queryGetProducts)
   const products = productsQuery.data.data.getProducts
   const featuredQuery = await request(queryGetFeatureProducts)
   const featured = featuredQuery.data.data.getFeatureProducts
   const categoriesQuery = await request(queryGetCategories)
   const categoriesRough = categoriesQuery.data.data.getCategories
-  const categories = await categoriesRough.map(({ name, sub }) => ({
+  const categories = await categoriesRough.map(({ name, sub, series }) => ({
     name,
     id: removeSpace(name),
     sub: sub.map(s => ({
       name: s,
       id: removeSpace(s)
+    })),
+    series: (series || []).map(s => ({
+      name: s.split('/')[1],
+      id: removeSpace(s.split('/')[1])
     }))
   }))
 

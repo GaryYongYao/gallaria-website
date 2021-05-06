@@ -10,15 +10,14 @@ export default function DesignSection() {
   const getEle = () => {
     const ele = document.getElementsByClassName('fp-scroller')[0]
     if (ele) ele.addEventListener('wheel', showElement)
+    if (ele) ele.addEventListener('touchmove', showElement)
   }
 
   useEffect(() => {
     window.addEventListener('load', getEle)
-
-    // returned function will be called on component unmount
-    return () => {
-      window.removeEventListener('load', getEle)
-    }
+    const navData = window.performance.getEntriesByType('navigation')
+    if (navData.length > 0 && navData[0].loadEventEnd > 0) getEle()
+    else window.addEventListener('load', getEle)
   }, [])
 
   return (

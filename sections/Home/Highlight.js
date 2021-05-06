@@ -31,10 +31,10 @@ export default function HighlightSection() {
           </video>
         </div>
         <div className={`col-12 ${styles['flex-container']}`}>
-          <Link href="/#" style={styles['item-wrapper']}>
+          <Link href="/products?filterUrl=Wall-Hung" style={styles['item-wrapper']}>
             <div className={`container ${styles['item-name']}`}>WALL HUNG PAN</div>
           </Link>
-          <Link href="/#" style={styles['item-wrapper']}>
+          <Link href="/products?filterUrl=Floor-pan" style={styles['item-wrapper']}>
             <div className={`container ${styles['item-name']}`}>FLOOR PAN</div>
           </Link>
         </div>

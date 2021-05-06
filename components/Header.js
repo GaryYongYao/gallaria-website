@@ -13,7 +13,7 @@ function Header({ setAllowScrolling }) {
     <header>
       <div className={`flex-center${open ? ' menu-header' : ''}`}>
         <div className="container flex-center">
-          <Link href="/#">
+          <Link href="/">
             <img src={open ? '/svg/logo-white.svg' : '/svg/logo-black.svg'} alt="Gallaria Logo" className="logo" />
           </Link>
           <div className="navigation">

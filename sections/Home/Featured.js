@@ -25,9 +25,9 @@ export default function FeaturedSection({ data }) {
             else col = 'col-12'
 
             return (
-              <div className={col}>
+              <div key={d.code} className={col}>
                 <Link href={`/product/${d.code}`}>
-                  <div className={styles['featured-items']} style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(d.primaryImage)}')` }}>
+                  <div className={styles['featured-items']} style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(d.featureImage)}')` }}>
                     <div className={styles['img-overlay']} />
                     <span className={styles['name']}>{d.name}</span>
                   </div>

@@ -19,6 +19,7 @@ query {
   getFeatureProducts {
     code
     name
+    featureImage
     primaryImage
   }
 }

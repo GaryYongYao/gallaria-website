@@ -33,7 +33,7 @@ function DropdownUnderline({ value, items, setValue }) {
         <img src="/svg/down.svg" alt="Dropdown" className={open ? 'open' : ''} />
       </div>
       <div ref={wrapperRef} className={`dropdown-underline-items ${open ? 'opened' : ''}`}>
-        {items.map(item => (
+        {items.map(item => !(item.name === value || item === value) && (
           <div
             key={item.name || item}
             className="item"

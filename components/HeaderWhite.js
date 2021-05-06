@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react'
 import Link from 'components/Link'
 
-function HeaderWhite() {
+function HeaderWhite({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
+    if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])
 
   return (
     <header className="no-bg">
-      <div className="flex-center">
+      <div className={`flex-center${open ? ' menu-header' : ''}`}>
         <div className="container flex-center ">
-          <Link href="/#">
+          <Link href="/">
             <img src="/svg/logo-white.svg" alt="Gllaria Logo" className="logo" />
           </Link>
           <div>

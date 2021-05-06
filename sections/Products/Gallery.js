@@ -24,7 +24,7 @@ function Gallery({ data, selected, setSelected, setOpen }) {
     <div className={`col-lg-6 ${styles['section-gallery']}`}>
       <div>
         <div className={styles['selected-image']} onClick={() => setOpen(true)}>
-          <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected)}`} />
+          <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
         </div>
         <div className={styles['image-gallery']}>
           <Carousel
@@ -36,7 +36,7 @@ function Gallery({ data, selected, setSelected, setOpen }) {
                 key={image}
                 onClick={() => setSelected(image)}
                 className={`${(selected === image) ? styles['selected'] : ''}`}
-                style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image)})` }}
+                style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')})` }}
               />
             ))}
           </Carousel>

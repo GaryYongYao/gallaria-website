@@ -194,12 +194,13 @@
     .sorting {
       margin-left: auto;
       display: flex;
-      align-items: center;
       position: relative;
 
       span {
         font-size: 12px;
         line-height: 14.32px;
+        font-weight: 700;
+        text-transform: uppercase;
     
         @media screen and (max-width: $md-max) {
           font-size: 10px;
@@ -208,18 +209,24 @@
       }
 
       > span {
-        width: 150px;
+        width: 120px;
         font-weight: 700;
+        padding: 10px 0;
     
         @media screen and (max-width: $md-max) {
           width: 90px;
         }
       }
 
+      :global(.dropdown-underline) {
+        border-bottom: 0.25px solid #939393;
+      }
+
       :global(.dropdown-underline-items) {
         position: absolute;
-        left: 0;
-        transform: translateY(60%) scaleY(0);
+        right: 0;
+        top: 35px;
+        transform: scaleY(0);
         z-index: 5;
         background-color: white;
         border-radius: 10px;
@@ -232,8 +239,8 @@
 
         &:global(.opened) {
           height: auto;
-          transform: translateY(60%) scaleY(1);
-          padding: 5px 15px 0;
+          transform: scaleY(1);
+          padding: 5px 5px 0 15px;
         }
       }
     }
@@ -307,11 +314,20 @@
         margin: 0 0 1em;
         width: 100%;
         position: relative;
-        border-radius: 5%;
+        border-radius: 3%;
         overflow: hidden;
+
+        @media screen and (max-width: $md-max) {
+          border-radius: 0;
+        }
 
         img {
           width: 100%;
+
+          @media screen and (max-width: $md-max) {
+            border-radius: 3%;
+            overflow: hidden;
+          }
         }
 
         .overlay {
