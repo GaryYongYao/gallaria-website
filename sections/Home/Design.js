@@ -11,6 +11,7 @@ export default function DesignSection() {
     const ele = document.getElementsByClassName('fp-scroller')[0]
     if (ele) ele.addEventListener('wheel', showElement)
     if (ele) ele.addEventListener('touchmove', showElement)
+    if (ele) ele.addEventListener('touchend', showElement)
   }
 
   useEffect(() => {

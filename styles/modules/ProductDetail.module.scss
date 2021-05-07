@@ -137,7 +137,7 @@
         h3 {
           font-size: 1.875rem;
           font-weight: 700;
-          line-break: anywhere;
+          word-break: break-word;
 
           @media screen and (max-width: $md-max) {
             font-size: 20px;

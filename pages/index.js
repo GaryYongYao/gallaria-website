@@ -16,24 +16,22 @@ export default function Home({ featured }) {
     else header.style.transform = `translateY(${ele.getBoundingClientRect().height - window.innerHeight}px)`
   }
 
-  const showTouchElement = () => {
+  /* const showTouchElement = () => {
     const ele = document.getElementsByClassName('fp-scroller')[0]
     const translatePt = parseInt(ele.style.transform.split('0px, ')[1].split('px)')[0], 10)
     const header = document.getElementById('header')
     const transformDistance = Math.abs(translatePt)
     header.style.transform = `translateY(${transformDistance <= 6 ? 0 : transformDistance}px)`
-  }
+  } */
 
   const getEle = () => {
     const ele = document.getElementsByClassName('fp-scroller')[0]
     if (ele) ele.addEventListener('wheel', showElement)
-    if (ele) ele.addEventListener('touchmove', showTouchElement)
-    if (ele) ele.addEventListener('touchend', showTouchElement)
+    /* if (ele) ele.addEventListener('touchmove', showTouchElement)
+    if (ele) ele.addEventListener('touchend', showTouchElement) */
   }
 
   useEffect(() => {
-    // eslint-disable-next-line
-    require('fullpage.js/vendors/scrolloverflow')
     document.body.className = styles['body']
     const navData = window.performance.getEntriesByType('navigation')
     if (navData.length > 0 && navData[0].loadEventEnd > 0) getEle()

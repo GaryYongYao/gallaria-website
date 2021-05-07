@@ -46,31 +46,31 @@ function Header({ setAllowScrolling }) {
             <div className="button">
               <div>
                 <Link href="/products?filterUrl=INTELLIGENT-BATHROOM" style="col-6 col-lg-3">
-                  <img src="/svg/bathroom.svg" />
+                  <img src="/svg/bathroom.svg" onClick={() => setOpen(false)} />
                   <span>INTELLIGENT BATHROOM</span>
                 </Link>
                 <Link href="/products?filterUrl=TOILET" style="col-6 col-lg-3">
-                  <img src="/svg/toilet.svg" />
+                  <img src="/svg/toilet.svg" onClick={() => setOpen(false)} />
                   <span>TOILET</span>
                 </Link>
               </div>
               <div>
                 <Link href="/products?filterUrl=BATHING" style="col-6 col-lg-3">
-                  <img src="/svg/bathing.svg" />
+                  <img src="/svg/bathing.svg" onClick={() => setOpen(false)} />
                   <span>BATHING</span>
                 </Link>
                 <Link href="/products?filterUrl=DESIGNplus" style="col-6 col-lg-3">
-                  <img src="/svg/design.svg" />
+                  <img src="/svg/design.svg" onClick={() => setOpen(false)} />
                   <span>WASHING</span>
                 </Link>
               </div>
               <div>
                 <Link href="/products?filterUrl=WASHING" style="col-6 col-lg-3">
-                  <img src="/svg/washing.svg" />
+                  <img src="/svg/washing.svg" onClick={() => setOpen(false)} />
                   <span>DESIGN+</span>
                 </Link>
                 <Link href="/products?filterUrl=ACCESORIES" style="col-6 col-lg-3">
-                  <img src="/svg/accessories.svg" />
+                  <img src="/svg/accessories.svg" onClick={() => setOpen(false)} />
                   <span>ACCESORIES</span>
                 </Link>
               </div>
