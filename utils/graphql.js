@@ -9,6 +9,7 @@ query {
     category
     sub
     series
+    isDraft
     createdDate
   }
 }

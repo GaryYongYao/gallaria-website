@@ -7,7 +7,7 @@ function List({ data }) {
     <div className={styles['section-list']}>
       <div className="container">
         <div className={`${styles['masonry']} masonry`}>
-          {data.map(d => (
+          {data.map(d => !d.isDraft && (
             <div
               key={d.name}
               data-name={d.name}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, Fragment } from 'react'
 import styles from 'styles/modules/ProductList.module.scss'
 
 function Filter({ categories, setFilter, selection }) {
@@ -20,9 +20,8 @@ function Filter({ categories, setFilter, selection }) {
         </div>
         <div className={`${styles['dropdown-items']}${open ? ` ${styles['opened']}` : ''}`}>
           {categories.map(({ name, id, sub, series }) => (
-            <>
+            <Fragment key={name}>
               <div
-                key={name}
                 className={styles['item']}
                 onClick={() => setFilter(id)}
               >
@@ -52,7 +51,7 @@ function Filter({ categories, setFilter, selection }) {
                   </span>
                 </div>
               ))}
-            </>
+            </Fragment>
           ))}
           <div
             className={styles['reset']}
