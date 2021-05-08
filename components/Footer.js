@@ -10,7 +10,7 @@ function Footer() {
       <div className="container">
         <div className="footer-left">
           <div className="navigation">
-            <Link href="/">
+            <Link href="/about-us">
               ABOUT GALLARIA
             </Link>
             <Link href="/products">

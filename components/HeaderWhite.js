@@ -12,8 +12,8 @@ function HeaderWhite({ setAllowScrolling }) {
   }, [open])
 
   return (
-    <header className="no-bg">
-      <div className={`flex-center${open ? ' menu-header' : ''}`}>
+    <header>
+      <div className={`no-bg flex-center${open ? ' menu-header' : ''}`}>
         <div className="container flex-center ">
           <Link href="/">
             <img src="/svg/logo-white.svg" alt="Gllaria Logo" className="logo" />
@@ -70,7 +70,7 @@ function HeaderWhite({ setAllowScrolling }) {
               </div>
             </div>
             <div className="links-container">
-              <Link href="/products?" style="col-6 col-lg-12 links">
+              <Link href="/about-us" style="col-6 col-lg-12 links">
                 <span>ABOUT GALLARIA</span>
               </Link>
               <Link href="/products?" style="col-6 col-lg-12 links">

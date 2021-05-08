@@ -78,7 +78,7 @@ function Header({ setAllowScrolling }) {
               </div>
             </div>
             <div className="links-container">
-              <Link href="/products?" style="col-6 col-lg-12 links">
+              <Link href="/about-us" style="col-6 col-lg-12 links">
                 <span>ABOUT GALLARIA</span>
               </Link>
               <Link href="/products?" style="col-6 col-lg-12 links">
