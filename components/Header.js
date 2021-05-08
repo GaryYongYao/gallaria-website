@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { ContactContext } from 'components/ContactWindow'
 import Link from 'components/Link'
 
 function Header({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
+  const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
@@ -85,9 +87,17 @@ function Header({ setAllowScrolling }) {
               <Link href="/products?" style="col-6 col-lg-12 links">
                 <span>SHOWROOM</span>
               </Link>
-              <Link href="/products?" style="col-6 col-lg-12 links">
+              <a
+                href="#"
+                onClick={e => {
+                  e.preventDefault()
+                  setOpen(false)
+                  setContactOpen(true)
+                }}
+                className="col-6 col-lg-12 links"
+              >
                 <span>CONTACT US</span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

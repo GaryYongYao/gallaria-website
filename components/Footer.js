@@ -1,6 +1,10 @@
+import { useContext } from 'react'
+import { ContactContext } from 'components/ContactWindow'
 import Link from './Link'
 
 function Footer() {
+  const { setContactOpen } = useContext(ContactContext)
+
   return (
     <footer>
       <div className="container">
@@ -18,9 +22,15 @@ function Footer() {
             <Link href="/">
               SHOWROOM
             </Link>
-            <Link href="/">
-              CONTACT
-            </Link>
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault()
+                setContactOpen(true)
+              }}
+            >
+              <span>CONTACT</span>
+            </a>
           </div>
         </div>
         <div className="footer-right">

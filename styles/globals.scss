@@ -2,6 +2,7 @@
 @import './animation.scss';
 @import './components/breadcrumbs.scss';
 @import './components/button.scss';
+@import './components/contact-window.scss';
 @import './components/dropdown.scss';
 @import './components/footer.scss';
 @import './components/header.scss';
@@ -99,4 +100,16 @@ h3 {
 
 .react-multiple-carousel__arrow {
   z-index: 5;
+}
+
+// bootstrap overwrite
+
+.row {
+  margin-right: -2.5px;
+  margin-left: -2.5px;
+}
+
+.row > * {
+  padding-right: 2.5px;
+  padding-left: 2.5px;
 }
