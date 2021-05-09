@@ -44,46 +44,72 @@ export default function Home({ featured }) {
         <title>Gallaria</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ReactFullpage
-        scrollOverflow
-        scrollingSpeed={1400}
-        keyboardScrolling={false}
-        render={({ fullpageApi }) => (
-          <ReactFullpage.Wrapper>
-            <div id="fullpage-wrapper">
-              <div className="section">
-                <div style={{ width: '100%' }}>
-                  <HeaderWhite
-                    setAllowScrolling={(fullpageApi || {}).setAllowScrolling}
-                  />
+      <div className={styles['desktop-only']}>
+        <ReactFullpage
+          scrollOverflow
+          scrollingSpeed={1400}
+          keyboardScrolling={false}
+          responsiveWidth={991}
+          render={({ fullpageApi }) => (
+            <ReactFullpage.Wrapper>
+              <div id="fullpage-wrapper">
+                <div className="section">
+                  <div style={{ width: '100%' }}>
+                    <HeaderWhite
+                      setAllowScrolling={(fullpageApi || {}).setAllowScrolling}
+                    />
+                  </div>
+                  <Hero moveSectionDown={(fullpageApi || {}).moveSectionDown} />
                 </div>
-                <Hero moveSectionDown={(fullpageApi || {}).moveSectionDown} />
-              </div>
-              <div className="section">
-                <div
-                  id="header"
-                  style={{
-                    width: '100%',
-                    position: 'sticky',
-                    top: '-20px',
-                    zIndex: 2
-                  }}
-                >
-                  <Header
-                    setAllowScrolling={(fullpageApi || {}).setAllowScrolling}
-                  />
+                <div className="section">
+                  <div
+                    id="header"
+                    style={{
+                      width: '100%',
+                      position: 'sticky',
+                      top: '-20px',
+                      zIndex: 2
+                    }}
+                  >
+                    <Header
+                      setAllowScrolling={(fullpageApi || {}).setAllowScrolling}
+                    />
+                  </div>
+                  <Highlight />
+                  <Experience />
+                  <Featured data={featured} />
+                  <Project />
+                  <Design />
+                  <Footer />
                 </div>
-                <Highlight />
-                <Experience />
-                <Featured data={featured} />
-                <Project />
-                <Design />
-                <Footer />
               </div>
-            </div>
-          </ReactFullpage.Wrapper>
-        )}
-      />
+            </ReactFullpage.Wrapper>
+          )}
+        />
+      </div>
+      <div className={styles['mobile-only']}>
+        <div style={{ width: '100%' }}>
+          <HeaderWhite />
+        </div>
+        <Hero />
+        <div
+          id="header"
+          style={{
+            width: '100%',
+            position: 'sticky',
+            top: 0,
+            zIndex: 2
+          }}
+        >
+          <Header />
+        </div>
+        <Highlight />
+        <Experience />
+        <Featured data={featured} />
+        <Project />
+        <Design />
+        <Footer />
+      </div>
     </div>
   )
 }

@@ -9,9 +9,14 @@ header {
   @media screen and (max-width: $md-max) {
     height: 60px;
   }
+  
 
   > div {
     background-color: $secondary-blur;
+
+    @media screen and (max-width: $md-max) {
+      padding-right: 25px;
+    }
   }
 
   .links {

@@ -1,6 +1,20 @@
 @import '../mixins';
 @import '../animation';
 
+.desktop-only {
+  @media screen and (max-width: $md-max) {
+    display: none;
+  }
+}
+
+.mobile-only {
+  width: 100%;
+  display: none;
+  @media screen and (max-width: $md-max) {
+    display: block;
+  }
+}
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -11,6 +25,9 @@
 
 .body {
   overflow: hidden !important;
+  @media screen and (max-width: $md-max) {
+    overflow: auto !important;
+  }
 }
 
 .section {
@@ -24,6 +41,9 @@
     background-repeat: no-repeat;
     background-size: cover;
 
+    @media screen and (max-width: $md-max) {
+      height: calc( 100vh + 40px);
+    }
 
     .overlay {
       position: absolute;

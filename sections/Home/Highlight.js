@@ -25,7 +25,7 @@ export default function HighlightSection() {
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div className={`col-1 ${styles['video-container']}`}>
-          <video autoPlay loop muted>
+          <video autoPlay loop muted preload="auto" playsInline>
             <source src="/video/video-2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -64,7 +64,7 @@ export default function HighlightSection() {
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div className={`col-1 ${styles['video-container']}`}>
-          <video autoPlay loop muted>
+          <video autoPlay loop muted preload="auto" playsInline>
             <source src="/video/video-2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>

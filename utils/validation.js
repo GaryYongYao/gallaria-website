@@ -8,8 +8,13 @@ export const validationEmail = (email) => {
 }
 
 export const validationPassword = (pass) => {
-  const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+  const re = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
   return !re.test(String(pass))
+}
+
+export const filterRegex = (match, item) => {
+  const re = new RegExp(match, 'i')
+  return re.test(item)
 }
 
 export const removeSpace = (str) => str.replace(' ', '-').replace('+', 'plus')

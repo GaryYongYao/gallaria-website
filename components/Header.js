@@ -1,15 +1,22 @@
 import { useContext, useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { ContactContext } from 'components/ContactWindow'
 import Link from 'components/Link'
 
 function Header({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const router = useRouter()
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
     if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])
+
+  const searchFunction = () => {
+    if (search.length > 3) router.push(`/products?search=${search}`)
+  }
 
   return (
     <header>
@@ -21,10 +28,15 @@ function Header({ setAllowScrolling }) {
           <div className="navigation">
             <div className="search">
               <div>
-                <img src={open ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
+                <img onClick={searchFunction} src={open ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
               </div>
               <div>
-                <input required placeholder="SEARCH" />
+                <input
+                  value={search}
+                  onChange={({ target }) => setSearch(target.value)}
+                  onKeyDown={e => (e.key === 'Enter') && searchFunction()}
+                  placeholder="SEARCH"
+                />
               </div>
             </div>
             <Link href="/">

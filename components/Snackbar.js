@@ -1,7 +1,7 @@
 import { useEffect, useContext, createContext } from 'react'
 
 export function SnackbarComponent() {
-  const [snackbarState, setSnackbarState] = useContext(SnackbarContext)
+  const { snackbarState, setSnackbarState } = useContext(SnackbarContext)
 
   useEffect(() => {
     if (snackbarState.open) {

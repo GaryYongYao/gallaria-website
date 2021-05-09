@@ -122,8 +122,11 @@
 
   &-header {
     background-color: $primary-blur;
-
-    .search:hover input {
+    
+    .search input,
+    .search:hover input,
+    .search input:focus,
+    .search input:valid {
       color: $text-secondary;
       border-bottom: 1px solid $text-secondary !important;
 

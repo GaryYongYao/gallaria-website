@@ -1,19 +1,68 @@
-import { useContext, useEffect, useRef, createContext } from 'react'
+import { useContext, useEffect, useRef, useState, createContext } from 'react'
+import { animateScroll as scroll } from 'react-scroll'
+import request from 'utils/request'
+import { mutationSubmitContact } from 'utils/graphql'
+import { SnackbarContext } from './Snackbar'
 
 export function ContactWindow() {
   const formRef = useRef()
+  const [submit, setSubmit] = useState(false)
   const { contactOpen, setContactOpen } = useContext(ContactContext)
+  const { setSnackbarState } = useContext(SnackbarContext)
 
   useEffect(() => {
     document.body.style.overflow = contactOpen ? 'hidden' : 'auto'
   }, [contactOpen])
 
+  const scrollToTop = () => {
+    scroll.scrollTo(0, {
+      containerId: 'contact-window',
+      duration: 1400,
+      smooth: true
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setSubmit(true)
+    const leadInput = {
+      name: formRef.current[0].value,
+      email: formRef.current[1].value,
+      phone: formRef.current[2].value,
+      company: formRef.current[3].value,
+      message: formRef.current[4].value
+    }
+
+    try {
+      const response = await request(mutationSubmitContact, { leadInput })
+      const reply = response.data.data.submitContact
+      setSnackbarState({
+        open: true,
+        message: reply,
+      })
+      formRef.current.reset()
+      setSubmit(false)
+      setContactOpen(false)
+    } catch (err) {
+      setSnackbarState({
+        open: true,
+        message: err
+      })
+    }
+  }
+
   return (
-    <div className={`contact-window ${contactOpen ? 'open' : ''}`}>
+    <div id="contact-window" className={`contact-window ${contactOpen ? 'open' : ''}`}>
       <div className="container">
         <div className="contact-window-header">
           <div className="contact-window-title">CONTACT US</div>
-          <div className="contact-window-close" onClick={() => setContactOpen(false)}>
+          <div
+            className="contact-window-close"
+            onClick={() => {
+              formRef.current.reset()
+              setContactOpen(false)
+            }}
+          >
             <span>CLOSE</span>
             <img src="/svg/inverted-close.svg" alt="close" />
           </div>
@@ -83,10 +132,10 @@ export function ContactWindow() {
             <div className="enquiry-title">
               <span>ENQUIRY FORM</span>
             </div>
-            <form ref={formRef}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <input required name="name" placeholder="NAME*" />
-              <input required name="email" placeholder="EMAIL ADDRESS*" />
-              <input required name="phone" placeholder="MOBILE NUMBER*" />
+              <input required name="email" placeholder="EMAIL ADDRESS*" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
+              <input required name="phone" placeholder="MOBILE NUMBER*" pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
               <input name="company" placeholder="COMPANY'S NAME" />
               <textarea
                 required
@@ -95,11 +144,21 @@ export function ContactWindow() {
                 rows={8}
               />
               <div className="button-container">
-                <div className="button-contained white">
-                  SEND
-                </div>
+                {!submit && (
+                  <button type="submit" className="button-contained white">
+                    SEND
+                  </button>
+                )}
+                {submit && (
+                  <div className="sent">
+                    SENT
+                  </div>
+                )}
               </div>
             </form>
+            <div className="arrow-container" onClick={scrollToTop}>
+              <img src="/svg/inverted-up.svg" alt="email" />
+            </div>
           </div>
         </div>
       </div>

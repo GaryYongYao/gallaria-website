@@ -1,4 +1,4 @@
-// graphql
+// graphql query
 export const queryGetProducts = `
 query {
   getProducts {
@@ -80,5 +80,12 @@ query {
     name
     sub
   }
+}
+`
+
+// leads
+export const mutationSubmitContact = `
+mutation submitContact($leadInput: LeadInput!) {
+  submitContact(leadInput: $leadInput)
 }
 `

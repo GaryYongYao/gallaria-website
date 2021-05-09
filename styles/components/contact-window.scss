@@ -14,7 +14,7 @@
   padding: 170px 0;
 
   @media screen and (max-width: $md-max) {
-    padding: 30.4px 0;
+    padding: 30.4px 20px;
   }
 
   * {
@@ -105,17 +105,18 @@
 
           @media screen and (max-width: $md-max) {
             display: block;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
           }
         }
 
         .contact-window-contacts {
+          margin-bottom: 80px;
           > div {
             margin-bottom: 75.48px;
             padding-right: 5px;
 
             @media screen and (max-width: $md-max) {
-              margin-bottom: 100px;
+              margin-bottom: 20px;
             }
 
             .image {
@@ -275,12 +276,48 @@
         }
 
         .button-container {
-          margin-top: 15px;
+          margin-top: 29px;
+          margin-bottom: 100px;
           padding-right: 98px;
 
           @media screen and (max-width: $md-max) {
             margin-top: 27px;
+            margin-bottom: 25px;
             padding-right: 0;
+          }
+
+          button {
+            border: 0;
+          }
+
+          .sent {
+            padding: 13px 0;
+            text-align: center;
+            width: 100%;
+            font-size: 0.875rem;
+            font-weight: 700;
+            line-height: 5px;
+          
+            @media screen and (max-width: $md-max) {
+              font-size: 0.75rem;
+              line-height: 14.65px;
+            }
+          }
+        }
+
+        .arrow-container {
+          display: none;
+          text-align: center;
+          cursor: pointer;
+
+          @media screen and (max-width: $md-max) {
+            display: block;
+            margin-bottom: 100px;
+            padding-right: 0;
+          }
+
+          img {
+            width: 15px;
           }
         }
       }

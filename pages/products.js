@@ -6,13 +6,14 @@ import { Carousel, Filter, List } from 'sections/ProductList'
 import { DropdownUnderline, Footer, Header } from 'components'
 import request from 'utils/request'
 import { queryGetProducts, queryGetFeatureProducts, queryGetCategories } from 'utils/graphql'
-import { removeSpace } from 'utils/validation'
+import { removeSpace, filterRegex } from 'utils/validation'
 
 function Product({ products, featured, categories }) {
   const router = useRouter()
   const [mixer, setMixer] = useState(() => {})
   const [selected, setSelected] = useState({ name: 'Default', value: 'default:asc' })
   const [filter, setFilter] = useState('')
+  const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
 
   const variants = [
@@ -35,8 +36,25 @@ function Product({ products, featured, categories }) {
   }, [])
 
   useEffect(() => {
-    (router.query.filterUrl && mixer) && mixer.toggleOn(`.${removeSpace(router.query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+    const { query } = router
+    if (query.filterUrl && mixer) mixer.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+    if (query.search) {
+      const display = products.filter(prod => {
+        const match = (
+          filterRegex(query.search, prod.name)
+          || filterRegex(query.search, prod.category)
+          || filterRegex(query.search, prod.sub)
+          || filterRegex(query.search, prod.series)
+        )
+        return match
+      })
+      setDisplayProducts(display)
+    }
   }, [router])
+
+  useEffect(() => {
+    mixer && mixer.forceRefresh()
+  }, [displayProducts])
 
   useEffect(() => {
     mixer && mixer.sort(selected.value)
@@ -79,13 +97,13 @@ function Product({ products, featured, categories }) {
           />
         </div>
       </div>
-      <List data={products} />
+      <List data={displayProducts} />
       <Footer />
     </div>
   )
 }
 
-export async function getStaticProps(ctx) {
+export async function getStaticProps() {
   const productsQuery = await request(queryGetProducts)
   const products = productsQuery.data.data.getProducts
   const featuredQuery = await request(queryGetFeatureProducts)

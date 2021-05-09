@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
   const [contactOpen, setContactOpen] = useState(false)
 
   return (
-    <SnackbarContext.Provider value={[snackbarState, setSnackbarState]}>
+    <SnackbarContext.Provider value={{ snackbarState, setSnackbarState }}>
       <ContactContext.Provider value={{ contactOpen, setContactOpen }}>
         <Component {...pageProps} />
         <SnackbarComponent />

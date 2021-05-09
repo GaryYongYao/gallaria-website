@@ -45,10 +45,14 @@
     line-height: 19.09px;
     color: #717171;
     cursor: pointer;
+    transition: color .2s ease-in-out;
 
-    &:not([href]):not([class]),
-    &:not([href]):not([class]):hover {
+    &:not([href]):not([class]){
       color: #717171;
+    }
+
+    &:not([href]):not([class]):hover {
+      color: $text-secondary;
     }
 
     &.active {

@@ -20,7 +20,7 @@
   &-gallery {
 
     > div {
-      margin-right: 3px;
+      margin-right: 12px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -348,6 +348,7 @@
   
             @media screen and (max-width: $md-max) {
               font-size: 12px;
+              line-height: normal;
             }
           }
 
@@ -359,6 +360,7 @@
   
             @media screen and (max-width: $md-max) {
               font-size: 12px;
+              line-height: normal;
             }
 
             p {

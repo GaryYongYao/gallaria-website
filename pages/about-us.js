@@ -13,7 +13,7 @@ function Product() {
   // eslint-disable-next-line
   const scrollTo = () => {
     scroller.scrollTo('scroll-to-element', {
-      duration: 800,
+      duration: 1400,
       delay: 0,
       smooth: 'easeInOutQuart'
     })
@@ -28,7 +28,7 @@ function Product() {
       })
 
       scroller.scrollTo('scroll-container', {
-        duration: 800,
+        duration: 1400,
         delay: 0,
         smooth: 'easeInOutQuart'
       })

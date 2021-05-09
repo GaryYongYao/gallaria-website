@@ -105,11 +105,28 @@ h3 {
 // bootstrap overwrite
 
 .row {
-  margin-right: -2.5px;
-  margin-left: -2.5px;
+
+  @media screen and (max-width: $md-max) {
+    margin-right: -2.5px;
+    margin-left: -2.5px;
+  }
 }
 
 .row > * {
-  padding-right: 2.5px;
-  padding-left: 2.5px;
+  @media screen and (max-width: $md-max) {
+    padding-right: 2.5px;
+    padding-left: 2.5px;
+  }
+}
+
+.fp-enabled body, html.fp-enabled {
+  @media screen and (max-width: $md-max) {
+    overflow: auto !important;
+  }
+}
+
+.fp-scrollable {
+  @media screen and (max-width: $md-max) {
+    overflow: auto !important;
+  }
 }
