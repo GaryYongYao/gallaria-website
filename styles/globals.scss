@@ -61,11 +61,26 @@ h3 {
   background: unset !important;
 }
 
+.flex-reverse-column-mobile {
+  
+  @media screen and (max-width: $md-max) {
+    flex-direction: column-reverse;
+  }
+}
+
 .only-mobile {
   display: none;
   
   @media screen and (max-width: $md-max) {
-    display: block;
+    display: block !important;
+  }
+}
+
+.only-desktop {
+  display: block;
+  
+  @media screen and (max-width: $md-max) {
+    display: none;
   }
 }
 

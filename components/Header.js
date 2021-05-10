@@ -32,6 +32,7 @@ function Header({ setAllowScrolling }) {
               </div>
               <div>
                 <input
+                  required
                   value={search}
                   onChange={({ target }) => setSearch(target.value)}
                   onKeyDown={e => (e.key === 'Enter') && searchFunction()}
@@ -96,8 +97,8 @@ function Header({ setAllowScrolling }) {
               <Link href="/products?" style="col-6 col-lg-12 links">
                 <span>PROJECTS</span>
               </Link>
-              <Link href="/products?" style="col-6 col-lg-12 links">
-                <span>SHOWROOM</span>
+              <Link href="/showrooms" style="col-6 col-lg-12 links">
+                <span>SHOWROOMS</span>
               </Link>
               <a
                 href="#"

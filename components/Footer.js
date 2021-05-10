@@ -19,8 +19,8 @@ function Footer() {
             <Link href="/">
               PROJECTS
             </Link>
-            <Link href="/">
-              SHOWROOM
+            <Link href="/showrooms">
+              SHOWROOMS
             </Link>
             <a
               href="#"

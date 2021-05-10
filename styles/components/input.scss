@@ -26,3 +26,21 @@
     cursor: pointer;
   }
 }
+
+input { 
+  background: transparent;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #AAAAAA;
+  font-size: 14px;
+
+  @media screen and (max-width: $md-max) {
+    font-size: 12px;
+  }
+
+  &::placeholder {
+    color: #AAAAAA
+  }
+}
