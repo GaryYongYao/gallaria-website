@@ -1,9 +1,11 @@
 import { useContext } from 'react'
 import { ContactContext } from 'components/ContactWindow'
+import { TermsContext } from 'components/TermsWindow'
 import Link from './Link'
 
 function Footer() {
   const { setContactOpen } = useContext(ContactContext)
+  const { setTermsOpen, setTerms } = useContext(TermsContext)
 
   return (
     <footer>
@@ -76,13 +78,27 @@ function Footer() {
             <p>ALL COPYRIGHTS RESERVED.</p>
           </div>
           <div className="terms-links">
-            <Link href="/">
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault()
+                setTermsOpen(true)
+                setTerms('policy')
+              }}
+            >
               PRIVACY POLICY
-            </Link>
+            </a>
             <span>/</span>
-            <Link href="/">
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault()
+                setTermsOpen(true)
+                setTerms('terms')
+              }}
+            >
               TERMS & CONDITIONS
-            </Link>
+            </a>
           </div>
         </div>
       </div>

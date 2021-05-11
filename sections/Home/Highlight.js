@@ -1,7 +1,7 @@
 import styles from 'styles/modules/Home.module.scss'
 import { Link } from 'components'
 
-export default function HighlightSection() {
+export default function HighlightSection({ id }) {
   const MobileBox = ({ link, img, text }) => (
     <Link href={link} style="col-6">
       <div
@@ -13,7 +13,7 @@ export default function HighlightSection() {
   )
 
   return (
-    <div id="content" className={`section-highlight ${styles['section-highlight']}`}>
+    <div id={id} className={`section-highlight ${styles['section-highlight']}`}>
       <div className="container">
         <div className={styles['text-container']}>
           <span className={styles['title']}>

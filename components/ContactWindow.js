@@ -52,7 +52,11 @@ export function ContactWindow() {
   }
 
   return (
-    <div id="contact-window" className={`contact-window ${contactOpen ? 'open' : ''}`}>
+    <div
+      id="contact-window"
+      className={`contact-window ${contactOpen ? 'open' : ''}`}
+      onWheel={e => { e.stopPropagation() }}
+    >
       <div className="container">
         <div className="contact-window-header">
           <div className="contact-window-title">CONTACT US</div>

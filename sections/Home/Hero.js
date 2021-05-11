@@ -1,6 +1,6 @@
 import styles from 'styles/modules/Home.module.scss'
 
-export default function HeroSection({ moveSectionDown }) {
+export default function HeroSection({ moveSectionDown, scrollToContent }) {
   return (
     <div id="hero" className={styles['section-hero']} onScroll={() => console.log('lol')}>
       <div className={styles['overlay']} />
@@ -9,7 +9,9 @@ export default function HeroSection({ moveSectionDown }) {
           href="/#"
           onClick={(e) => {
             e.preventDefault()
-            moveSectionDown()
+            console.log(scrollToContent)
+            moveSectionDown && moveSectionDown()
+            scrollToContent && scrollToContent()
           }}
         >
           <img src="/svg/inverted-down.svg" alt="Down" />

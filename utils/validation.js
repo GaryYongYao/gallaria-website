@@ -13,7 +13,8 @@ export const validationPassword = (pass) => {
 }
 
 export const filterRegex = (match, item) => {
-  const re = new RegExp(match, 'i')
+  const format = match.replace('+', '\\+')
+  const re = new RegExp(decodeURIComponent(format), 'i')
   return re.test(item)
 }
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Head from 'next/head'
+import { animateScroll as scroll } from 'react-scroll'
 import styles from 'styles/modules/Home.module.scss'
 import ReactFullpage from '@fullpage/react-fullpage'
 import { Footer, Header, HeaderWhite } from 'components'
@@ -38,6 +39,14 @@ export default function Home({ featured }) {
     else window.addEventListener('load', getEle)
   }, [])
 
+  const scrollToContent = () => {
+    const content = document.getElementById('mobile-content').offsetTop
+    scroll.scrollTo(content, {
+      duration: 1400,
+      smooth: true
+    })
+  }
+
   return (
     <div className={styles['container']}>
       <Head>
@@ -75,7 +84,7 @@ export default function Home({ featured }) {
                       setAllowScrolling={(fullpageApi || {}).setAllowScrolling}
                     />
                   </div>
-                  <Highlight />
+                  <Highlight id="desktop-content" />
                   <Experience />
                   <Featured data={featured} />
                   <Project />
@@ -91,19 +100,8 @@ export default function Home({ featured }) {
         <div style={{ width: '100%' }}>
           <HeaderWhite />
         </div>
-        <Hero />
-        <div
-          id="header"
-          style={{
-            width: '100%',
-            position: 'sticky',
-            top: 0,
-            zIndex: 2
-          }}
-        >
-          <Header />
-        </div>
-        <Highlight />
+        <Hero scrollToContent={scrollToContent} />
+        <Highlight id="mobile-content" />
         <Experience />
         <Featured data={featured} />
         <Project />

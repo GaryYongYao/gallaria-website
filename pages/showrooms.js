@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Footer, Header } from 'components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { List, Map, Search } from 'sections/Showroom'
 import styles from 'styles/modules/Showrooms.module.scss'
 
@@ -9,8 +9,7 @@ const DATA = [
     name: 'CASS Brothers Waverley',
     address: '82 Carrington Rd, Waverley NSW 2024',
     phone: '(02) 8999 7278',
-    position: { lat: -33.900082, lng: 151.253924 },
-    website: 'https://www.cassbrothers.com.au/'
+    position: { lat: -33.900082, lng: 151.253924 }
   },
   {
     name: 'ACS Designer Bathroom',
@@ -45,7 +44,11 @@ const DATA = [
 function Showroom() {
   const [list] = useState(DATA)
   const [selected, setSelected] = useState(DATA[0])
-  const [zoom, setZoom] = useState(10)
+  const [zoom, setZoom] = useState(17)
+
+  useEffect(() => {
+    document.body.className = ''
+  }, [])
 
   return (
     <div className={styles['container']}>

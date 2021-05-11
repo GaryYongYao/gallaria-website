@@ -54,13 +54,6 @@ function Product({ products, featured, categories }) {
 
   useEffect(() => {
     mixer && mixer.forceRefresh()
-  }, [displayProducts])
-
-  useEffect(() => {
-    mixer && mixer.sort(selected.value)
-  }, [selected])
-
-  useEffect(() => {
     if (filter === '') return
     if (filter === 'all' && mixer) {
       mixer.filter('all').then(state => setSelectors(state.activeFilter.selector))
@@ -70,6 +63,26 @@ function Product({ products, featured, categories }) {
         ? mixer.toggleOff(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
         : mixer.toggleOn(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
       setFilter('')
+    }
+  }, [displayProducts])
+
+  useEffect(() => {
+    mixer && mixer.sort(selected.value)
+  }, [selected])
+
+  useEffect(() => {
+    if (displayProducts !== products) setDisplayProducts(products)
+    else {
+      if (filter === '') return
+      if (filter === 'all' && mixer) {
+        mixer.filter('all').then(state => setSelectors(state.activeFilter.selector))
+      } else if (mixer) {
+        const { selector } = mixer.getState().activeFilter
+        selector.includes(filter)
+          ? mixer.toggleOff(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
+          : mixer.toggleOn(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
+        setFilter('')
+      }
     }
   }, [filter])
 

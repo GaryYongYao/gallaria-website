@@ -13,24 +13,26 @@ function List({ list, selected, setSelected, setZoom }) {
         <div className={styles['location-divider']} />
         <div className={`${styles['location-content']} ${styles['location-address']}`}>{selected.address}</div>
         <div className={`${styles['location-content']} ${styles['location-phone']}`}>{selected.phone}</div>
-        <div className={styles['location-website']}>
-          <a
-            href={selected.website}
-            target="_blank"
-            rel="noreferrer"
-            onClick={e => e.stopPropagation()}
-          >
-            VIEW WEBSITE
-            <img src="/svg/left-arrow.svg" width="6px" />
-          </a>
-        </div>
+        {selected.website && (
+          <div className={styles['location-website']}>
+            <a
+              href={selected.website}
+              target="_blank"
+              rel="noreferrer"
+              onClick={e => e.stopPropagation()}
+            >
+              VIEW WEBSITE
+              <img src="/svg/left-arrow.svg" width="6px" />
+            </a>
+          </div>
+        )}
       </div>
       {list.map(l => (
         <div
           key={l.name}
           className={`${styles['location-box']}${selected.name === l.name ? ` ${styles['selected']}` : ''}`}
           onClick={() => {
-            setZoom(14)
+            setZoom(17)
             if (screen.width < 992) scrollToTop()
             setSelected(l)
           }}
