@@ -42,6 +42,7 @@ function Product({ products, featured, categories }) {
       const display = products.filter(prod => {
         const match = (
           filterURLRegex(query.search, prod.name)
+          || filterURLRegex(query.search, prod.code)
           || filterURLRegex(query.search, prod.category)
           || filterURLRegex(query.search, prod.sub)
           || filterURLRegex(query.search, prod.series)
