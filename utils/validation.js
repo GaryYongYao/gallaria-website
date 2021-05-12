@@ -12,9 +12,16 @@ export const validationPassword = (pass) => {
   return !re.test(String(pass))
 }
 
-export const filterRegex = (match, item) => {
+export const filterURLRegex = (match, item) => {
   const format = match.replace('+', '\\+')
   const re = new RegExp(decodeURIComponent(format), 'i')
+  return re.test(item)
+}
+
+export const filterRegex = (match, item) => {
+  console.log(match)
+  const re = new RegExp(match, 'i')
+  console.log(re)
   return re.test(item)
 }
 

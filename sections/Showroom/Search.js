@@ -1,6 +1,6 @@
 import styles from 'styles/modules/Showrooms.module.scss'
 
-function Search() {
+function Search({ searchStore, search, setSearch }) {
   return (
     <div className={styles['section-search']}>
       <div className="container">
@@ -15,14 +15,14 @@ function Search() {
               <div className="col-6">
                 <input
                   className=""
-                  /* value={search}
+                  value={search}
                   onChange={({ target }) => setSearch(target.value)}
-                  onKeyDown={e => (e.key === 'Enter') && searchFunction()} */
+                  onKeyDown={e => (e.key === 'Enter') && searchStore()}
                   placeholder="ENTER POSTCODE OR SUBURB"
                 />
               </div>
               <div className="col-6">
-                <button type="submit" className="button-contained" style={{ width: '50%' }}>
+                <button type="button" onClick={searchStore} className="button-contained" style={{ width: '50%' }}>
                   SEARCH
                 </button>
               </div>

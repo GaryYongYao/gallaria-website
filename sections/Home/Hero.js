@@ -1,17 +1,21 @@
 import styles from 'styles/modules/Home.module.scss'
 
-export default function HeroSection({ moveSectionDown, scrollToContent }) {
+export default function HeroSection({ scrollToContent, wheelHero, touchHero, setTouch }) {
   return (
-    <div id="hero" className={styles['section-hero']} onScroll={() => console.log('lol')}>
+    <div
+      id="hero"
+      onWheel={wheelHero}
+      onTouchStart={(e) => setTouch(e.touches[0].pageY)}
+      onTouchMove={touchHero}
+      className={styles['section-hero']}
+    >
       <div className={styles['overlay']} />
       <div className={styles['down-button']}>
         <a
           href="/#"
           onClick={(e) => {
             e.preventDefault()
-            console.log(scrollToContent)
-            moveSectionDown && moveSectionDown()
-            scrollToContent && scrollToContent()
+            scrollToContent()
           }}
         >
           <img src="/svg/inverted-down.svg" alt="Down" />

@@ -41,17 +41,21 @@
     .location-container {
       overflow: auto;
       max-height: 856px;
+      height: 856px;
       
       @media screen and (max-width: 1399px) {
         max-height: 736px;
+        height: 736px;
       }
       
       @media screen and (max-width: 1199px) {
         max-height: 615.984px;
+        height: 615.984px;
       }
       
       @media screen and (max-width: $md-max) {
         max-height: unset;
+        height: auto;
       }
         
       &::-webkit-scrollbar {
@@ -186,12 +190,11 @@
         margin-bottom: 50px;
       }
 
-      .map-box {
-        padding-top: 100%;
-        position: relative;
+      > div:nth-child(1) {
+        padding-top: 100% !important;
     
         @media screen and (max-width: $md-max) {
-          margin-bottom: 50px;
+          margin-bottom: 50px !important;
         }
 
         > div:nth-child(1) {

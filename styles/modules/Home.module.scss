@@ -25,7 +25,8 @@
 
 .body {
   overflow: hidden !important;
-  @media screen and (max-width: $md-max) {
+
+  &.inContent {
     overflow: auto !important;
   }
 }
@@ -658,8 +659,6 @@
         padding-left: 41.5px;
         padding-right: 41.5px;
         text-align: left;
-        opacity: 1;
-        transform: translateY(0);
       }
 
       span {

@@ -1,11 +1,6 @@
-import { animateScroll as scroll } from 'react-scroll'
 import styles from 'styles/modules/Showrooms.module.scss'
 
-function List({ list, selected, setSelected, setZoom }) {
-  const scrollToTop = () => {
-    scroll.scrollToTop()
-  }
-
+function List({ list, selected, setSelected, setZoom, setCenter, scrollToTop }) {
   return (
     <div className={`${styles['location-container']} col-lg-4`}>
       <div className={`${styles['location-box']} ${styles['selected']} only-mobile`}>
@@ -32,7 +27,8 @@ function List({ list, selected, setSelected, setZoom }) {
           key={l.name}
           className={`${styles['location-box']}${selected.name === l.name ? ` ${styles['selected']}` : ''}`}
           onClick={() => {
-            setZoom(17)
+            setZoom(12)
+            setCenter(l.position)
             if (screen.width < 992) scrollToTop()
             setSelected(l)
           }}

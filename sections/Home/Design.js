@@ -7,19 +7,13 @@ export default function DesignSection() {
     showFromBottom('our-design', styles['text-box'])
   }
 
-  const getEle = () => {
-    const ele = document.getElementsByClassName('fp-scroller')[0]
-    if (ele) ele.addEventListener('scroll', showElement)
-    if (ele) ele.addEventListener('wheel', showElement)
-    if (ele) ele.addEventListener('touchmove', showElement)
-    if (ele) ele.addEventListener('touchend', showElement)
-  }
-
   useEffect(() => {
-    window.addEventListener('load', getEle)
-    const navData = window.performance.getEntriesByType('navigation')
-    if (navData.length > 0 && navData[0].loadEventEnd > 0) getEle()
-    else window.addEventListener('load', getEle)
+    window.addEventListener('scroll', showElement)
+
+    // returned function will be called on component unmount
+    return () => {
+      window.removeEventListener('scroll', showElement)
+    }
   }, [])
 
   return (

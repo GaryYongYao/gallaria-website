@@ -1,28 +1,37 @@
-import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps'
+import GoogleMapReact from 'google-map-react'
 import styles from 'styles/modules/Showrooms.module.scss'
 import { mapStyles } from './constant'
 
-function Map({ list, selected, zoom }) {
+function Map({ list, zoom, center, searchStore, search, setSearch }) {
   return (
     <div className={`${styles['map-container']} col-lg-8`}>
-      <MapComponent
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API}&v=3.exp`}
-        loadingElement={<div style={{ paddingTop: '100%' }} />}
-        containerElement={<div className={styles['map-box']} />}
-        mapElement={<div style={{ height: '100%' }} />}
-        showrooms={list}
-        selected={selected}
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_API }}
+        options={{
+          styles: mapStyles,
+          mapTypeControl: false,
+          streetViewControl: false
+        }}
         zoom={zoom}
-      />
+        center={center}
+      >
+        {list.map(showroom => (
+          <CustomMarker
+            key={showroom.name}
+            lat={showroom.position[0]}
+            lng={showroom.position[1]}
+          />
+        ))}
+      </GoogleMapReact>
       <div className="only-mobile">
         <input
           className={styles['input-box']}
-          /* value={search}
+          value={search}
           onChange={({ target }) => setSearch(target.value)}
-          onKeyDown={e => (e.key === 'Enter') && searchFunction()} */
+          onKeyDown={e => (e.key === 'Enter') && searchStore()}
           placeholder="ENTER POSTCODE OR SUBURB"
         />
-        <button type="submit" className="button-contained">
+        <button type="button" onClick={searchStore} className="button-contained">
           SEARCH
         </button>
       </div>
@@ -30,32 +39,17 @@ function Map({ list, selected, zoom }) {
   )
 }
 
-const CustomMarker = ({ position }) => (
-  <Marker
-    icon={{
-      url: '/svg/marker.svg',
-      scaledSize: new google.maps.Size(51, 51)
+const CustomMarker = () => (
+  <img
+    animation={2}
+    src="/svg/marker.svg"
+    height="61px"
+    width="61px"
+    style={{
+      position: 'absolute',
+      transform: 'translate(-50%, -100%)'
     }}
-    position={position}
   />
 )
-
-const MapComponent = withScriptjs(withGoogleMap(({ showrooms, selected, zoom }) => (
-  <GoogleMap
-    defaultOptions={{
-      styles: mapStyles,
-      mapTypeControl: false,
-      streetViewControl: false
-    }}
-    defaultZoom={zoom}
-    zoom={zoom}
-    defaultCenter={selected.position}
-    center={selected.position}
-  >
-    {showrooms.map(showroom => (
-      <CustomMarker position={showroom.position} />
-    ))}
-  </GoogleMap>
-)))
 
 export default Map

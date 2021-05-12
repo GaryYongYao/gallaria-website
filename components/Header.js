@@ -19,7 +19,7 @@ function Header({ setAllowScrolling }) {
   }
 
   return (
-    <header>
+    <header id="header">
       <div className={`flex-center${open ? ' menu-header' : ''}`}>
         <div className="container flex-center">
           <Link href="/">

@@ -6,7 +6,7 @@ import { Carousel, Filter, List } from 'sections/ProductList'
 import { DropdownUnderline, Footer, Header } from 'components'
 import request from 'utils/request'
 import { queryGetProducts, queryGetFeatureProducts, queryGetCategories } from 'utils/graphql'
-import { removeSpace, filterRegex } from 'utils/validation'
+import { removeSpace, filterURLRegex } from 'utils/validation'
 
 function Product({ products, featured, categories }) {
   const router = useRouter()
@@ -41,10 +41,10 @@ function Product({ products, featured, categories }) {
     if (query.search) {
       const display = products.filter(prod => {
         const match = (
-          filterRegex(query.search, prod.name)
-          || filterRegex(query.search, prod.category)
-          || filterRegex(query.search, prod.sub)
-          || filterRegex(query.search, prod.series)
+          filterURLRegex(query.search, prod.name)
+          || filterURLRegex(query.search, prod.category)
+          || filterURLRegex(query.search, prod.sub)
+          || filterURLRegex(query.search, prod.series)
         )
         return match
       })

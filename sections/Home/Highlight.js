@@ -1,7 +1,7 @@
 import styles from 'styles/modules/Home.module.scss'
 import { Link } from 'components'
 
-export default function HighlightSection({ id }) {
+export default function HighlightSection({ scrollToHero, setTouch, touch }) {
   const MobileBox = ({ link, img, text }) => (
     <Link href={link} style="col-6">
       <div
@@ -12,8 +12,37 @@ export default function HighlightSection({ id }) {
     </Link>
   )
 
+  const wheelEvent = (e) => {
+    const hero = document.getElementById('hero')
+    if (e.deltaY < 0 && document.body.getBoundingClientRect().top + 1 > 0 - hero.clientHeight) {
+      scrollToHero()
+    }
+  }
+
+  const touchEvent = (e) => {
+    const hero = document.getElementById('hero')
+    if (e.touches[0].pageY - touch > 0 && document.body.getBoundingClientRect().top + 1 > 0 - hero.clientHeight) {
+      scrollToHero()
+    }
+  }
+
+  const touchEndEvent = (e) => {
+    const hero = document.getElementById('hero')
+    console.log(e.changedTouches[0].pageY)
+    if (e.changedTouches[0].pageY - touch > 0 && document.body.getBoundingClientRect().top + 1 > 0 - hero.clientHeight) {
+      scrollToHero()
+    }
+  }
+
   return (
-    <div id={id} className={`section-highlight ${styles['section-highlight']}`}>
+    <div
+      id="content"
+      onWheel={wheelEvent}
+      onTouchStart={(e) => setTouch(e.touches[0].pageY)}
+      onTouchMove={touchEvent}
+      onTouchEnd={touchEndEvent}
+      className={`section-highlight ${styles['section-highlight']}`}
+    >
       <div className="container">
         <div className={styles['text-container']}>
           <span className={styles['title']}>
