@@ -15,7 +15,7 @@ header {
     background-color: $secondary-blur;
 
     @media screen and (max-width: $md-max) {
-      padding-right: 25px;
+      padding: 0 15px;
     }
   }
 
@@ -73,17 +73,18 @@ header {
       }
 
       > div:nth-child(2) {
-        width: 150px;;
+        width: 150px;
         overflow: hidden;
       }
       
       input {
         background-color: transparent;
         border: 0;
+        border-radius: 0;
         transition: all 0.5s ease-out;
         transform-origin: 100%;
         padding: 5px;
-        border-bottom: 1px solid $primary-light !important;
+        border-bottom: 1px solid $primary-light;
         transform: translateX(150px);
         width: 100%;
         letter-spacing: 0.1em;

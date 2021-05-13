@@ -25,6 +25,44 @@
       width: 100%;
     }
   }
+
+  .title {
+    position: relative;
+
+    .intelligent {
+      font-weight: 400;
+      font-size: 78px;
+      letter-spacing: -0.04em;
+  
+      @media screen and (max-width: $md-max) {
+        font-size: 36px;
+      }
+    }
+  
+    .bathrooms {
+      font-weight: 200;
+      font-size: 78px;
+      letter-spacing: -0.04em;
+  
+      @media screen and (max-width: $md-max) {
+        font-size: 36px;
+      }
+    }
+  
+    .reserved {
+      font-weight: 200;
+      position: absolute;
+      font-size: 18px;
+      top: 30px;
+      margin-left: 1px;
+  
+      @media screen and (max-width: $md-max) {
+        font-size: 12px;
+        top: 7px;
+        margin-left: 1px;
+      }
+    }
+  }
 }
 
 .content {
@@ -68,12 +106,18 @@
   }
 
   .section {
-    padding-top: 105px;
+    padding-top: 81px;
     margin-bottom: 105px;
 
     @media screen and (max-width: $md-max) {
       padding-top: 100px;
       margin-bottom: 100px;
+    }
+    
+    :global(.visibility-hidden) {
+      @media screen and (max-width: $md-max) {
+        display: none;
+      }
     }
 
     .title {

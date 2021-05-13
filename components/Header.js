@@ -40,10 +40,10 @@ function Header({ setAllowScrolling }) {
                 />
               </div>
             </div>
-            <Link href="/">
+            <Link href="/" style="carts">
               <img src={open ? '/svg/inverted-enquiry.svg' : '/svg/enquiry.svg'} alt="Enquiry" />
             </Link>
-            <Link href="/">
+            <Link href="/" style="carts">
               <img src={open ? '/svg/inverted-shopping.svg' : '/svg/shopping.svg'} alt="Shopping" />
             </Link>
             <div>
@@ -94,7 +94,7 @@ function Header({ setAllowScrolling }) {
               <Link href="/about-us" style="col-6 col-lg-12 links">
                 <span>ABOUT GALLARIA</span>
               </Link>
-              <Link href="/products?" style="col-6 col-lg-12 links">
+              <Link href="/projects" style="col-6 col-lg-12 links">
                 <span>PROJECTS</span>
               </Link>
               <Link href="/showrooms" style="col-6 col-lg-12 links">

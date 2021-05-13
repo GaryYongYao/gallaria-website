@@ -402,3 +402,51 @@
     }
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 110px;
+
+  .pages {
+    display: flex;
+    justify-content: center;
+    max-width: 210px;
+
+    .page {
+      cursor: pointer;
+      color: $primary;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+
+      &.current {
+        font-weight: 700;
+        cursor: auto;
+      }
+
+      &:nth-child(1) {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .prev-page {
+    cursor: pointer;
+    margin-right: 15px;
+
+    &.first {
+      visibility: hidden;
+    }
+  }
+
+  .next-page {
+    cursor: pointer;
+    margin-left: 15px;
+
+    &.last {
+      visibility: hidden;
+    }
+  }
+}

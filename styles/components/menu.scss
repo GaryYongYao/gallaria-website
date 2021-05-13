@@ -135,6 +135,48 @@
       }
     }
 
+    .logo {
+      @media screen and (max-width: $md-max) {
+        display: none;
+      }
+    }
+
+    .container {
+      @media screen and (max-width: $md-max) {
+        justify-content: flex-start;
+      }
+    }
+
+    .navigation {
+      @media screen and (max-width: $md-max) {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    .search {
+
+      @media screen and (max-width: $md-max) {
+        width: 100%;
+        margin-right: 10px !important;
+        padding-bottom: 5px;
+        display: block !important;
+
+        > div:nth-child(1) {
+          display: none !important;
+        }
+
+        > div:nth-child(2) {
+          width: 100% !important;
+        }
+
+        input {
+          width: 100%;
+          transform: translateX(0px) !important;
+        }
+      }
+    }
+
     .kebab {
 
       &:after,
@@ -149,7 +191,8 @@
     height: calc(100vh - 107.16px);
 
     @media screen and (max-width: $md-max) {
-      height: 100vh;
+      height: calc(100vh - 48.86px);
+      overflow: auto;
     }
   }
 }

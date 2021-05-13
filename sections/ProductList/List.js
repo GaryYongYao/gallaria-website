@@ -2,12 +2,12 @@ import styles from 'styles/modules/ProductList.module.scss'
 import { Link } from 'components'
 import { removeSpace } from 'utils/validation'
 
-function List({ data }) {
+function List({ data, current, perPage }) {
   return (
     <div className={styles['section-list']}>
       <div className="container">
         <div className={`${styles['masonry']} masonry`}>
-          {data.map(d => !d.isDraft && (
+          {data.map((d, i) => (!d.isDraft && (i >= ((current * perPage) - perPage) && i < current * perPage)) && (
             <div
               key={d.name}
               data-name={d.name}

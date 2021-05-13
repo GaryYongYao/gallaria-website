@@ -79,6 +79,9 @@ query {
     _id
     name
     sub
+    series {
+      name
+    }
   }
 }
 `

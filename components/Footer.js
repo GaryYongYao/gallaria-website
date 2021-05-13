@@ -18,7 +18,7 @@ function Footer() {
             <Link href="/products">
               PRODUCTS
             </Link>
-            <Link href="/">
+            <Link href="/projects">
               PROJECTS
             </Link>
             <Link href="/showrooms">

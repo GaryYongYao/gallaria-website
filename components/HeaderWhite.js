@@ -1,15 +1,22 @@
 import { useContext, useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { ContactContext } from 'components/ContactWindow'
 import Link from 'components/Link'
 
 function HeaderWhite({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const router = useRouter()
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
     if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])
+
+  const searchFunction = () => {
+    if (search.length > 3) router.push(`/products?search=${encodeURIComponent(search)}`)
+  }
 
   return (
     <header>
@@ -26,7 +33,21 @@ function HeaderWhite({ setAllowScrolling }) {
               <img src="/svg/inverted-linkedIn.svg" alt="LinkedIn" className="social" />
             </a>
           </div>
-          <div className="only-mobile">
+          <div className="navigation only-mobile-flex">
+            <div className="search">
+              <div>
+                <img onClick={searchFunction} src={open ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
+              </div>
+              <div>
+                <input
+                  required
+                  value={search}
+                  onChange={({ target }) => setSearch(target.value)}
+                  onKeyDown={e => (e.key === 'Enter') && searchFunction()}
+                  placeholder="SEARCH"
+                />
+              </div>
+            </div>
             <div className={`kebab white${open ? ' opened' : ''}`} onClick={() => setOpen(!open)}>
               <div />
             </div>
@@ -73,7 +94,7 @@ function HeaderWhite({ setAllowScrolling }) {
               <Link href="/about-us" style="col-6 col-lg-12 links">
                 <span>ABOUT GALLARIA</span>
               </Link>
-              <Link href="/products?" style="col-6 col-lg-12 links">
+              <Link href="/projects" style="col-6 col-lg-12 links">
                 <span>PROJECTS</span>
               </Link>
               <Link href="/showrooms" style="col-6 col-lg-12 links">

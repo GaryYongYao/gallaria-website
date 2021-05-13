@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
+import anime from 'animejs'
 // eslint-disable-next-line
 import { Link, Element, Events, scrollSpy, scroller } from 'react-scroll'
 import styles from 'styles/modules/About.module.scss'
@@ -8,6 +9,19 @@ import { Footer, Header } from 'components'
 function Product() {
   useEffect(() => {
     document.body.className = ''
+    const intelligent = document.querySelector('#intelligent')
+    intelligent.innerHTML = intelligent.textContent.replace(/\S/g, "<span class='letter'>$&</span>")
+    const bathrooms = document.querySelector('#bathrooms')
+    bathrooms.innerHTML = bathrooms.textContent.replace(/\S/g, "<span class='letter'>$&</span>")
+
+    anime.timeline()
+      .add({
+        targets: '#ml3 .letter',
+        opacity: [0, 1],
+        easing: 'easeInOutQuad',
+        duration: 2250,
+        delay: (el, i) => 150 * (i + 1)
+      })
   }, [])
 
   // eslint-disable-next-line
@@ -54,7 +68,12 @@ function Product() {
       <Header />
       <div className="container">
         <section className={styles['intelligent-bathroom']}>
-          <img src="/images/about/intelligentbathroom.png" alt="Intelligent Bathroom" />
+          {/* <img src="/images/about/intelligentbathroom.png" alt="Intelligent Bathroom" /> */}
+          <div id="ml3" className={styles['title']}>
+            <span id="intelligent" className={styles['intelligent']}>intelligent</span>
+            <span id="bathrooms" className={styles['bathrooms']}>bathrooms</span>
+            <span className={`${styles['reserved']} letter`}>&#174;</span>
+          </div>
         </section>
       </div>
       <div className={styles['content']}>
@@ -68,7 +87,6 @@ function Product() {
                 spy={true}
                 smooth={true}
                 duration={1200}
-                style={{ color: 'white' }}
               >
                 1. OUR STORY
               </Link>
@@ -107,7 +125,10 @@ function Product() {
               </Link>
             </div>
           </div>
-          <Element name="our-story" className={`${styles['section']} row`}>
+          <div className={`${styles['section']} row`}>
+            <Element name="our-story" className="position-relative visibility-hidden" style={{ top: '-300px' }}>
+              our story
+            </Element>
             <div className="col-lg-3">
               <span className={styles['title']}>
                 OUR STORY
@@ -118,9 +139,12 @@ function Product() {
                 From our base in Sydney, New South Wales, Gallaria Bathware have been specialising in Bathroom ware for eighteen years. During that time we have built a reputation for quality and integrity, gaining the Watermark Licence and WELS certifications, and supplying thousands of customers with affordable, stylish and beautifully engineered products.
               </span>
             </div>
-          </Element>
+          </div>
           <img src="/images/about/image-1.png" alt="Gallaria" />
-          <Element name="design" className={`${styles['section']} row`}>
+          <div className={`${styles['section']} row`}>
+            <Element name="design" className="position-relative visibility-hidden" style={{ top: '-186px' }}>
+              design
+            </Element>
             <div className="col-lg-3">
               <span className={styles['title']}>
                 DESIGN
@@ -131,9 +155,12 @@ function Product() {
                 Combining our passion for refined design with years of experience in the industry, Gallaria is the preferred choice for customers who want the ultimate in style and quality at an attractive price.
               </span>
             </div>
-          </Element>
+          </div>
           <img src="/images/about/image-2.png" alt="Gallaria" />
-          <Element name="service" className={`${styles['section']} row`}>
+          <div className={`${styles['section']} row`}>
+            <Element name="service" className="position-relative visibility-hidden" style={{ top: '-186px' }}>
+              service
+            </Element>
             <div className="col-lg-3">
               <span className={styles['title']}>
                 SERVICE
@@ -144,9 +171,12 @@ function Product() {
                 Our total emphasis on customer satisfaction means that as well as creating the finest products available, we have also made them easy to install and maintain.
               </span>
             </div>
-          </Element>
+          </div>
           <img src="/images/about/graphic.png" alt="Gallaria" />
-          <Element name="warranty" className={`${styles['section']} row`}>
+          <div className={`${styles['section']} row`}>
+            <Element name="warranty" className="position-relative visibility-hidden" style={{ top: '-186px' }}>
+              warranty
+            </Element>
             <div className="col-lg-3">
               <span className={styles['title']}>
                 WARRANTY
@@ -157,12 +187,14 @@ function Product() {
                 Customers benefit from our full After Sales & Service program, underpinned by comprehensive manufacturer Warranties and backed by service from fully qualified, licensed plumbers. To ensure smooth service, we also stock the spare parts needed to bring you years of flawless utility.
               </span>
             </div>
-          </Element>
+          </div>
         </div>
       </div>
       <div className="container">
         <section className={styles['mamo']}>
-          <img src="/images/about/mamo.svg" alt="Intelligent Bathroom" />
+          <a href="https://www.mamoliving.com.au/" target="_blank" rel="noreferrer">
+            <img src="/images/about/mamo.svg" alt="Intelligent Bathroom" />
+          </a>
           <span>Together with MAMO, Gallaria redefines the bathroom experience with a full range of fixtures and textures.</span>
         </section>
       </div>

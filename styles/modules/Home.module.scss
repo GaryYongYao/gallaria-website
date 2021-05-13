@@ -23,14 +23,6 @@
   align-items: center;
 }
 
-.body {
-  overflow: hidden !important;
-
-  &.inContent {
-    overflow: auto !important;
-  }
-}
-
 .section {
   &-hero {
     margin-top: -100px;

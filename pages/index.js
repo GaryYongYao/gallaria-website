@@ -15,7 +15,6 @@ export default function Home({ featured }) {
   }, [])
 
   const scrollToContent = () => {
-    document.body.className = `${styles['body']} ${styles['inContent']}`
     const content = document.getElementById('header').offsetTop
     scroll.scrollTo(content, {
       duration: 1400,
@@ -25,7 +24,6 @@ export default function Home({ featured }) {
   }
 
   const scrollToHero = () => {
-    document.body.className = styles['body']
     const content = document.getElementById('hero').offsetTop
     scroll.scrollTo(content, {
       duration: 1400,

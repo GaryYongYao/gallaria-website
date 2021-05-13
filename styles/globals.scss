@@ -59,8 +59,12 @@ h3 {
 }
 
 .no-bg {
-  background-color: unset !important;
-  background: unset !important;
+  background-color: unset;
+  background: unset;
+
+  &.menu-header {
+    background-color: $primary-blur;
+  }
 }
 
 .flex-reverse-column-mobile {
@@ -70,11 +74,15 @@ h3 {
   }
 }
 
-.only-mobile {
-  display: none;
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.only-mobile-flex {
+  display: none !important;
   
   @media screen and (max-width: $md-max) {
-    display: block !important;
+    display: flex !important;
   }
 }
 
@@ -146,4 +154,8 @@ h3 {
   @media screen and (max-width: $md-max) {
     overflow: auto !important;
   }
+}
+
+.letter {
+  letter-spacing: -0.04em;
 }
