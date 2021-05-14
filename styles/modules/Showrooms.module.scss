@@ -93,6 +93,15 @@
           @media screen and (max-width: $md-max) {
             display: none;
           }
+
+          &-mobile {
+            border: 2px solid $primary;
+            display: none;
+          
+            @media screen and (max-width: $md-max) {
+              display: block;
+            }
+          }
         }
 
         .location {
@@ -213,4 +222,11 @@
     }
     
   }
+}
+
+.location-no {
+  padding-top: 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
 }

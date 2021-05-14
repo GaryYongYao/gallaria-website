@@ -93,9 +93,9 @@ export async function getStaticProps(ctx) {
 
 export async function getStaticPaths() {
   const response = await request(queryProductPaths)
-  const { getProducts } = (response.data || {}).data
+  const { getAllProducts } = (response.data || {}).data
 
-  const paths = await getProducts.map(product => ({
+  const paths = await getAllProducts.map(product => ({
     params: { code: product.code }
   }))
 

@@ -14,7 +14,7 @@ function Search({ searchStore, search, setSearch }) {
             <div className="row">
               <div className="col-6">
                 <input
-                  className=""
+                  type="search"
                   value={search}
                   onChange={({ target }) => setSearch(target.value)}
                   onKeyDown={e => (e.key === 'Enter') && searchStore()}

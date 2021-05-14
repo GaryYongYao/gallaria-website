@@ -59,6 +59,7 @@ function Product({ products, featured, categories }) {
     mixer && mixer.forceRefresh()
     if (filter === '') return
     if (filter === 'all' && mixer) {
+      if (displayProducts !== products) setDisplayProducts(products)
       mixer.filter('all').then(state => setSelectors(state.activeFilter.selector))
     } else if (mixer) {
       const { selector } = mixer.getState().activeFilter

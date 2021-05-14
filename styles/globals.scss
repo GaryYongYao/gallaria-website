@@ -86,6 +86,15 @@ h3 {
   }
 }
 
+.only-mobile-block {
+  display: none !important;
+  
+  @media screen and (max-width: $md-max) {
+    display: block !important;
+  }
+}
+
+
 .only-desktop {
   display: block;
   

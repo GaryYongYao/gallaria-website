@@ -19,9 +19,7 @@ export const filterURLRegex = (match, item) => {
 }
 
 export const filterRegex = (match, item) => {
-  console.log(match)
   const re = new RegExp(match, 'i')
-  console.log(re)
   return re.test(item)
 }
 

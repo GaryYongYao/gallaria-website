@@ -1,4 +1,4 @@
-// graphql query
+// products
 export const queryGetProducts = `
 query {
   getProducts {
@@ -28,7 +28,7 @@ query {
 
 export const queryProductPaths = `
 query {
-  getProducts {
+  getAllProducts {
     code
     isDraft
   }
@@ -91,4 +91,18 @@ export const mutationSubmitContact = `
 mutation submitContact($leadInput: LeadInput!) {
   submitContact(leadInput: $leadInput)
 }
+`
+
+// Locations
+export const queryGetLocations = `
+  query {
+    getLocations {
+      _id
+      name
+      address
+      phone
+      website
+      position
+    }
+  }
 `

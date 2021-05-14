@@ -5,72 +5,84 @@ import styles from 'styles/modules/Projects.module.scss'
 
 const DATA = [
   {
+    _id: '366345',
     name: 'Project 01',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 02',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 03',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 04',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 05',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 06',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 07',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 08',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 09',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 10',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 11',
     location: 'Sydney, Australia',
     type: 'Commercial',
     year: 'Nov 2019'
   },
   {
+    _id: '366345',
     name: 'Project 12',
     location: 'Sydney, Australia',
     type: 'Commercial',

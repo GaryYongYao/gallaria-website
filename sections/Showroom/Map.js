@@ -23,9 +23,10 @@ function Map({ list, zoom, center, searchStore, search, setSearch }) {
           />
         ))}
       </GoogleMapReact>
-      <div className="only-mobile">
+      <div className="only-mobile-block">
         <input
           className={styles['input-box']}
+          type="search"
           value={search}
           onChange={({ target }) => setSearch(target.value)}
           onKeyDown={e => (e.key === 'Enter') && searchStore()}
@@ -41,7 +42,6 @@ function Map({ list, zoom, center, searchStore, search, setSearch }) {
 
 const CustomMarker = () => (
   <img
-    animation={2}
     src="/svg/marker.svg"
     height="61px"
     width="61px"
