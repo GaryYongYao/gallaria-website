@@ -44,6 +44,7 @@ function Filter({ categories, setFilter, selection }) {
               >
                 <span className={selection.includes(id) ? styles['selected'] : ''}>
                   {name}
+                  <span className={selection.includes(id) ? styles['selected'] : ''}>{selection.includes(id) ? '-' : '+'}</span>
                 </span>
               </div>
               {sub.map(s => (
@@ -54,6 +55,7 @@ function Filter({ categories, setFilter, selection }) {
                 >
                   <span className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}>
                     {s.name}
+                    <span className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}>{selection.includes(id) ? '-' : '+'}</span>
                   </span>
                 </div>
               ))}
@@ -65,6 +67,7 @@ function Filter({ categories, setFilter, selection }) {
                 >
                   <span className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}>
                     {s.name}
+                    <span className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}>{selection.includes(id) ? '-' : '+'}</span>
                   </span>
                 </div>
               ))}

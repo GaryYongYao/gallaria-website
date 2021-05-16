@@ -234,6 +234,12 @@
             font-size: 0.875rem;
             color: $primary-light;
             font-weight: 700;
+            display: flex;
+
+            > span {
+              display: block;
+              margin-left: auto;
+            }
 
             &.selected {
               color: $primary;
