@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styles from 'styles/modules/ProductList.module.scss'
-import { Carousel, Filter, List } from 'sections/ProductList'
-import { DropdownUnderline, Footer, Header } from 'components'
+import { Carousel, Filter, List, Sorting } from 'sections/ProductList'
+import { Footer, Header } from 'components'
 import request from 'utils/request'
 import { queryGetProducts, queryGetFeatureProducts, queryGetCategories } from 'utils/graphql'
 import { removeSpace, filterURLRegex } from 'utils/validation'
@@ -11,20 +11,12 @@ import { removeSpace, filterURLRegex } from 'utils/validation'
 function Product({ products, featured, categories }) {
   const router = useRouter()
   const [mixer, setMixer] = useState(() => {})
-  const [selected, setSelected] = useState({ name: 'Default', value: 'default:asc' })
+  const [selected, setSelected] = useState({ name: 'DEFAULT', value: 'default:asc' })
   const [filter, setFilter] = useState('')
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
   const [current, setCurrent] = useState(1)
   const perPage = 30
-
-  const variants = [
-    { name: 'DEFAULT', value: 'default:asc' },
-    { name: 'A - Z', value: 'name:asc' },
-    { name: 'Z - A', value: 'name:desc' },
-    { name: 'DATE:  NEW - OLD', value: 'date:desc' },
-    { name: 'DATE:  OLD - NEW', value: 'date:asc' }
-  ]
 
   useEffect(() => {
     document.body.className = ''
@@ -125,14 +117,10 @@ function Product({ products, featured, categories }) {
           setFilter={setFilter}
           selection={selectors}
         />
-        <div className={styles['sorting']}>
-          <span>Sort By: </span>
-          <DropdownUnderline
-            value={selected.name}
-            items={variants}
-            setValue={setSelected}
-          />
-        </div>
+        <Sorting
+          selected={selected}
+          setSelected={setSelected}
+        />
       </div>
       <List data={displayProducts} current={current} perPage={perPage} />
       {displayProducts.length > perPage && (
