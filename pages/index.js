@@ -84,7 +84,6 @@ export async function getStaticProps() {
   const featured = response.data.data.getFeatureProducts
   const projectResponse = await request(queryGetLatestProjects)
   const projects = projectResponse.data.data.getLatestProjects
-  console.log(projects)
 
   return {
     props: { featured, projects }, // will be passed to the page component as props

@@ -68,10 +68,13 @@
       flex-direction: column;
       height: 400px;
       position: relative;
+      filter: grayscale(100%);
+      transition: all .3s ease-in-out;
 
       @media screen and (max-width: $md-max) {
         padding: 14px;
         margin-bottom: 10px;
+        filter: grayscale(0);
         height: 370px !important;
       }
 
@@ -168,6 +171,10 @@
     }
     
     &:hover {
+      .item-container {
+        filter: grayscale(0);
+      }
+
       .item-overlay,
       .name,
       .info {
