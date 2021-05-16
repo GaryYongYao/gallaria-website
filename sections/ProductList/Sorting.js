@@ -1,8 +1,31 @@
-import { useState, Fragment } from 'react'
+import { useEffect, useRef, useState, Fragment } from 'react'
 import styles from 'styles/modules/ProductList.module.scss'
 
+function useOutsideAlerter(ref, buttonRef, setOpen) {
+  useEffect(() => {
+    function handleClickOutside(event) {
+      // eslint-disable-next-line
+      if (buttonRef.current.contains(event.target)) return
+      else if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [ref])
+}
+
 function Filter({ selected, setSelected }) {
+  const wrapperRef = useRef(null)
+  const buttonRef = useRef(null)
   const [open, setOpen] = useState(false)
+
+  useOutsideAlerter(wrapperRef, buttonRef, setOpen)
 
   const variants = [
     { name: 'DEFAULT', value: 'default:asc' },
@@ -11,12 +34,11 @@ function Filter({ selected, setSelected }) {
     { name: 'DATE:  NEW - OLD', value: 'date:desc' },
     { name: 'DATE:  OLD - NEW', value: 'date:asc' }
   ]
-  console.log(variants)
 
   return (
     <>
       <div className={styles['sorting']}>
-        <div className={`${styles['sorting-button']}${open ? ` ${styles['opened']}` : ''}`} onClick={() => setOpen(!open)}>
+        <div ref={buttonRef} className={`${styles['sorting-button']}${open ? ` ${styles['opened']}` : ''}`} onClick={() => setOpen(!open)}>
           <span>
             SORT BY:
           </span>
@@ -25,7 +47,7 @@ function Filter({ selected, setSelected }) {
             <img src="/svg/down.svg" alt="Dropdown" className={open ? 'open' : ''} />
           </span>
         </div>
-        <div className={`${styles['dropdown-items']}${open ? ` ${styles['opened']}` : ''}`}>
+        <div ref={wrapperRef} className={`${styles['dropdown-items']}${open ? ` ${styles['opened']}` : ''}`}>
           {variants.map(variant => variant.name !== selected.name && (
             <Fragment key={variant.name}>
               <div
