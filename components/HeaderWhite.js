@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { ContactContext } from 'components/ContactWindow'
 import Link from 'components/Link'
 
 function HeaderWhite({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
-  const router = useRouter()
+  /* const [search, setSearch] = useState('')
+  const router = useRouter() */
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
@@ -14,9 +14,9 @@ function HeaderWhite({ setAllowScrolling }) {
     if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])
 
-  const searchFunction = () => {
+  /* const searchFunction = () => {
     if (search.length > 3) router.push(`/products?search=${encodeURIComponent(search)}`)
-  }
+  } */
 
   return (
     <header>
@@ -33,7 +33,7 @@ function HeaderWhite({ setAllowScrolling }) {
               <img src="/svg/inverted-linkedIn.svg" alt="LinkedIn" className="social" />
             </a>
           </div>
-          <div className="navigation only-mobile-flex">
+          {/* <div className="navigation only-mobile-flex">
             <div className="search">
               <div>
                 <img onClick={searchFunction} src={open ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
@@ -51,7 +51,7 @@ function HeaderWhite({ setAllowScrolling }) {
             <div className={`kebab white${open ? ' opened' : ''}`} onClick={() => setOpen(!open)}>
               <div />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={`menu${open ? ' open' : ''}`}>

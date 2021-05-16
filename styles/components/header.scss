@@ -12,6 +12,7 @@ header {
   
 
   > div {
+    transition: all .5s ease-in-out;
     background-color: $secondary-blur;
 
     @media screen and (max-width: $md-max) {
@@ -130,7 +131,8 @@ header {
       margin-left: 30.84px;
   
       @media screen and (max-width: $md-max) {
-        display: none;
+        width: 21px;
+        margin-left: 18px;
       }
     }
   }

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { ContactContext } from 'components/ContactWindow'
 import Link from 'components/Link'
@@ -6,13 +6,41 @@ import Link from 'components/Link'
 function Header({ setAllowScrolling }) {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const [invert, setInvert] = useState(false)
+  const headerRef = useRef()
   const router = useRouter()
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
+    checkHeader()
     if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])
+
+  useEffect(() => {
+    window.addEventListener('scroll', checkHeader)
+
+    // returned function will be called on component unmount
+    return () => {
+      window.removeEventListener('scroll', checkHeader)
+    }
+  }, [])
+
+  const checkHeader = () => {
+    const ele = headerRef.current
+    if (document.documentElement.scrollTop > 100) {
+      (ele || {}).className = `flex-center${open ? ' menu-header' : ''} menu-black`
+      headerState()
+    } else {
+      (ele || {}).className = `flex-center${open ? ' menu-header' : ''}`
+      headerState()
+    }
+  }
+
+  const headerState = () => {
+    const classes = headerRef.current?.className
+    setInvert(classes?.includes('menu-header') || classes?.includes('menu-black'))
+  }
 
   const searchFunction = () => {
     if (search.length > 3) router.push(`/products?search=${encodeURIComponent(search)}`)
@@ -20,15 +48,15 @@ function Header({ setAllowScrolling }) {
 
   return (
     <header id="header">
-      <div className={`flex-center${open ? ' menu-header' : ''}`}>
+      <div ref={headerRef} id="header-background" className={`flex-center${open ? ' menu-header' : ''}`}>
         <div className="container flex-center">
           <Link href="/">
-            <img src={open ? '/svg/logo-white.svg' : '/svg/logo-black.svg'} alt="Gallaria Logo" className="logo" />
+            <img src={invert ? '/svg/logo-white.svg' : '/svg/logo-black.svg'} alt="Gallaria Logo" className="logo" />
           </Link>
           <div className="navigation">
             <div className="search">
               <div>
-                <img onClick={searchFunction} src={open ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
+                <img onClick={searchFunction} src={invert ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
               </div>
               <div>
                 <input
@@ -41,10 +69,10 @@ function Header({ setAllowScrolling }) {
               </div>
             </div>
             <Link href="/" style="carts">
-              <img src={open ? '/svg/inverted-enquiry.svg' : '/svg/enquiry.svg'} alt="Enquiry" />
+              <img src={invert ? '/svg/inverted-enquiry.svg' : '/svg/enquiry.svg'} alt="Enquiry" />
             </Link>
             <Link href="/" style="carts">
-              <img src={open ? '/svg/inverted-shopping.svg' : '/svg/shopping.svg'} alt="Shopping" />
+              <img src={invert ? '/svg/inverted-shopping.svg' : '/svg/shopping.svg'} alt="Shopping" />
             </Link>
             <div>
               <div className={`kebab${open ? ' opened' : ''}`} onClick={() => setOpen(!open)}>

@@ -119,6 +119,57 @@
     }
   }
 
+  &-black {
+    background-color: $primary-blur;
+    
+    .search input,
+    .search:hover input,
+    .search input:focus,
+    .search input:valid {
+      color: $text-secondary;
+      border-bottom: 1px solid $text-secondary !important;
+
+      &::-webkit-input-placeholder {
+        color: $text-secondary;
+      }
+    }
+
+    .container {
+      @media screen and (max-width: $md-max) {
+        justify-content: flex-start;
+      }
+    }
+
+    .navigation {
+      @media screen and (max-width: $md-max) {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    .search {
+
+      @media screen and (max-width: $md-max) {
+        width: 100%;
+        margin-right: 10px !important;
+        padding-bottom: 5px;
+        display: block !important;
+
+        > div:nth-child(1) {
+          display: none !important;
+        }
+      }
+    }
+
+    .kebab {
+
+      &:after,
+      &:before,
+      div {
+        background-color: $text-secondary;
+      }
+    }
+  }
 
   &-header {
     background-color: $primary-blur;

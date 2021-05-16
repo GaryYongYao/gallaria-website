@@ -3,8 +3,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styles from 'styles/modules/ProjectDetails.module.scss'
 import { Breadcrumbs, Footer, Header } from 'components'
-// import request from 'utils/request'
-// import {  } from 'utils/graphql'
+import request from 'utils/request'
+import { queryProjectPaths, queryGetProjectById, queryGetLatestProjects } from 'utils/graphql'
+import Products from 'sections/ProjectDetails/Products'
+import OtherProjects from 'sections/ProjectDetails/Project'
 import Error from '../_error'
 
 function Project({ data, recommendations }) {
@@ -36,19 +38,74 @@ function Project({ data, recommendations }) {
           {data.name}
         </span>
       </div>
-      <div className={`${styles['cover-photo']} container`} />
+      <div className={`${styles['cover-photo']} container`}>
+        <img
+          src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
+        />
+      </div>
+      <div className={`${styles['info-row']} container`}>
+        <div className="row">
+          <div className={`${styles['info-container']} col-lg-4`}>
+            <div className={`${styles['info-box']}`}>
+              <div className={`${styles['info-title']}`}>
+                LOCATION
+              </div>
+              <div className={`${styles['info-detail']}`}>
+                {data.location}
+              </div>
+            </div>
+            <div className={`${styles['info-box']}`}>
+              <div className={`${styles['info-title']}`}>
+                TYPE
+              </div>
+              <div className={`${styles['info-detail']}`}>
+                {data.type}
+              </div>
+            </div>
+            <div className={`${styles['info-box']}`}>
+              <div className={`${styles['info-title']}`}>
+                YEAR
+              </div>
+              <div className={`${styles['info-detail']}`}>
+                {data.date}
+              </div>
+            </div>
+            <div className={`${styles['desc-box']}`}>
+              {data.desc}
+            </div>
+          </div>
+          <div className={`${styles['first-photo']} col-lg-8`}>
+            <img
+              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.photos[0]).replace('(', '%28').replace(')', '%29')}`}
+            />
+          </div>
+        </div>
+      </div>
+      <div className={`${styles['photos']} container`}>
+        {data.photos?.map((photo, i) => i !== 0 && (
+          <img
+            key={photo}
+            src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(photo).replace('(', '%28').replace(')', '%29')}`}
+          />
+        ))}
+      </div>
+      <Products data={data} />
+      {recommendations.length > 0 && (
+        <OtherProjects data={recommendations} />
+      )}
       <Footer />
     </div>
   )
 }
 
 export async function getStaticProps(ctx) {
-  /* const { id, res } = ctx.params
+  const { id, res } = ctx.params
 
-  const response = await request(queryGetProductByCode, { _id: id })
-  const data = response.data.data.getProductByCode
-  const reList = await request(queryGetRecommendedProducts, { _id: id })
-  const recommendations = reList.data.data.getRecommendedProducts
+  const response = await request(queryGetProjectById, { id })
+  const data = response.data.data.getProjectById
+  const reList = await request(queryGetLatestProjects, { id })
+  const recommendations = reList.data.data.getLatestProjects
+
   if (!data && res) {
     return {
       notFound: true,
@@ -57,33 +114,19 @@ export async function getStaticProps(ctx) {
 
   return {
     props: { data, recommendations }, // will be passed to the page component as props
-  } */
-
-  return {
-    props: {
-      data: {
-        name: '5 AVENUE RESIDENCE',
-        location: 'CBD, SYDNEY, AUSTRALIA',
-        type: 'commercial',
-        year: 'nov 2019',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere elementum lacus, vel bibendum metus pulvinar id. Vestibulum vel ligula eu lacus vulputate cursus. Maecenas tincidunt accumsan massa, interdum fringilla augue pharetra id. Sed nec nibh neque. Praesent et mauris id urna egestas convallis accumsan eu neque. Maecenas in imperdiet tortor, id viverra nisl. Proin egestas augue sodales, maximus justo a, egestas purus. Aenean laoreet tempus risus.',
-        primaryImg: 'dsa',
-        photos: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-      }
-    }
   }
 }
 
 export async function getStaticPaths() {
-  /* const response = await request(queryProductPaths)
-  const { getAllProducts } = (response.data || {}).data
+  const response = await request(queryProjectPaths)
+  const { getAllProjects } = (response.data || {}).data
 
-  const paths = await getAllProducts.map(product => ({
-    params: { code: product.code }
-  })) */
+  const paths = await getAllProjects.map(project => ({
+    params: { id: project._id }
+  }))
 
   return {
-    paths: [{ params: { id: '366345' } }],
+    paths,
     fallback: false // See the "fallback" section below
   }
 }

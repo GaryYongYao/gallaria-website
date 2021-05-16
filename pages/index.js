@@ -5,9 +5,9 @@ import styles from 'styles/modules/Home.module.scss'
 import { Footer, Header, HeaderWhite } from 'components'
 import { Design, Experience, Featured, Hero, Highlight, Project } from 'sections/Home'
 import request from 'utils/request'
-import { queryGetFeatureProducts } from 'utils/graphql'
+import { queryGetFeatureProducts, queryGetLatestProjects } from 'utils/graphql'
 
-export default function Home({ featured }) {
+export default function Home({ featured, projects }) {
   const [touch, setTouch] = useState(0)
 
   useEffect(() => {
@@ -32,7 +32,10 @@ export default function Home({ featured }) {
     })
   }
 
-  const wheelHero = (e) => e.deltaY > 0 && scrollToContent()
+  const wheelHero = (e) => {
+    e.deltaY < 0 && scrollToHero()
+    e.deltaY > 0 && scrollToContent()
+  }
   const touchHero = (e) => e.touches[0].pageY - touch < 0 && scrollToContent()
 
   return (
@@ -69,7 +72,7 @@ export default function Home({ featured }) {
       />
       <Experience />
       <Featured data={featured} />
-      <Project />
+      {projects.length > 0 && <Project data={projects} />}
       <Design />
       <Footer />
     </div>
@@ -79,8 +82,11 @@ export default function Home({ featured }) {
 export async function getStaticProps() {
   const response = await request(queryGetFeatureProducts)
   const featured = response.data.data.getFeatureProducts
+  const projectResponse = await request(queryGetLatestProjects)
+  const projects = projectResponse.data.data.getLatestProjects
+  console.log(projects)
 
   return {
-    props: { featured }, // will be passed to the page component as props
+    props: { featured, projects }, // will be passed to the page component as props
   }
 }

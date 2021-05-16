@@ -1,7 +1,7 @@
 import styles from 'styles/modules/Home.module.scss'
 import Link from 'components/Link'
 
-export default function ProjectSection() {
+export default function ProjectSection({ data }) {
   return (
     <div className={styles['section-project']}>
       <div className={`container ${styles['title-box']}`}>
@@ -16,36 +16,23 @@ export default function ProjectSection() {
       </div>
       <div className={`container ${styles['photo-box']}`}>
         <div className="row">
-          <div className={`col-lg-6 ${styles['column']}`}>
-            <Link href="/#" style={styles['photo']}>
-              <img width="100%" src="/images/project-1.png" />
-              <div className={styles['overlay']} />
-              <div className={`container ${styles['date']}`}>
-                <span>JAN 2020</span>
-              </div>
-              <div className={`container ${styles['type']}`}>
-                <span>Commercial</span>
-              </div>
-              <div className={`container ${styles['text']}`}>
-                <span>PROJECT 01</span>
-              </div>
-            </Link>
-          </div>
-          <div className={`col-lg-6 ${styles['column']}`}>
-            <Link href="/#" style={styles['photo']}>
-              <img width="100%" src="/images/project-2.png" />
-              <div className={styles['overlay']} />
-              <div className={`container ${styles['date']}`}>
-                <span>JAN 2020</span>
-              </div>
-              <div className={`container ${styles['type']}`}>
-                <span>Commercial</span>
-              </div>
-              <div className={`container ${styles['text']}`}>
-                <span>PROJECT 02</span>
-              </div>
-            </Link>
-          </div>
+          {data.map(project => (
+            <div key={project._id} className={`col-lg-6 ${styles['column']}`}>
+              <Link href={`/project/${project._id}`} style={styles['photo']}>
+                <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(project.cover)}`} />
+                <div className={styles['overlay']} />
+                <div className={`container ${styles['date']}`}>
+                  <span>{project.date}</span>
+                </div>
+                <div className={`container ${styles['type']}`}>
+                  <span>{project.type}</span>
+                </div>
+                <div className={`container ${styles['text']}`}>
+                  <span>{project.name}</span>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>

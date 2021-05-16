@@ -72,6 +72,62 @@ query getRecommendedProducts($code: String!) {
 }
 `
 
+// projects
+export const queryGetProjects = `
+query {
+  getProjects {
+    _id
+    date
+    type
+    name
+    location
+    cover
+  }
+}
+`
+export const queryGetProjectById = `
+query getProjectById($id: ID!) {
+  getProjectById(_id: $id) {
+    _id
+    name
+    location
+    type
+    date
+    desc
+    cover
+    photos
+    products {
+      name
+      code
+      primaryImage
+    }
+    isDraft
+  }
+}
+`
+
+export const queryGetLatestProjects = `
+query getLatestProjects($id: ID) {
+  getLatestProjects(_id: $id) {
+    _id
+    date
+    type
+    name
+    location
+    cover
+  }
+}
+`
+
+export const queryProjectPaths = `
+query {
+  getAllProjects {
+    _id
+    isDraft
+  }
+}
+`
+
 // Category
 export const queryGetCategories = `
 query {

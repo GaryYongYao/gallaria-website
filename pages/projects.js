@@ -2,96 +2,11 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { Footer, Header, Link } from 'components'
 import styles from 'styles/modules/Projects.module.scss'
+import request from 'utils/request'
+import { queryGetProjects } from 'utils/graphql'
 
-const DATA = [
-  {
-    _id: '366345',
-    name: 'Project 01',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 02',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 03',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 04',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 05',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 06',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 07',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 08',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 09',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 10',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 11',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  },
-  {
-    _id: '366345',
-    name: 'Project 12',
-    location: 'Sydney, Australia',
-    type: 'Commercial',
-    year: 'Nov 2019'
-  }
-]
-
-function Projects() {
-  const [list] = useState(DATA)
+function Projects({ projects }) {
+  const [list] = useState(projects)
   const [current, setCurrent] = useState(1)
   const perPage = 10
 
@@ -108,7 +23,12 @@ function Projects() {
         <div className={`${styles['content']} row`}>
           {list.map((l, i) => (i >= ((current * perPage) - perPage) && i < current * perPage) && (
             <Link key={l.name} href={`/project/${l._id}`} style={`${styles['items']} col`}>
-              <div className={styles['item-container']}>
+              <div
+                className={styles['item-container']}
+                style={{
+                  backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(l.cover)}')`
+                }}
+              >
                 <div className={styles['item-overlay']} />
                 <div className={styles['name']}>
                   {l.name}
@@ -123,7 +43,7 @@ function Projects() {
                 </div>
                 <div className={styles['info']}>
                   <div className={styles['info-label']}>YEAR</div>
-                  {l.year}
+                  {l.date}
                 </div>
               </div>
             </Link>
@@ -237,6 +157,15 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
       </div>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const projectsQuery = await request(queryGetProjects)
+  const projects = projectsQuery.data.data.getProjects
+
+  return {
+    props: { projects }, // will be passed to the page component as props
+  }
 }
 
 export default Projects
