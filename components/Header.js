@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { ContactContext } from 'components/ContactWindow'
 import Link from 'components/Link'
 
-function Header({ setAllowScrolling }) {
+function Header({ setAllowScrolling, landing = false }) {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [invert, setInvert] = useState(false)
@@ -28,7 +28,8 @@ function Header({ setAllowScrolling }) {
 
   const checkHeader = () => {
     const ele = headerRef.current
-    if (document.documentElement.scrollTop > 100) {
+    const breakpoint = landing ? document.documentElement.clientHeight : 100
+    if (document.documentElement.scrollTop > breakpoint) {
       (ele || {}).className = `flex-center${open ? ' menu-header' : ''} menu-black`
       headerState()
     } else {

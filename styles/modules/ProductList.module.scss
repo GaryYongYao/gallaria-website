@@ -219,7 +219,7 @@
         .item {
           min-width: 300px;
           border-bottom: 0.25px solid #939393;
-          padding: 6px 0;
+          padding: 6px 5px 6px 5px;
           cursor: pointer;
       
           @media screen and (max-width: $md-max) {
@@ -235,8 +235,11 @@
             color: $primary-light;
             font-weight: 700;
             display: flex;
+            align-items: center;
+            text-transform: uppercase;
 
             > span {
+              font-size: 1rem;
               display: block;
               margin-left: auto;
             }
@@ -248,15 +251,76 @@
         }
     
         .sub-item {
-          padding-left: 25px;
+          min-width: 300px;
+          padding: 0 5px 0 25px;
+          cursor: pointer;
+          overflow: hidden;
+          min-height: 0;
+          height: 0;
+          transition: all .3s ease-in-out;
+      
+          @media screen and (max-width: $md-max) {
+            min-width: 200px;
+          }
+
+          &-open {
+            min-height: 36px;
+            padding: 6px 5px 6px 25px;
+            border-bottom: 0.25px solid #939393;
+          }
 
           span {
+            font-size: 0.875rem;
             color: $primary-light;
             font-weight: 400;
+            align-items: center;
+            display: flex;
+
+            > span {
+              font-size: 1rem;
+              display: block;
+              margin-left: auto;
+            }
   
             &.selected {
               color: $primary;
-              font-weight: 400;
+            }
+          }
+        }
+    
+        .series-item {
+          min-width: 300px;
+          padding: 0 5px 0 50px;
+          cursor: pointer;
+          overflow: hidden;
+          min-height: 0;
+          height: 0;
+          transition: all .3s ease-in-out;
+      
+          @media screen and (max-width: $md-max) {
+            min-width: 200px;
+          }
+
+          &-open {
+            min-height: 36px;
+            padding: 6px 5px 6px 50px;
+            border-bottom: 0.25px solid #939393;
+          }
+
+          span {
+            font-size: 0.875rem;
+            color: $primary-light;
+            font-weight: 400;
+            display: flex;
+
+            > span {
+              font-size: 1rem;
+              display: block;
+              margin-left: auto;
+            }
+  
+            &.selected {
+              color: $primary;
             }
           }
         }

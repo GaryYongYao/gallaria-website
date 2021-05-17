@@ -136,6 +136,7 @@ query {
     name
     sub
     series {
+      sub
       name
     }
   }

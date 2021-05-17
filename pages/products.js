@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import { animateScroll as scroll } from 'react-scroll'
 import { useRouter } from 'next/router'
 import styles from 'styles/modules/ProductList.module.scss'
 import { Carousel, Filter, List, Sorting } from 'sections/ProductList'
@@ -16,7 +17,7 @@ function Product({ products, featured, categories }) {
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
   const [current, setCurrent] = useState(1)
-  const perPage = 5
+  const perPage = 30
 
   useEffect(() => {
     const { query } = router
@@ -25,8 +26,9 @@ function Product({ products, featured, categories }) {
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
     const masonryAnimate = mixitup(containerEl)
-    masonryAnimate.toggleOn('.page-1')
-    query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+    query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(query.filterUrl)}`).then(() => {
+      masonryAnimate.toggleOn('.page-1').then(state => setSelectors(state.activeFilter.selector))
+    })
     if (query.search) {
       const toFilter = []
       const format = removeSpace(query.search)
@@ -39,7 +41,9 @@ function Product({ products, featured, categories }) {
           }
         })
       })
-      masonryAnimate.toggleOn(toFilter.join(', ')).then(state => setSelectors(state.activeFilter.selector))
+      masonryAnimate.toggleOn(toFilter.join(', ')).then(() => {
+        masonryAnimate.toggleOn('.page-1').then(state => setSelectors(state.activeFilter.selector))
+      })
       const display = products.filter(prod => {
         const match = (
           filterURLRegex(query.search, prod.name)
@@ -87,6 +91,7 @@ function Product({ products, featured, categories }) {
   }, [router])
 
   const changePage = (next) => {
+    scroll.scrollToTop()
     mixer.toggleOn(`.page-${next}`).then(() => {
       setCurrent(prev => {
         mixer.toggleOff(`.page-${prev}`).then(state => {
@@ -123,16 +128,16 @@ function Product({ products, featured, categories }) {
   useEffect(() => {
     if (filter === '') return
     if (filter === 'all' && mixer) {
-      if (displayProducts !== products) setDisplayProducts(products)
-      mixer.toggleOn('.page-1').then(() => {
+      mixer.filter('.mix').then(
         setCurrent(prev => {
           mixer.toggleOff(`.page-${prev}`).then(state => {
+            filterProducts(state.activeFilter.selector)
             setSelectors(state.activeFilter.selector)
           })
 
           return 1
         })
-      })
+      )
     } else if (mixer) {
       const { selector } = mixer.getState().activeFilter
       selector.includes(filter)
@@ -305,6 +310,7 @@ export async function getStaticProps() {
       id: removeSpace(s)
     })),
     series: (series || []).map(s => ({
+      sub: s.sub,
       name: s.name,
       id: removeSpace(s.name)
     }))

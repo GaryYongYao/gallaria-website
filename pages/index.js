@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { animateScroll as scroll } from 'react-scroll'
+import { Events, animateScroll as scroll } from 'react-scroll'
 import styles from 'styles/modules/Home.module.scss'
 import { Footer, Header, HeaderWhite } from 'components'
 import { Design, Experience, Featured, Hero, Highlight, Project } from 'sections/Home'
@@ -12,9 +12,20 @@ export default function Home({ featured, projects }) {
 
   useEffect(() => {
     document.body.scrollTo(0, 0)
+
+    Events.scrollEvent.register('end', (to, element) => {
+      if (document.documentElement.scrollTop > 500) {
+        document.body.style.overflow = 'auto'
+      }
+    })
+
+    return () => {
+      Events.scrollEvent.remove('end')
+    }
   }, [])
 
   const scrollToContent = () => {
+    document.body.style.overflow = 'hidden'
     const content = document.getElementById('header').offsetTop
     scroll.scrollTo(content, {
       duration: 1400,
@@ -24,6 +35,7 @@ export default function Home({ featured, projects }) {
   }
 
   const scrollToHero = () => {
+    document.body.style.overflow = 'hidden'
     const content = document.getElementById('hero').offsetTop
     scroll.scrollTo(content, {
       duration: 1400,
@@ -63,7 +75,7 @@ export default function Home({ featured, projects }) {
           zIndex: 2
         }}
       >
-        <Header />
+        <Header landing />
       </div>
       <Highlight
         scrollToHero={scrollToHero}
