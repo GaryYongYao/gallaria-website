@@ -23,4 +23,4 @@ export const filterRegex = (match, item) => {
   return re.test(item)
 }
 
-export const removeSpace = (str) => str.replace(' ', '-').replace('+', 'plus')
+export const removeSpace = (str) => str.replace(/ /g, '-').replace(/\+/g, 'plus').toLowerCase()

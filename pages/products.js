@@ -16,15 +16,42 @@ function Product({ products, featured, categories }) {
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
   const [current, setCurrent] = useState(1)
-  const perPage = 30
+  const perPage = 5
 
   useEffect(() => {
+    const { query } = router
     document.body.className = ''
     // eslint-disable-next-line
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
     const masonryAnimate = mixitup(containerEl)
-    router.query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(router.query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+    masonryAnimate.toggleOn('.page-1')
+    query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+    if (query.search) {
+      const toFilter = []
+      const format = removeSpace(query.search)
+      const re = new RegExp(format, 'i');
+
+      [].forEach.call(document.getElementsByClassName('mix'), ele => {
+        [].forEach.call(ele.classList, eleClass => {
+          if (re.test(eleClass)) {
+            toFilter.push(`.${eleClass}`)
+          }
+        })
+      })
+      masonryAnimate.toggleOn(toFilter.join(', ')).then(state => setSelectors(state.activeFilter.selector))
+      const display = products.filter(prod => {
+        const match = (
+          filterURLRegex(query.search, prod.name)
+          || filterURLRegex(query.search, prod.code)
+          || filterURLRegex(query.search, prod.category)
+          || filterURLRegex(query.search, prod.sub)
+          || filterURLRegex(query.search, prod.series)
+        )
+        return match
+      })
+      setDisplayProducts(display)
+    }
 
     setMixer(masonryAnimate)
   }, [])
@@ -32,7 +59,19 @@ function Product({ products, featured, categories }) {
   useEffect(() => {
     const { query } = router
     if (query.filterUrl && mixer) mixer.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
-    if (query.search) {
+    if (query.search && mixer) {
+      const toFilter = []
+      const format = removeSpace(query.search)
+      const re = new RegExp(format, 'i');
+
+      [].forEach.call(document.getElementsByClassName('mix'), ele => {
+        [].forEach.call(ele.classList, eleClass => {
+          if (re.test(eleClass)) {
+            toFilter.push(`.${eleClass}`)
+          }
+        })
+      })
+      mixer.toggleOn(toFilter.join(', ')).then(state => setSelectors(state.activeFilter.selector))
       const display = products.filter(prod => {
         const match = (
           filterURLRegex(query.search, prod.name)
@@ -47,59 +86,78 @@ function Product({ products, featured, categories }) {
     }
   }, [router])
 
-  useEffect(() => {
-    mixer && mixer.forceRefresh()
-    if (filter === '') return
-    if (filter === 'all' && mixer) {
-      if (displayProducts !== products) setDisplayProducts(products)
-      mixer.filter('all').then(state => setSelectors(state.activeFilter.selector))
-    } else if (mixer) {
-      const { selector } = mixer.getState().activeFilter
-      selector.includes(filter)
-        ? mixer.toggleOff(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
-        : mixer.toggleOn(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
-      setFilter('')
-    }
-  }, [displayProducts])
+  const changePage = (next) => {
+    mixer.toggleOn(`.page-${next}`).then(() => {
+      setCurrent(prev => {
+        mixer.toggleOff(`.page-${prev}`).then(state => {
+          setSelectors(state.activeFilter.selector)
+        })
 
-  useEffect(() => {
-    mixer && mixer.forceRefresh()
-  }, [current])
+        return next
+      })
+    })
+  }
 
   useEffect(() => {
     mixer && mixer.sort(selected.value)
   }, [selected])
 
   useEffect(() => {
+    mixer && mixer.toggleOn('.page-1').then(state => setSelectors(state.activeFilter.selector))
+  }, [displayProducts])
+
+  const filterProducts = (currentSelectors) => {
     const display = products.filter(prod => {
       const match = (
-        selectors === '.mix'
-        || selectors === ''
-        || selectors.includes(removeSpace(prod.category))
-        || (prod.sub && selectors.includes(removeSpace(prod.sub)))
-        || (prod.series && selectors.includes(removeSpace(prod.series || '')))
+        currentSelectors === '.mix'
+        || currentSelectors === ''
+        || currentSelectors.includes(removeSpace(prod.category))
+        || (prod.sub && currentSelectors.includes(removeSpace(prod.sub)))
+        || (prod.series && currentSelectors.includes(removeSpace(prod.series || '')))
       )
       return match
     })
-    if (displayProducts !== display) setDisplayProducts(display)
-  }, [selectors])
+    setDisplayProducts(display)
+  }
 
   useEffect(() => {
-    if (displayProducts !== products) setDisplayProducts(products)
-    else {
-      if (filter === '') return
-      if (filter === 'all' && mixer) {
-        if (displayProducts !== products) setDisplayProducts(products)
-        mixer.filter('all').then(state => setSelectors(state.activeFilter.selector))
-      } else if (mixer) {
-        console.log(filter)
-        const { selector } = mixer.getState().activeFilter
-        selector.includes(filter)
-          ? mixer.toggleOff(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
-          : mixer.toggleOn(`.${filter}`).then(state => setSelectors(state.activeFilter.selector))
-      }
-      setFilter('')
+    if (filter === '') return
+    if (filter === 'all' && mixer) {
+      if (displayProducts !== products) setDisplayProducts(products)
+      mixer.toggleOn('.page-1').then(() => {
+        setCurrent(prev => {
+          mixer.toggleOff(`.page-${prev}`).then(state => {
+            setSelectors(state.activeFilter.selector)
+          })
+
+          return 1
+        })
+      })
+    } else if (mixer) {
+      const { selector } = mixer.getState().activeFilter
+      selector.includes(filter)
+        ? mixer.toggleOff(`.${filter}`).then(() => {
+          setCurrent(prev => {
+            mixer.toggleOff(`.page-${prev}`).then(state => {
+              filterProducts(state.activeFilter.selector)
+              setSelectors(state.activeFilter.selector)
+            })
+
+            return 1
+          })
+        })
+        : mixer.toggleOn(`.${filter}`).then(() => {
+          setCurrent(prev => {
+            mixer.toggleOff(`.page-${prev}`).then(state => {
+              filterProducts(state.activeFilter.selector)
+              setSelectors(state.activeFilter.selector)
+            })
+
+            return 1
+          })
+        })
     }
+    setFilter('')
   }, [filter])
 
   return (
@@ -122,13 +180,13 @@ function Product({ products, featured, categories }) {
           setSelected={setSelected}
         />
       </div>
-      <List data={displayProducts} current={current} perPage={perPage} />
+      <List data={products} displayList={displayProducts} perPage={perPage} />
       {displayProducts.length > perPage && (
         <Pagination
           list={displayProducts}
           current={current}
-          setCurrent={setCurrent}
           perPage={perPage}
+          changePage={changePage}
         />
       )}
       <Footer />
@@ -136,7 +194,7 @@ function Product({ products, featured, categories }) {
   )
 }
 
-const Pagination = ({ list, current, setCurrent, perPage }) => {
+const Pagination = ({ list, current, perPage, changePage }) => {
   const [total, setTotal] = useState(1)
 
   useEffect(() => {
@@ -149,7 +207,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
     <div className={styles['pagination']}>
       <div
         className={`${styles['prev-page']}${current === 1 ? ` ${styles['first']}` : ''}`}
-        onClick={() => setCurrent(current - 1)}
+        onClick={() => changePage(current - 1)}
       >
         &lt;
       </div>
@@ -157,7 +215,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {(current - 4 > 0 && current === total) && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current - 4)}
+            onClick={() => changePage(current - 4)}
           >
             {current - 4}
           </div>
@@ -165,7 +223,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {(current - 3 > 0 && (current === total || current === total - 1)) && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current - 3)}
+            onClick={() => changePage(current - 3)}
           >
             {current - 3}
           </div>
@@ -173,7 +231,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {current - 2 > 0 && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current - 2)}
+            onClick={() => changePage(current - 2)}
           >
             {current - 2}
           </div>
@@ -181,7 +239,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {current - 1 > 0 && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current - 1)}
+            onClick={() => changePage(current - 1)}
           >
             {current - 1}
           </div>
@@ -192,7 +250,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {total >= current + 1 && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current + 1)}
+            onClick={() => changePage(current + 1)}
           >
             {current + 1}
           </div>
@@ -200,7 +258,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {total >= current + 2 && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current + 2)}
+            onClick={() => changePage(current + 2)}
           >
             {current + 2}
           </div>
@@ -208,7 +266,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {(total > current + 3 && (current === 1 || current === 2)) && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current + 3)}
+            onClick={() => changePage(current + 3)}
           >
             {current + 3}
           </div>
@@ -216,7 +274,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
         {(total > current + 4 && (current === 1)) && (
           <div
             className={styles['page']}
-            onClick={() => setCurrent(current + 4)}
+            onClick={() => changePage(current + 4)}
           >
             {current + 4}
           </div>
@@ -224,7 +282,7 @@ const Pagination = ({ list, current, setCurrent, perPage }) => {
       </div>
       <div
         className={`${styles['next-page']}${current === total ? ` ${styles['last']}` : ''}`}
-        onClick={() => setCurrent(current + 1)}
+        onClick={() => changePage(current + 1)}
       >
         &gt;
       </div>
