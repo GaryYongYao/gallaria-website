@@ -1,12 +1,18 @@
 import styles from 'styles/modules/Home.module.scss'
 
-export default function HeroSection({ scrollToContent, wheelHero, touchHero, setTouch }) {
+export default function HeroSection({ scrolling, setScrolling, scrollToContent, wheelHero, touchHero, setTouch }) {
   return (
     <div
       id="hero"
-      onWheel={wheelHero}
+      onWheel={e => {
+        setScrolling(true)
+        !scrolling && wheelHero(e)
+      }}
       onTouchStart={(e) => setTouch(e.touches[0].pageY)}
-      onTouchMove={touchHero}
+      onTouchMove={e => {
+        setScrolling(true)
+        !scrolling && touchHero(e)
+      }}
       className={styles['section-hero']}
     >
       <div className={styles['overlay']} />

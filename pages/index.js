@@ -9,11 +9,13 @@ import { queryGetFeatureProducts, queryGetLatestProjects } from 'utils/graphql'
 
 export default function Home({ featured, projects }) {
   const [touch, setTouch] = useState(0)
+  const [scrolling, setScrolling] = useState(false)
 
   useEffect(() => {
     document.body.scrollTo(0, 0)
 
-    Events.scrollEvent.register('end', (to, element) => {
+    Events.scrollEvent.register('end', () => {
+      setScrolling(false)
       if (document.documentElement.scrollTop > 500) {
         document.body.style.overflow = 'auto'
       }
@@ -61,6 +63,8 @@ export default function Home({ featured, projects }) {
         <HeaderWhite />
       </div>
       <Hero
+        scrolling={scrolling}
+        setScrolling={setScrolling}
         wheelHero={wheelHero}
         touchHero={touchHero}
         setTouch={setTouch}
@@ -78,6 +82,8 @@ export default function Home({ featured, projects }) {
         <Header landing />
       </div>
       <Highlight
+        scrolling={scrolling}
+        setScrolling={setScrolling}
         scrollToHero={scrollToHero}
         setTouch={setTouch}
         touch={touch}
