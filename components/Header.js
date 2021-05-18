@@ -12,7 +12,7 @@ function Header({ setAllowScrolling, landing = false }) {
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : 'auto'
+    // document.body.style.overflow = open ? 'hidden' : 'auto'
     checkHeader()
     if (setAllowScrolling) setAllowScrolling(!open)
   }, [open])

@@ -48,16 +48,16 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
       <div className="container">
         <div className={styles['text-container']}>
           <span className={styles['title']}>
-            CONCEALED DESIGN WITH SMART CONTROL
+            Intelligent Bathrooms by Gallaria
           </span>
           <span className={styles['desc']}>
-            Flexible to maintain and install
+            Hygiene and comfort evolved
           </span>
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div className={`col-1 ${styles['video-container']}`}>
           <video autoPlay loop muted preload="auto" playsInline>
-            <source src="/video/video-2.mp4" type="video/mp4" />
+            <source src="/video/video-1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -72,12 +72,12 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
         <div className={`col-12 ${styles['mobile-container']}`}>
           <div className="row">
             <MobileBox
-              link="/#"
+              link="/products?filterUrl=Wall-Hung"
               img="/images/wall-pan.png"
               text="WALL HUNG PAN"
             />
             <MobileBox
-              link="/#"
+              link="/products?filterUrl=Floor-pan"
               img="/images/floor-pan.png"
               text="FLOOR PAN"
             />
@@ -87,10 +87,10 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
       <div className="container">
         <div className={styles['text-container']}>
           <span className={styles['title']}>
-            CONCEALED DESIGN WITH SMART CONTROL
+            Smart design and technology has never looked better
           </span>
           <span className={styles['desc']}>
-            Flexible to maintain and install
+            Discover the future of comfort plus cleanliness
           </span>
           <div className={`col-1 ${styles['divider']}`} />
         </div>
@@ -102,7 +102,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
         </div>
         <div className={`col-12 ${styles['images-container']}`}>
           <div className="row">
-            <Link href="/#" style="col-4">
+            <Link href="/product/DZ1000UNV" style="col-4">
               <div
                 className={styles['img-box']}
                 style={{ backgroundImage: 'url("/images/recom-1.png")' }}
@@ -112,7 +112,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
                 <span className={styles['name']}>Product 01</span>
               </div>
             </Link>
-            <Link href="/#" style="col-4">
+            <Link href="/product/EC520" style="col-4">
               <div
                 className={styles['img-box']}
                 style={{ backgroundImage: 'url("/images/recom-2.png")' }}
@@ -122,7 +122,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
                 <span className={styles['name']}>Product 02</span>
               </div>
             </Link>
-            <Link href="/#" style="col-4">
+            <Link href="/product/EV210" style="col-4">
               <div
                 className={styles['img-box']}
                 style={{ backgroundImage: 'url("/images/recom-3.png")' }}
@@ -137,12 +137,12 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
         <div className={`col-12 ${styles['mobile-container']}`}>
           <div className="row">
             <MobileBox
-              link="/#"
+              link="/product/DZ1000UNV"
               img="/images/recom-1.png"
               text="Product 01"
             />
             <MobileBox
-              link="/#"
+              link="/product/EC520"
               img="/images/recom-2.png"
               text="Product 02"
             />

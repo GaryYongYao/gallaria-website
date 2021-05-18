@@ -70,9 +70,7 @@ function Project({ data, recommendations }) {
                 {data.date}
               </div>
             </div>
-            <div className={`${styles['desc-box']}`}>
-              {data.desc}
-            </div>
+            <div className={styles['desc-box']} dangerouslySetInnerHTML={{ __html: data.desc.replace(/\n/g, '<br />') }} />
           </div>
           <div className={`${styles['first-photo']} col-lg-8`}>
             <img

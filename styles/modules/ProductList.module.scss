@@ -219,7 +219,7 @@
         .item {
           min-width: 300px;
           border-bottom: 0.25px solid #939393;
-          padding: 6px 5px 6px 5px;
+          padding: 6px 0 6px 5px;
           cursor: pointer;
       
           @media screen and (max-width: $md-max) {
@@ -237,11 +237,15 @@
             display: flex;
             align-items: center;
             text-transform: uppercase;
+            position: relative;
 
             > span {
-              font-size: 1rem;
+              font-size: 1.4rem;
               display: block;
               margin-left: auto;
+              padding: 0 5px 0 30px;
+              position: absolute;
+              right: 0;
             }
 
             &.selected {
@@ -252,7 +256,7 @@
     
         .sub-item {
           min-width: 300px;
-          padding: 0 5px 0 25px;
+          padding: 0 0 0 25px;
           cursor: pointer;
           overflow: hidden;
           min-height: 0;
@@ -264,8 +268,8 @@
           }
 
           &-open {
-            min-height: 36px;
-            padding: 6px 5px 6px 25px;
+            min-height: 38px;
+            padding: 6px 0 6px 25px;
             border-bottom: 0.25px solid #939393;
           }
 
@@ -275,11 +279,15 @@
             font-weight: 400;
             align-items: center;
             display: flex;
+            position: relative;
 
             > span {
-              font-size: 1rem;
+              font-size: 1.4rem;
               display: block;
               margin-left: auto;
+              padding: 0 5px 0 30px;
+              position: absolute;
+              right: 0;
             }
   
             &.selected {
@@ -290,7 +298,7 @@
     
         .series-item {
           min-width: 300px;
-          padding: 0 5px 0 50px;
+          padding: 0 0 0 50px;
           cursor: pointer;
           overflow: hidden;
           min-height: 0;
@@ -303,7 +311,7 @@
 
           &-open {
             min-height: 36px;
-            padding: 6px 5px 6px 50px;
+            padding: 6px 0 6px 50px;
             border-bottom: 0.25px solid #939393;
           }
 
@@ -314,9 +322,10 @@
             display: flex;
 
             > span {
-              font-size: 1rem;
+              font-size: 1.2rem;
               display: block;
               margin-left: auto;
+              padding: 0 5px 0 30px;
             }
   
             &.selected {

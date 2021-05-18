@@ -65,13 +65,14 @@ function Filter({ categories, setFilter, selection }) {
                   const [openSeries, setOpenSeries] = useState(false)
 
                   return (
-                    <>
+                    <Fragment key={s.name}>
                       <div
-                        key={s.name}
                         className={`${styles['sub-item']}${openSub ? ` ${styles['sub-item-open']}` : ''}`}
                         onClick={() => setFilter(s.id)}
                       >
-                        <span className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}>
+                        <span
+                          className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}
+                        >
                           {s.name}
                           {(findIndex(series, ['sub', s.name]) > -1) && (
                             <span
@@ -89,7 +90,7 @@ function Filter({ categories, setFilter, selection }) {
                       {(series || []).map(item => item.sub === s.name && (
                         <div
                           key={item.name}
-                          className={`${styles['series-item']}${openSeries ? ` ${styles['series-item-open']}` : ''}`}
+                          className={`${styles['series-item']}${(openSeries && openSub) ? ` ${styles['series-item-open']}` : ''}`}
                           onClick={() => setFilter(item.id)}
                         >
                           <span className={(selection.includes(s.id) || selection.includes(item.id) || selection.includes(id)) ? styles['selected'] : ''}>
@@ -97,7 +98,7 @@ function Filter({ categories, setFilter, selection }) {
                           </span>
                         </div>
                       ))}
-                    </>
+                    </Fragment>
                   )
                 })}
               </Fragment>
@@ -110,7 +111,7 @@ function Filter({ categories, setFilter, selection }) {
               setOpen(false)
             }}
           >
-            RESET FILTER
+            CLEAR FILTER
           </div>
         </div>
       </div>

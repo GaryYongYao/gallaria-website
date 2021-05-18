@@ -1,4 +1,5 @@
 import styles from 'styles/modules/Home.module.scss'
+import ImageMap from './ImageMap'
 
 export default function ExperienceSection() {
   return (
@@ -16,7 +17,8 @@ export default function ExperienceSection() {
         </div>
       </div>
       <div className={styles['experience-image']}>
-        <img src="/images/experience.jpg" />
+        <ImageMap />
+        <img src="/images/experience.png" className={styles['mobile-image']} />
       </div>
     </div>
   )
