@@ -26,8 +26,9 @@ function Product({ products, featured, categories }) {
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
     const masonryAnimate = mixitup(containerEl)
-    query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(query.filterUrl)}`).then(() => {
-      masonryAnimate.toggleOn('.page-1').then(state => setSelectors(state.activeFilter.selector))
+    query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => {
+      filterProducts(state.activeFilter.selector)
+      setSelectors(state.activeFilter.selector)
     })
     if (query.search) {
       const toFilter = []
@@ -41,8 +42,9 @@ function Product({ products, featured, categories }) {
           }
         })
       })
-      masonryAnimate.toggleOn(toFilter.join(', ')).then(() => {
-        masonryAnimate.toggleOn('.page-1').then(state => setSelectors(state.activeFilter.selector))
+      masonryAnimate.toggleOn(toFilter.join(', ')).then(state => {
+        filterProducts(state.activeFilter.selector)
+        setSelectors(state.activeFilter.selector)
       })
       const display = products.filter(prod => {
         const match = (
@@ -62,7 +64,12 @@ function Product({ products, featured, categories }) {
 
   useEffect(() => {
     const { query } = router
-    if (query.filterUrl && mixer) mixer.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => setSelectors(state.activeFilter.selector))
+    if (query.filterUrl && mixer) {
+      mixer.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => {
+        filterProducts(state.activeFilter.selector)
+        setSelectors(state.activeFilter.selector)
+      })
+    }
     if (query.search && mixer) {
       const toFilter = []
       const format = removeSpace(query.search)
@@ -140,7 +147,7 @@ function Product({ products, featured, categories }) {
       )
     } else if (mixer) {
       const { selector } = mixer.getState().activeFilter
-      selector.includes(filter)
+      console.log(filter, selector.includes(filter), selector)
         ? mixer.toggleOff(`.${filter}`).then(() => {
           setCurrent(prev => {
             mixer.toggleOff(`.page-${prev}`).then(state => {

@@ -12,6 +12,8 @@ function Header({ setAllowScrolling, landing = false }) {
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
+    window.removeEventListener('scroll', checkHeader)
+    window.addEventListener('scroll', checkHeader)
     // document.body.style.overflow = open ? 'hidden' : 'auto'
     checkHeader()
     if (setAllowScrolling) setAllowScrolling(!open)
@@ -49,7 +51,7 @@ function Header({ setAllowScrolling, landing = false }) {
 
   return (
     <header id="header">
-      <div ref={headerRef} id="header-background" className={`flex-center${open ? ' menu-header' : ''}`}>
+      <div ref={headerRef} id="header-background" className="flex-center">
         <div className="container flex-center">
           <Link href="/">
             <img src={invert ? '/svg/logo-white.svg' : '/svg/logo-black.svg'} alt="Gallaria Logo" className="logo" />

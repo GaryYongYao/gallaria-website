@@ -34,8 +34,8 @@ export default function ImageBox() {
         style={styles['image-map']}
         customStyle={{
           width: '6.672562979189484%',
-          height: '18.030522088353406%',
-          left: '86.83745892661562%',
+          height: '19.030522088353406%',
+          left: '86.33745892661562%',
           top: '55.636546184739%'
         }}
       >
