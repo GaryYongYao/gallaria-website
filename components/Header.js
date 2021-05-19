@@ -46,7 +46,7 @@ function Header({ setAllowScrolling, landing = false }) {
   }
 
   const searchFunction = () => {
-    if (search.length > 3) router.push(`/products?search=${encodeURIComponent(search)}`)
+    if (search.length > 2) router.push(`/products?search=${encodeURIComponent(search)}`)
   }
 
   return (

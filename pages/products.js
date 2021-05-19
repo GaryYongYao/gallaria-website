@@ -31,32 +31,34 @@ function Product({ products, featured, categories }) {
       setSelectors(state.activeFilter.selector)
     })
     if (query.search) {
-      const toFilter = []
-      const format = removeSpace(query.search)
-      const re = new RegExp(format, 'i');
+      masonryAnimate.filter('all').then(() => {
+        const toFilter = []
+        const format = removeSpace(query.search)
+        const re = new RegExp(format, 'i');
 
-      [].forEach.call(document.getElementsByClassName('mix'), ele => {
-        [].forEach.call(ele.classList, eleClass => {
-          if (re.test(eleClass)) {
-            toFilter.push(`.${eleClass}`)
-          }
+        [].forEach.call(document.getElementsByClassName('mix'), ele => {
+          [].forEach.call(ele.classList, eleClass => {
+            if (re.test(eleClass)) {
+              toFilter.push(`.${eleClass}`)
+            }
+          })
         })
+        masonryAnimate.toggleOn(toFilter.join(', ')).then(state => {
+          filterProducts(state.activeFilter.selector)
+          setSelectors(state.activeFilter.selector)
+        })
+        const display = products.filter(prod => {
+          const match = (
+            filterURLRegex(query.search, prod.name)
+            || filterURLRegex(query.search, prod.code)
+            || filterURLRegex(query.search, prod.category)
+            || filterURLRegex(query.search, prod.sub)
+            || filterURLRegex(query.search, prod.series)
+          )
+          return match
+        })
+        setDisplayProducts(display)
       })
-      masonryAnimate.toggleOn(toFilter.join(', ')).then(state => {
-        filterProducts(state.activeFilter.selector)
-        setSelectors(state.activeFilter.selector)
-      })
-      const display = products.filter(prod => {
-        const match = (
-          filterURLRegex(query.search, prod.name)
-          || filterURLRegex(query.search, prod.code)
-          || filterURLRegex(query.search, prod.category)
-          || filterURLRegex(query.search, prod.sub)
-          || filterURLRegex(query.search, prod.series)
-        )
-        return match
-      })
-      setDisplayProducts(display)
     }
 
     setMixer(masonryAnimate)
@@ -71,29 +73,31 @@ function Product({ products, featured, categories }) {
       })
     }
     if (query.search && mixer) {
-      const toFilter = []
-      const format = removeSpace(query.search)
-      const re = new RegExp(format, 'i');
+      mixer.filter('all').then(() => {
+        const toFilter = []
+        const format = removeSpace(query.search)
+        const re = new RegExp(format, 'i');
 
-      [].forEach.call(document.getElementsByClassName('mix'), ele => {
-        [].forEach.call(ele.classList, eleClass => {
-          if (re.test(eleClass)) {
-            toFilter.push(`.${eleClass}`)
-          }
+        [].forEach.call(document.getElementsByClassName('mix'), ele => {
+          [].forEach.call(ele.classList, eleClass => {
+            if (re.test(eleClass)) {
+              toFilter.push(`.${eleClass}`)
+            }
+          })
         })
+        mixer.toggleOn(toFilter.join(', ')).then(state => setSelectors(state.activeFilter.selector))
+        const display = products.filter(prod => {
+          const match = (
+            filterURLRegex(query.search, prod.name)
+            || filterURLRegex(query.search, prod.code)
+            || filterURLRegex(query.search, prod.category)
+            || filterURLRegex(query.search, prod.sub)
+            || filterURLRegex(query.search, prod.series)
+          )
+          return match
+        })
+        setDisplayProducts(display)
       })
-      mixer.toggleOn(toFilter.join(', ')).then(state => setSelectors(state.activeFilter.selector))
-      const display = products.filter(prod => {
-        const match = (
-          filterURLRegex(query.search, prod.name)
-          || filterURLRegex(query.search, prod.code)
-          || filterURLRegex(query.search, prod.category)
-          || filterURLRegex(query.search, prod.sub)
-          || filterURLRegex(query.search, prod.series)
-        )
-        return match
-      })
-      setDisplayProducts(display)
     }
   }, [router])
 
@@ -147,7 +151,7 @@ function Product({ products, featured, categories }) {
       )
     } else if (mixer) {
       const { selector } = mixer.getState().activeFilter
-      console.log(filter, selector.includes(filter), selector)
+      selector.includes(filter)
         ? mixer.toggleOff(`.${filter}`).then(() => {
           setCurrent(prev => {
             mixer.toggleOff(`.page-${prev}`).then(state => {
