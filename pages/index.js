@@ -30,8 +30,8 @@ export default function Home({ featured, projects }) {
     document.body.style.overflow = 'hidden'
     const content = document.getElementById('header').offsetTop
     scroll.scrollTo(content, {
-      duration: 1400,
-      smooth: true,
+      duration: 600,
+      smooth: false,
       ignoreCancelEvents: true
     })
   }
@@ -40,7 +40,7 @@ export default function Home({ featured, projects }) {
     document.body.style.overflow = 'hidden'
     const content = document.getElementById('hero').offsetTop
     scroll.scrollTo(content, {
-      duration: 1400,
+      duration: 600,
       smooth: true,
       ignoreCancelEvents: true
     })

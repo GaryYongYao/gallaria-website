@@ -1,7 +1,7 @@
 import styles from 'styles/modules/Home.module.scss'
 import { Link } from 'components'
 
-export default function HighlightSection({ scrolling, setScrolling, scrollToHero, setTouch, touch }) {
+export default function HighlightSection(/* { scrolling, setScrolling, scrollToHero, setTouch, touch } */) {
   const MobileBox = ({ link, img, text }) => (
     <Link href={link} style="col-6">
       <div
@@ -12,7 +12,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
     </Link>
   )
 
-  const wheelEvent = (e) => {
+  /* const wheelEvent = (e) => {
     const hero = document.getElementById('hero')
     if (e.deltaY < 0 && document.body.getBoundingClientRect().top + 1 > 0 - hero.clientHeight) {
       setScrolling(true)
@@ -34,15 +34,15 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
       setScrolling(true)
       !scrolling && scrollToHero()
     }
-  }
+  } */
 
   return (
     <div
       id="content"
-      onWheel={wheelEvent}
-      onTouchStart={(e) => setTouch(e.touches[0].pageY)}
-      onTouchMove={touchEvent}
-      onTouchEnd={touchEndEvent}
+      // onWheel={wheelEvent}
+      // onTouchStart={(e) => setTouch(e.touches[0].pageY)}
+      // onTouchMove={touchEvent}
+      // onTouchEnd={touchEndEvent}
       className={`section-highlight ${styles['section-highlight']}`}
     >
       <div className="container">
@@ -109,7 +109,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
               >
                 <div className={styles['img-overlay']} />
                 <span className={styles['shop-now']}>SHOP NOW</span>
-                <span className={styles['name']}>Product 01</span>
+                <span className={styles['name']}>DANZACOMFORT+</span>
               </div>
             </Link>
             <Link href="/product/EC520" style="col-4">
@@ -119,7 +119,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
               >
                 <div className={styles['img-overlay']} />
                 <span className={styles['shop-now']}>SHOP NOW</span>
-                <span className={styles['name']}>Product 02</span>
+                <span className={styles['name']}>ALTARETROFIT</span>
               </div>
             </Link>
             <Link href="/product/EV210" style="col-4">
@@ -129,7 +129,7 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
               >
                 <div className={styles['img-overlay']} />
                 <span className={styles['shop-now']}>SHOP NOW</span>
-                <span className={styles['name']}>Product 03</span>
+                <span className={styles['name']}>EVOCOMFORT+</span>
               </div>
             </Link>
           </div>
@@ -139,12 +139,12 @@ export default function HighlightSection({ scrolling, setScrolling, scrollToHero
             <MobileBox
               link="/product/DZ1000UNV"
               img="/images/recom-1.png"
-              text="Product 01"
+              text="DANZACOMFORT+"
             />
             <MobileBox
               link="/product/EC520"
               img="/images/recom-2.png"
-              text="Product 02"
+              text="ALTARETROFIT"
             />
           </div>
         </div>

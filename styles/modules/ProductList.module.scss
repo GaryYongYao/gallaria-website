@@ -121,7 +121,7 @@
         padding: 39px 50px;
       
         @media screen and (max-width: $sm-max) {
-          padding: 20px 30px;
+          padding: 20px 20px;
         }
           
         &.opened {
@@ -223,7 +223,7 @@
           cursor: pointer;
       
           @media screen and (max-width: $md-max) {
-            min-width: 200px;
+            min-width: 250px;
           }
           
           &:last-child {
@@ -240,12 +240,13 @@
             position: relative;
 
             > span {
-              font-size: 1.4rem;
+              font-size: 1.7rem;
               display: block;
               margin-left: auto;
               padding: 0 5px 0 30px;
               position: absolute;
               right: 0;
+              top: -11px;
             }
 
             &.selected {
@@ -264,7 +265,7 @@
           transition: all .3s ease-in-out;
       
           @media screen and (max-width: $md-max) {
-            min-width: 200px;
+            min-width: 250px;
           }
 
           &-open {
@@ -282,12 +283,13 @@
             position: relative;
 
             > span {
-              font-size: 1.4rem;
+              font-size: 1.7rem;
               display: block;
               margin-left: auto;
               padding: 0 5px 0 30px;
               position: absolute;
               right: 0;
+              top: -11px;
             }
   
             &.selected {
@@ -306,7 +308,7 @@
           transition: all .3s ease-in-out;
       
           @media screen and (max-width: $md-max) {
-            min-width: 200px;
+            min-width: 250px;
           }
 
           &-open {

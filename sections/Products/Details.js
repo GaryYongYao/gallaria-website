@@ -1,12 +1,86 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import Cookies from 'js-cookie'
+import { findIndex } from 'lodash'
+import { EnquiryContext } from 'utils/enquiryCookie'
+import { CartContext } from 'utils/cartCookie'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import { DropdownUnderline, NumberInput } from 'components'
 
 function Details({ data }) {
+  const { setEnquiryAmount } = useContext(EnquiryContext)
+  const { setCartAmount } = useContext(CartContext)
   const { code, name, price, desc, forSale, details, variants, file } = data
   const [number, setNumber] = useState(0)
   const [selected, setSelected] = useState(variants[0] || '')
   const [info, setInfo] = useState('details')
+
+  const addToEnquiry = () => {
+    if (number < 1) {
+      alert('Must add with quantity count')
+      return
+    }
+    const newEnquiry = {
+      name: data.name,
+      price: data.price,
+      id: data._id,
+      image: data.primaryImage,
+      quantity: number,
+      variant: selected
+    }
+    const enquiries = Cookies.get('enquiries')
+
+    if (!enquiries) {
+      Cookies.set('enquiries', [newEnquiry])
+    } else {
+      const oldEnquiries = JSON.parse(enquiries)
+      const sameProductIndex = findIndex(oldEnquiries, { id: data._id })
+
+      if (sameProductIndex > -1) {
+        if (data.variants.length > 0) {
+          const sameVariantIndex = findIndex(oldEnquiries, { id: data._id, variant: selected })
+          if (sameVariantIndex > -1) oldEnquiries.splice(sameVariantIndex, 1, newEnquiry)
+          else oldEnquiries.push(newEnquiry)
+        } else oldEnquiries.splice(sameProductIndex, 1, newEnquiry)
+      } else oldEnquiries.push(newEnquiry)
+
+      Cookies.set('enquiries', oldEnquiries)
+    }
+    setEnquiryAmount(JSON.parse(Cookies.get('enquiries')).length)
+  }
+
+  const addToCart = () => {
+    if (number < 1) {
+      alert('Must add with quantity count')
+      return
+    }
+    const newCart = {
+      name: data.name,
+      price: data.price,
+      id: data._id,
+      image: data.primaryImage,
+      quantity: number,
+      variant: selected
+    }
+    const cart = Cookies.get('cart')
+
+    if (!cart) {
+      Cookies.set('cart', [newCart])
+    } else {
+      const oldCart = JSON.parse(cart)
+      const sameProductIndex = findIndex(oldCart, { id: data._id })
+
+      if (sameProductIndex > -1) {
+        if (data.variants.length > 0) {
+          const sameVariantIndex = findIndex(oldCart, { id: data._id, variant: selected })
+          if (sameVariantIndex > -1) oldCart.splice(sameVariantIndex, 1, newCart)
+          else oldCart.push(newCart)
+        } else oldCart.splice(sameProductIndex, 1, newCart)
+      } else oldCart.push(newCart)
+
+      Cookies.set('cart', oldCart)
+    }
+    setCartAmount(JSON.parse(Cookies.get('cart')).length)
+  }
 
   return (
     <div className={`col-lg-5 ${styles['section-details']}`}>
@@ -34,14 +108,17 @@ function Details({ data }) {
           />
         )}
       </div>
-      {forSale && (
-        <div className={styles['container-number']}>
-          <NumberInput input={number} setValue={setNumber} />
-        </div>
-      )}
+      <div className={styles['container-number']}>
+        <NumberInput input={number} setValue={setNumber} />
+      </div>
       <div className={styles['container-button']}>
-        <div className="button-contained">
-          {forSale ? 'ADD TO CART' : 'ENQUIRY'}
+        <div
+          className="button-contained"
+          onClick={() => {
+            forSale ? addToCart() : addToEnquiry()
+          }}
+        >
+          {forSale ? 'ADD TO CART' : 'ADD TO ENQUIRY'}
         </div>
       </div>
       <div className={styles['container-title-download']}>

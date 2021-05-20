@@ -1,6 +1,9 @@
 import { useContext, useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 import { ContactContext } from 'components/ContactWindow'
+import { EnquiryNumber, EnquiryContext } from 'utils/enquiryCookie'
+import { CartNumber, CartContext } from 'utils/cartCookie'
 import Link from 'components/Link'
 
 function Header({ setAllowScrolling, landing = false }) {
@@ -9,6 +12,8 @@ function Header({ setAllowScrolling, landing = false }) {
   const [invert, setInvert] = useState(false)
   const headerRef = useRef()
   const router = useRouter()
+  const { enquiryAmount, setEnquiryAmount } = useContext(EnquiryContext)
+  const { cartAmount, setCartAmount } = useContext(CartContext)
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
@@ -21,6 +26,11 @@ function Header({ setAllowScrolling, landing = false }) {
 
   useEffect(() => {
     window.addEventListener('scroll', checkHeader)
+    const cart = Cookies.get('cart')
+    if (cart) setCartAmount(JSON.parse(cart).length)
+
+    const enquiries = Cookies.get('enquiries')
+    if (enquiries) setEnquiryAmount(JSON.parse(enquiries).length)
 
     // returned function will be called on component unmount
     return () => {
@@ -71,14 +81,16 @@ function Header({ setAllowScrolling, landing = false }) {
                 />
               </div>
             </div>
-            <Link href="/" style="carts">
+            <Link href="/" style="carts" customStyle={{ marginRight: '47.77px' }}>
               <img src={invert ? '/svg/inverted-enquiry.svg' : '/svg/enquiry.svg'} alt="Enquiry" />
+              {enquiryAmount > 0 && <EnquiryNumber invert={invert} />}
             </Link>
             <Link href="/" style="carts">
               <img src={invert ? '/svg/inverted-shopping.svg' : '/svg/shopping.svg'} alt="Shopping" />
+              {cartAmount > 0 && <CartNumber invert={invert} />}
             </Link>
-            <div>
-              <div className={`kebab${open ? ' opened' : ''}`} onClick={() => setOpen(!open)}>
+            <div onClick={() => setOpen(!open)} style={{ paddingLeft: '23.885px', paddingRight: '12px' }}>
+              <div className={`kebab${open ? ' opened' : ''}`}>
                 <div />
               </div>
             </div>
