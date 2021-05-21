@@ -14,6 +14,7 @@ header {
   > div {
     transition: all .5s ease-in-out;
     background-color: $secondary-blur;
+    position: relative;
 
     @media screen and (max-width: $md-max) {
       padding: 0 15px;
@@ -49,7 +50,7 @@ header {
       }
     }
 
-    img {
+    .navigation-image {
       height: 25px;
     }
 

@@ -5,15 +5,19 @@ import { ContactContext } from 'components/ContactWindow'
 import { EnquiryNumber, EnquiryContext } from 'utils/enquiryCookie'
 import { CartNumber, CartContext } from 'utils/cartCookie'
 import Link from 'components/Link'
+import EnquiryCart from './EnquiryCart'
+import ShoppingCart from './ShoppingCart'
 
 function Header({ setAllowScrolling, landing = false }) {
   const [open, setOpen] = useState(false)
+  const [openEnquiry, setOpenEnquiry] = useState(false)
+  const [openCart, setOpenCart] = useState(false)
   const [search, setSearch] = useState('')
   const [invert, setInvert] = useState(false)
   const headerRef = useRef()
   const router = useRouter()
-  const { enquiryAmount, setEnquiryAmount } = useContext(EnquiryContext)
-  const { cartAmount, setCartAmount } = useContext(CartContext)
+  const { enquiryAmount, setEnquiryAmount, setEnquiryCart } = useContext(EnquiryContext)
+  const { cartAmount, setShoppingCart, setCartAmount } = useContext(CartContext)
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {
@@ -22,15 +26,42 @@ function Header({ setAllowScrolling, landing = false }) {
     // document.body.style.overflow = open ? 'hidden' : 'auto'
     checkHeader()
     if (setAllowScrolling) setAllowScrolling(!open)
+  }, [open, openEnquiry, openCart])
+
+  useEffect(() => {
+    if (openCart) {
+      setOpen(false)
+      setOpenEnquiry(false)
+    }
+  }, [openCart])
+
+  useEffect(() => {
+    if (openEnquiry) {
+      setOpen(false)
+      setOpenCart(false)
+    }
+  }, [openEnquiry])
+
+  useEffect(() => {
+    if (open) {
+      setOpenEnquiry(false)
+      setOpenCart(false)
+    }
   }, [open])
 
   useEffect(() => {
     window.addEventListener('scroll', checkHeader)
     const cart = Cookies.get('cart')
-    if (cart) setCartAmount(JSON.parse(cart).length)
+    if (cart) {
+      setShoppingCart(JSON.parse(cart))
+      setCartAmount(JSON.parse(cart).length)
+    }
 
     const enquiries = Cookies.get('enquiries')
-    if (enquiries) setEnquiryAmount(JSON.parse(enquiries).length)
+    if (enquiries) {
+      setEnquiryCart(JSON.parse(enquiries))
+      setEnquiryAmount(JSON.parse(enquiries).length)
+    }
 
     // returned function will be called on component unmount
     return () => {
@@ -42,10 +73,10 @@ function Header({ setAllowScrolling, landing = false }) {
     const ele = headerRef.current
     const breakpoint = landing ? document.documentElement.clientHeight : 100
     if (document.documentElement.scrollTop > breakpoint) {
-      (ele || {}).className = `flex-center${open ? ' menu-header' : ''} menu-black`
+      (ele || {}).className = `flex-center${(open || openEnquiry || openCart) ? ' menu-header' : ''} menu-black`
       headerState()
     } else {
-      (ele || {}).className = `flex-center${open ? ' menu-header' : ''}`
+      (ele || {}).className = `flex-center${(open || openEnquiry || openCart) ? ' menu-header' : ''}`
       headerState()
     }
   }
@@ -69,7 +100,7 @@ function Header({ setAllowScrolling, landing = false }) {
           <div className="navigation">
             <div className="search">
               <div>
-                <img onClick={searchFunction} src={invert ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
+                <img className="navigation-image" onClick={searchFunction} src={invert ? '/svg/inverted-search.svg' : '/svg/search.svg'} alt="Search" />
               </div>
               <div>
                 <input
@@ -81,14 +112,36 @@ function Header({ setAllowScrolling, landing = false }) {
                 />
               </div>
             </div>
-            <Link href="/" style="carts" customStyle={{ marginRight: '47.77px' }}>
-              <img src={invert ? '/svg/inverted-enquiry.svg' : '/svg/enquiry.svg'} alt="Enquiry" />
-              {enquiryAmount > 0 && <EnquiryNumber invert={invert} />}
-            </Link>
-            <Link href="/" style="carts">
-              <img src={invert ? '/svg/inverted-shopping.svg' : '/svg/shopping.svg'} alt="Shopping" />
-              {cartAmount > 0 && <CartNumber invert={invert} />}
-            </Link>
+            <div style={{ position: 'relative', marginRight: '47.77px' }}>
+              <a
+                href="#"
+                className="carts"
+                style={{ marginRight: '0' }}
+                onClick={e => {
+                  e.preventDefault()
+                  setOpenEnquiry(!openEnquiry)
+                }}
+              >
+                <img className="navigation-image" src={invert ? '/svg/inverted-enquiry.svg' : '/svg/enquiry.svg'} alt="Enquiry" />
+                {enquiryAmount > 0 && <EnquiryNumber invert={invert} />}
+              </a>
+              <EnquiryCart openEnquiry={openEnquiry} setOpenEnquiry={setOpenEnquiry} />
+            </div>
+            <div style={{ position: 'relative', marginRight: '23.885px' }}>
+              <a
+                href="#"
+                className="carts"
+                style={{ marginRight: '0' }}
+                onClick={e => {
+                  e.preventDefault()
+                  setOpenCart(!openCart)
+                }}
+              >
+                <img className="navigation-image" src={invert ? '/svg/inverted-shopping.svg' : '/svg/shopping.svg'} alt="Shopping" />
+                {cartAmount > 0 && <CartNumber invert={invert} />}
+              </a>
+              <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} />
+            </div>
             <div onClick={() => setOpen(!open)} style={{ paddingLeft: '23.885px', paddingRight: '12px' }}>
               <div className={`kebab${open ? ' opened' : ''}`}>
                 <div />

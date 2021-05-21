@@ -7,8 +7,8 @@ import styles from 'styles/modules/ProductDetail.module.scss'
 import { DropdownUnderline, NumberInput } from 'components'
 
 function Details({ data }) {
-  const { setEnquiryAmount } = useContext(EnquiryContext)
-  const { setCartAmount } = useContext(CartContext)
+  const { setEnquiryAmount, setEnquiryCart } = useContext(EnquiryContext)
+  const { setCartAmount, setShoppingCart } = useContext(CartContext)
   const { code, name, price, desc, forSale, details, variants, file } = data
   const [number, setNumber] = useState(0)
   const [selected, setSelected] = useState(variants[0] || '')
@@ -23,6 +23,7 @@ function Details({ data }) {
       name: data.name,
       price: data.price,
       id: data._id,
+      code: data.code,
       image: data.primaryImage,
       quantity: number,
       variant: selected
@@ -45,6 +46,7 @@ function Details({ data }) {
 
       Cookies.set('enquiries', oldEnquiries)
     }
+    setEnquiryCart(JSON.parse(Cookies.get('enquiries')))
     setEnquiryAmount(JSON.parse(Cookies.get('enquiries')).length)
   }
 
@@ -57,6 +59,7 @@ function Details({ data }) {
       name: data.name,
       price: data.price,
       id: data._id,
+      code: data.code,
       image: data.primaryImage,
       quantity: number,
       variant: selected
@@ -79,6 +82,7 @@ function Details({ data }) {
 
       Cookies.set('cart', oldCart)
     }
+    setShoppingCart(JSON.parse(Cookies.get('cart')))
     setCartAmount(JSON.parse(Cookies.get('cart')).length)
   }
 

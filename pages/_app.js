@@ -8,7 +8,9 @@ import 'styles/globals.scss'
 
 function MyApp({ Component, pageProps }) {
   const [enquiryAmount, setEnquiryAmount] = useState(0)
+  const [enquiryCart, setEnquiryCart] = useState({})
   const [cartAmount, setCartAmount] = useState(0)
+  const [shoppingCart, setShoppingCart] = useState({})
   const [snackbarState, setSnackbarState] = useState({
     open: false,
     message: '',
@@ -21,8 +23,8 @@ function MyApp({ Component, pageProps }) {
     <SnackbarContext.Provider value={{ snackbarState, setSnackbarState }}>
       <ContactContext.Provider value={{ contactOpen, setContactOpen }}>
         <TermsContext.Provider value={{ termsOpen, setTermsOpen, terms, setTerms }}>
-          <EnquiryContext.Provider value={{ enquiryAmount, setEnquiryAmount }}>
-            <CartContext.Provider value={{ cartAmount, setCartAmount }}>
+          <EnquiryContext.Provider value={{ enquiryAmount, setEnquiryAmount, enquiryCart, setEnquiryCart }}>
+            <CartContext.Provider value={{ cartAmount, setCartAmount, shoppingCart, setShoppingCart }}>
               <Component {...pageProps} />
               <SnackbarComponent />
               <ContactWindow />

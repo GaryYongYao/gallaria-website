@@ -4,7 +4,7 @@ export function CartNumber({ invert }) {
   const { cartAmount } = useContext(CartContext)
 
   return (
-    <span className={`cart-number${invert ? ' inverted' : ''}`} style={{ transform: 'translate(-55%, -15%)' }}>
+    <span className={`cart-number${invert ? ' inverted' : ''}`} style={{ transform: 'translate(200%, -100%)' }}>
       {cartAmount}
     </span>
   )
