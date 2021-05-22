@@ -191,6 +191,24 @@ header {
   }
 }
 
+.cart-container-1 {
+  position: relative;
+  margin-right: 47.77px;
+
+  @media screen and (max-width: $md-max) {
+    display: none;
+  }
+}
+
+.cart-container-2 {
+  position: relative;
+  margin-right: 23.885px;
+
+  @media screen and (max-width: $md-max) {
+    display: none;
+  }
+}
+
 .carts {
   position: relative;
 

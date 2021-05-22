@@ -98,7 +98,7 @@ function Details({ data }) {
       </div>
       <div className={styles['container-price']}>
         <span>RRP PRICE:</span>
-        <span>${price}</span>
+        <span>${price.toFixed(2)}</span>
       </div>
       <div className={styles['container-desc']}>
         <span>{desc}</span>

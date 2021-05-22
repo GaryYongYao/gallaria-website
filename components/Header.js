@@ -112,7 +112,7 @@ function Header({ setAllowScrolling, landing = false }) {
                 />
               </div>
             </div>
-            <div style={{ position: 'relative', marginRight: '47.77px' }}>
+            <div className="cart-container-1">
               <a
                 href="#"
                 className="carts"
@@ -127,7 +127,7 @@ function Header({ setAllowScrolling, landing = false }) {
               </a>
               <EnquiryCart openEnquiry={openEnquiry} setOpenEnquiry={setOpenEnquiry} />
             </div>
-            <div style={{ position: 'relative', marginRight: '23.885px' }}>
+            <div className="cart-container-2">
               <a
                 href="#"
                 className="carts"

@@ -149,6 +149,12 @@ mutation submitContact($leadInput: LeadInput!) {
   submitContact(leadInput: $leadInput)
 }
 `
+// leads
+export const mutationSubmitEnquiry = `
+mutation submitEnquiry($enquiryInput: EnquiryInput!) {
+  submitEnquiry(enquiryInput: $enquiryInput)
+}
+`
 
 // Locations
 export const queryGetLocations = `
