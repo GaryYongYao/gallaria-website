@@ -48,6 +48,7 @@ function Details({ data }) {
     }
     setEnquiryCart(JSON.parse(Cookies.get('enquiries')))
     setEnquiryAmount(JSON.parse(Cookies.get('enquiries')).length)
+    alert('Product added to enquiry')
   }
 
   const addToCart = () => {
@@ -84,6 +85,7 @@ function Details({ data }) {
     }
     setShoppingCart(JSON.parse(Cookies.get('cart')))
     setCartAmount(JSON.parse(Cookies.get('cart')).length)
+    alert('Product added to cart')
   }
 
   return (

@@ -3,11 +3,12 @@ import { sumBy } from 'lodash'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { CartContext } from 'utils/cartCookie'
+import APIRequest from 'utils/APIRequest'
 import Link from 'components/Link'
 import styles from 'styles/modules/Cart.module.scss'
 
 function List() {
-  const [submit, setSubmit] = useState(false)
+  const [email, setEmail] = useState('gallariadev@gmail.com')
   const router = useRouter()
   const { setCartAmount, shoppingCart, setShoppingCart } = useContext(CartContext)
 
@@ -47,6 +48,35 @@ function List() {
 
     setShoppingCart(JSON.parse(Cookies.get('cart')))
     setCartAmount(JSON.parse(Cookies.get('cart')).length)
+  }
+
+  const checkout = () => {
+    const stripe = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+
+    APIRequest('POST', '/api/checkout', {
+      email,
+      line_items: shoppingCart.map(product => ({
+        price_data: {
+          currency: 'aud',
+          product_data: {
+            name: product.name,
+            images: [`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
+          },
+          unit_amount: product.price * 100,
+        },
+        quantity: product.quantity
+      }))
+    })
+      .then((response) => response.data)
+      .then((session) => stripe.redirectToCheckout({ sessionId: session.id }))
+      .then((result) => {
+        if (result.error) {
+          alert(result.error.message)
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+      })
   }
 
   return (
@@ -150,7 +180,6 @@ function List() {
           <div className="col-lg-3">
             <button
               type="button"
-              disabled={submit}
               onClick={() => router.back()}
               className="button-outlined"
             >
@@ -158,8 +187,8 @@ function List() {
             </button>
           </div>
           <div className="col-lg-3" style={{ marginLeft: 'auto' }}>
-            <button type="button" disabled={submit} className="button-contained">
-              ENQUIRE NOW
+            <button type="button" className="button-contained" onClick={checkout}>
+              CHECKOUT
             </button>
           </div>
         </div>

@@ -541,7 +541,7 @@
   overflow-y: auto;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 1001;
   background-color: $secondary-blur;
   transition: all .1s linear;
   transform: scale(0);

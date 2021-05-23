@@ -13,6 +13,7 @@ function Projects() {
       <Head>
         <title>Shopping Cart - Gallaria</title>
         <link rel="icon" href="/favicon.ico" />
+        <script src="https://js.stripe.com/v3/" />
       </Head>
 
       <Header />
