@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { sumBy } from 'lodash'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
@@ -8,7 +8,8 @@ import Link from 'components/Link'
 import styles from 'styles/modules/Cart.module.scss'
 
 function List() {
-  const [email, setEmail] = useState('gallariadev@gmail.com')
+  const formRef = useRef()
+  const [submit, setSubmit] = useState(false)
   const router = useRouter()
   const { setCartAmount, shoppingCart, setShoppingCart } = useContext(CartContext)
 
@@ -50,11 +51,13 @@ function List() {
     setCartAmount(JSON.parse(Cookies.get('cart')).length)
   }
 
-  const checkout = () => {
+  const checkout = e => {
+    e.preventDefault()
+    setSubmit(true)
     const stripe = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
     APIRequest('POST', '/api/checkout', {
-      email,
+      email: formRef.current[0].value,
       line_items: shoppingCart.map(product => ({
         price_data: {
           currency: 'aud',
@@ -77,6 +80,8 @@ function List() {
       .catch((error) => {
         console.error('Error:', error)
       })
+
+    setSubmit(false)
   }
 
   return (
@@ -176,22 +181,31 @@ function List() {
           </div>
         </div>
         <div className={`${styles['divider']} ${styles['divider-3']}`} />
-        <div className={`${styles['button-container']} row`}>
-          <div className="col-lg-3">
-            <button
-              type="button"
-              onClick={() => router.back()}
-              className="button-outlined"
-            >
-              BACK TO BROWSING
-            </button>
+        <form ref={formRef} onSubmit={checkout} className={styles['form']}>
+          <div className="row">
+            <div className="col-lg-8" />
+            <div className="col-lg-4">
+              <input className={styles['input']} required name="email" placeholder="EMAIL ADDRESS*" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
+            </div>
           </div>
-          <div className="col-lg-3" style={{ marginLeft: 'auto' }}>
-            <button type="button" className="button-contained" onClick={checkout}>
-              CHECKOUT
-            </button>
+          <div className={`${styles['button-container']} row`}>
+            <div className="col-lg-3">
+              <button
+                type="button"
+                disabled={submit}
+                onClick={() => router.back()}
+                className="button-outlined"
+              >
+                BACK TO BROWSING
+              </button>
+            </div>
+            <div className="col-lg-3" style={{ marginLeft: 'auto' }}>
+              <button type="submit" disabled={submit} className="button-contained">
+                CHECKOUT
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </section>
   )

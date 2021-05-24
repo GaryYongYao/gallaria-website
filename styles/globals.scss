@@ -134,6 +134,13 @@ h3 {
   }
 }
 
+.react-multi-carousel-dot {
+  button {
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
+
 .react-multiple-carousel__arrow {
   z-index: 5;
   background: transparent !important;

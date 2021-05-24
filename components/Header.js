@@ -153,6 +153,16 @@ function Header({ setAllowScrolling, landing = false }) {
       <div className={`menu${open ? ' open' : ''}`}>
         <div className="container">
           <div className="col-12 col-lg-4">
+            <Link href="/enquiry">
+              <span className="title enquiry-link">
+                ENQUIRIES {enquiryAmount > 0 ? ` (${enquiryAmount})` : ''}
+              </span>
+            </Link>
+            <Link href="/cart">
+              <span className="title cart-link">
+                SHOPPING CART {cartAmount > 0 ? ` (${cartAmount})` : ''}
+              </span>
+            </Link>
             <span className="title">PRODUCTS</span>
             <div className="button">
               <div>
@@ -172,13 +182,13 @@ function Header({ setAllowScrolling, landing = false }) {
                 </Link>
                 <Link href="/products?filterUrl=DESIGNplus" style="col-6 col-lg-3">
                   <img src="/svg/design.svg" onClick={() => setOpen(false)} />
-                  <span>WASHING</span>
+                  <span>DESIGN+</span>
                 </Link>
               </div>
               <div>
                 <Link href="/products?filterUrl=WASHING" style="col-6 col-lg-3">
                   <img src="/svg/washing.svg" onClick={() => setOpen(false)} />
-                  <span>DESIGN+</span>
+                  <span>WASHING</span>
                 </Link>
                 <Link href="/products?filterUrl=ACCESORIES" style="col-6 col-lg-3">
                   <img src="/svg/accessories.svg" onClick={() => setOpen(false)} />

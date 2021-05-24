@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from 'react'
 import { findIndex } from 'lodash'
 import styles from 'styles/modules/ProductList.module.scss'
 
-function Filter({ categories, setFilter, selection }) {
+function Filter({ categories, setFilter, selection, setFilterOff }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -48,18 +48,18 @@ function Filter({ categories, setFilter, selection }) {
                 >
                   <span className={selection.includes(id) ? styles['selected'] : ''}>
                     {name}
-                    {sub.length > 0 && (() => (
-                      <span
-                        className={selection.includes(id) ? styles['selected'] : ''}
-                        onClick={e => {
-                          e.stopPropagation()
-                          setOpenSub(!openSub)
-                        }}
-                      >
-                        {openSub ? '-' : '+'}
-                      </span>
-                    ))()}
                   </span>
+                  {sub.length > 0 && (() => (
+                    <span
+                      className={`${selection.includes(id) ? styles['selected'] : ''} ${openSub ? styles['minus'] : styles['plus']}`}
+                      onClick={e => {
+                        e.stopPropagation()
+                        setOpenSub(!openSub)
+                      }}
+                    >
+                      {openSub ? '-' : '+'}
+                    </span>
+                  ))()}
                 </div>
                 {sub.map(s => {
                   const [openSeries, setOpenSeries] = useState(false)
@@ -68,30 +68,36 @@ function Filter({ categories, setFilter, selection }) {
                     <Fragment key={s.name}>
                       <div
                         className={`${styles['sub-item']}${openSub ? ` ${styles['sub-item-open']}` : ''}`}
-                        onClick={() => setFilter(s.id)}
+                        onClick={() => {
+                          setFilter(s.id)
+                          setFilterOff([`.${id}`])
+                        }}
                       >
                         <span
                           className={(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''}
                         >
                           {s.name}
-                          {(findIndex(series, ['sub', s.name]) > -1) && (
-                            <span
-                              className={selection.includes(id) ? styles['selected'] : ''}
-                              onClick={e => {
-                                e.stopPropagation()
-                                setOpenSeries(!openSeries)
-                              }}
-                            >
-                              {openSeries ? '-' : '+'}
-                            </span>
-                          )}
                         </span>
+                        {(findIndex(series, ['sub', s.name]) > -1) && (
+                          <span
+                            className={`${(selection.includes(s.id) || selection.includes(id)) ? styles['selected'] : ''} ${openSeries ? styles['minus'] : styles['plus']}`}
+                            onClick={e => {
+                              e.stopPropagation()
+                              setOpenSeries(!openSeries)
+                            }}
+                          >
+                            {openSeries ? '-' : '+'}
+                          </span>
+                        )}
                       </div>
                       {(series || []).map(item => item.sub === s.name && (
                         <div
                           key={item.name}
                           className={`${styles['series-item']}${(openSeries && openSub) ? ` ${styles['series-item-open']}` : ''}`}
-                          onClick={() => setFilter(item.id)}
+                          onClick={() => {
+                            setFilter(item.id)
+                            setFilterOff([`.${id}`, `.${s.id}`])
+                          }}
                         >
                           <span className={(selection.includes(s.id) || selection.includes(item.id) || selection.includes(id)) ? styles['selected'] : ''}>
                             {item.name}

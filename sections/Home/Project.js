@@ -19,7 +19,7 @@ export default function ProjectSection({ data }) {
           {data.map(project => (
             <div key={project._id} className={`col-lg-6 ${styles['column']}`}>
               <Link href={`/project/${project._id}`} style={styles['photo']}>
-                <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(project.cover)}`} />
+                <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(project.cover)}`} />
                 <div className={styles['overlay']} />
                 <div className={`container ${styles['date']}`}>
                   <span>{project.date}</span>

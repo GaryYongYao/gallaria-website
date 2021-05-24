@@ -11,7 +11,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: 36.17px;
+    padding-bottom: 60px;
+      
+    @media screen and (max-width: $sm-max) {
+      padding-bottom: 25px;
+    }
 
     .backdrop {
       position: fixed;
@@ -221,6 +225,9 @@
           border-bottom: 0.25px solid #939393;
           padding: 6px 0 6px 5px;
           cursor: pointer;
+          position: relative;
+          display: flex;
+          align-items: center;
       
           @media screen and (max-width: $md-max) {
             min-width: 250px;
@@ -230,6 +237,34 @@
             border-bottom: 0;
           }
 
+          .plus {
+            font-size: 1.7rem;
+            display: block;
+            margin-left: auto;
+            padding: 0 5px 0 30px;
+            position: absolute;
+            right: 0;
+            top: -6px;
+
+            &.selected {
+              color: $primary;
+            }
+          }
+
+          .minus {
+            font-size: 1.7rem;
+            display: block;
+            margin-left: auto;
+            padding: 0 5px 0 30px;
+            position: absolute;
+            right: 2px;
+            top: -6px;
+
+            &.selected {
+              color: $primary;
+            }
+          }
+
           span {
             font-size: 0.875rem;
             color: $primary-light;
@@ -237,17 +272,6 @@
             display: flex;
             align-items: center;
             text-transform: uppercase;
-            position: relative;
-
-            > span {
-              font-size: 1.7rem;
-              display: block;
-              margin-left: auto;
-              padding: 0 5px 0 30px;
-              position: absolute;
-              right: 0;
-              top: -11px;
-            }
 
             &.selected {
               color: $primary;
@@ -263,6 +287,9 @@
           min-height: 0;
           height: 0;
           transition: all .3s ease-in-out;
+          position: relative;
+          display: flex;
+          align-items: center;
       
           @media screen and (max-width: $md-max) {
             min-width: 250px;
@@ -274,23 +301,40 @@
             border-bottom: 0.25px solid #939393;
           }
 
+          .plus {
+            font-size: 1.7rem;
+            display: block;
+            margin-left: auto;
+            padding: 0 5px 0 30px;
+            position: absolute;
+            right: 0;
+            top: -5px;
+
+            &.selected {
+              color: $primary;
+            }
+          }
+
+          .minus {
+            font-size: 1.7rem;
+            display: block;
+            margin-left: auto;
+            padding: 0 5px 0 30px;
+            position: absolute;
+            right: 3px;
+            top: -5px;
+
+            &.selected {
+              color: $primary;
+            }
+          }
+
           span {
             font-size: 0.875rem;
             color: $primary-light;
             font-weight: 400;
             align-items: center;
             display: flex;
-            position: relative;
-
-            > span {
-              font-size: 1.7rem;
-              display: block;
-              margin-left: auto;
-              padding: 0 5px 0 30px;
-              position: absolute;
-              right: 0;
-              top: -11px;
-            }
   
             &.selected {
               color: $primary;
@@ -306,6 +350,9 @@
           min-height: 0;
           height: 0;
           transition: all .3s ease-in-out;
+          position: relative;
+          display: flex;
+          align-items: center;
       
           @media screen and (max-width: $md-max) {
             min-width: 250px;
@@ -322,13 +369,6 @@
             color: $primary-light;
             font-weight: 400;
             display: flex;
-
-            > span {
-              font-size: 1.2rem;
-              display: block;
-              margin-left: auto;
-              padding: 0 5px 0 30px;
-            }
   
             &.selected {
               color: $primary;
@@ -494,7 +534,7 @@
 
   &-carousel {
     margin-top: 50px;
-    margin-bottom: 110px;
+    margin-bottom: 60px;
     
     @media screen and (max-width: $md-max) {
       margin-top: 0;
@@ -524,8 +564,8 @@
       .name {
         position: absolute;
         top: 30px;
-        right: 5%;
-        font-size: 21px;
+        right: 3%;
+        font-size: 18px;
         line-height: 21.98px;
         font-weight: 700;
         color: $text-secondary;

@@ -14,6 +14,7 @@ function Product({ products, featured, categories }) {
   const [mixer, setMixer] = useState(() => {})
   const [selected, setSelected] = useState({ name: 'DEFAULT', value: 'default:asc' })
   const [filter, setFilter] = useState('')
+  const [toFilterOff, setFilterOff] = useState([])
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
   const [current, setCurrent] = useState(1)
@@ -137,6 +138,38 @@ function Product({ products, featured, categories }) {
   }
 
   useEffect(() => {
+    const targets = toFilterOff
+    if (targets.length < 1) return
+    if (targets.length > 0) {
+      mixer.toggleOff(targets[0]).then(() => {
+        setCurrent(prev => {
+          mixer.toggleOff(`.page-${prev}`).then(state => {
+            targets.length === 1 && setFilterOff([])
+            filterProducts(state.activeFilter.selector)
+            setSelectors(state.activeFilter.selector)
+          })
+
+          return 1
+        })
+      })
+    }
+    if (targets.length > 1) {
+      mixer.toggleOff(targets[1]).then(() => {
+        setCurrent(prev => {
+          mixer.toggleOff(`.page-${prev}`).then(state => {
+            setFilterOff([])
+            filterProducts(state.activeFilter.selector)
+            setSelectors(state.activeFilter.selector)
+            console.log(state.activeFilter.selector)
+          })
+
+          return 1
+        })
+      })
+    }
+  }, [selectors])
+
+  useEffect(() => {
     if (filter === '') return
     if (filter === 'all' && mixer) {
       mixer.filter('.mix').then(
@@ -190,6 +223,7 @@ function Product({ products, featured, categories }) {
           categories={categories || []}
           setFilter={setFilter}
           selection={selectors}
+          setFilterOff={setFilterOff}
         />
         <Sorting
           selected={selected}
