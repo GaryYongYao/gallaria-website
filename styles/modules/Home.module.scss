@@ -375,6 +375,9 @@
           line-height: 24.2px;
           text-transform: uppercase;
           text-align: center;
+          transition: all .3s ease-in-out;
+          transform: translateY(10px);
+          opacity: 0;
         }
 
         > img {
@@ -388,6 +391,11 @@
 
           &:hover {
             > img {
+              opacity: 1;
+            }
+
+            span {
+              transform: translateY(0px);
               opacity: 1;
             }
           }
