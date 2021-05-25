@@ -27,7 +27,15 @@ function Gallery({ data, selected, setSelected, setOpen }) {
     <div className={`col-lg-6 ${styles['section-gallery']}`}>
       <div>
         <div className={styles['selected-image']} onClick={() => setOpen(true)}>
-          <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
+          {!selected.includes('mp4') && (
+            <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
+          )}
+          {selected.includes('mp4') && (
+            <video autoPlay loop muted preload="auto" playsInline webkit-playsinline>
+              <source src="/video/video-2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
         </div>
         <div className={styles['image-gallery']}>
           <Carousel

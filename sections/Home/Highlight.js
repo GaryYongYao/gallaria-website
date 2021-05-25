@@ -56,7 +56,7 @@ export default function HighlightSection(/* { scrolling, setScrolling, scrollToH
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div className={`col-1 ${styles['video-container']}`}>
-          <video controls={false} autoPlay loop muted preload="auto" playsInline webkit-playsinline>
+          <video autoPlay loop muted preload="auto" playsInline webkit-playsinline>
             <source src="/video/video-1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -95,7 +95,7 @@ export default function HighlightSection(/* { scrolling, setScrolling, scrollToH
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div className={`col-1 ${styles['video-container']}`}>
-          <video controls={false} autoPlay loop muted preload="auto" playsInline webkit-playsinline>
+          <video autoPlay loop muted preload="auto" playsInline webkit-playsinline>
             <source src="/video/video-2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
