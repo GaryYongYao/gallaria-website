@@ -263,10 +263,10 @@
 
   &.open {
     height: calc(100vh - 107.16px);
+    overflow: auto;
 
     @media screen and (max-width: $md-max) {
       height: calc(100vh - 48.86px);
-      overflow: auto;
     }
   }
 }
