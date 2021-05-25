@@ -1,6 +1,5 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import Carousel from 'react-multi-carousel'
-import VideoThumbnail from 'react-video-thumbnail'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import 'react-multi-carousel/lib/styles.css'
 
