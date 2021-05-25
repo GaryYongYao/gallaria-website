@@ -77,7 +77,7 @@ function Showroom({ showrooms }) {
               center={center}
               searchStore={searchStore}
               search={search}
-              clearSearch={setSearch}
+              setSearch={setSearch}
             />
           </div>
         </div>

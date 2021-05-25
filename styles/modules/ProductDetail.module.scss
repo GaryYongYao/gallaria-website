@@ -175,6 +175,7 @@
         @media screen and (max-width: $md-max) {
           max-width: 100%;
           padding-top: 0;
+          min-height: unset;
         }
 
         span {
@@ -328,6 +329,7 @@
         @media screen and (max-width: $md-max) {
           overflow-y: auto;
           max-height: unset;
+          height: 160px;
           padding-right: 0;
           width: 100%;
         }
@@ -584,7 +586,7 @@
     
           @media screen and (max-width: $md-max) {
             width: 100%;
-            min-width: none;
+            min-width: unset;
           }
         }
 
