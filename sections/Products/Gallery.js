@@ -1,4 +1,6 @@
+import { Fragment, useEffect } from 'react'
 import Carousel from 'react-multi-carousel'
+import VideoThumbnail from 'react-video-thumbnail'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import 'react-multi-carousel/lib/styles.css'
 
@@ -31,8 +33,8 @@ function Gallery({ data, selected, setSelected, setOpen }) {
             <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
           )}
           {selected.includes('mp4') && (
-            <video autoPlay loop muted preload="auto" playsInline webkit-playsinline>
-              <source src="/video/video-2.mp4" type="video/mp4" />
+            <video autoPlay loop muted preload="auto" playsInline>
+              <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           )}
@@ -43,12 +45,30 @@ function Gallery({ data, selected, setSelected, setOpen }) {
             ssr={true}
           >
             {images.map(image => (
-              <div
-                key={image}
-                onClick={() => setSelected(image)}
-                className={`${(selected === image) ? styles['selected'] : ''}`}
-                style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')})` }}
-              />
+              <Fragment key={image}>
+                {!image.includes('mp4') && (
+                  <div
+                    key={image}
+                    onClick={() => setSelected(image)}
+                    className={`${(selected === image) ? styles['selected'] : ''}`}
+                    style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')})` }}
+                  />
+                )}
+                {image.includes('mp4') && (
+                  <div className={styles['video-thumbnail']} onClick={() => setSelected(image)}>
+                    <video
+                      id={`${image}-video`}
+                      muted
+                      preload="auto"
+                      playsInline
+                    >
+                      <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    <div className={styles['video-overlay']} />
+                  </div>
+                )}
+              </Fragment>
             ))}
           </Carousel>
         </div>
