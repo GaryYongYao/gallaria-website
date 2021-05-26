@@ -2,14 +2,19 @@ function NumberInput({ input, setValue }) {
   const onChange = e => {
     const { value } = e.target
 
-    const re = /^[0-9\b]+$/
-    if (value === '' || re.test(value) || value > -1) {
+    const re = /^[1-9\b]+$/
+    if (value === '') {
+      setValue(1)
+      return
+    }
+
+    if (re.test(value) || value > 0) {
       setValue(Math.floor(value))
     }
   }
 
   const deduct = () => {
-    if (input > 0) setValue(input - 1)
+    if (input > 1) setValue(input - 1)
   }
 
   return (

@@ -22,9 +22,15 @@ function HeaderWhite({ setAllowScrolling }) {
     <header>
       <div className={`no-bg flex-center${open ? ' menu-header' : ''}`}>
         <div className="container flex-center ">
-          <Link href="/">
+          <a
+            href="/"
+            onClick={e => {
+              e.preventDefault()
+              location.reload()
+            }}
+          >
             <img src="/svg/logo-white.svg" alt="Gllaria Logo" className="logo" />
-          </Link>
+          </a>
           <div>
             <a target="_blank" href="https://www.instagram.com/gallariaaustralia/" rel="noopener noreferrer">
               <img src="/svg/inverted-insta.svg" alt="Instagram" className="social" />

@@ -84,12 +84,13 @@
       .title {
         display: block;
         text-align: center;
-        letter-spacing: 0.1em;
         text-transform: uppercase;
         font-weight: 700;
         font-size: 26px;
         line-height: 31.75px;
         margin-bottom: 14px;
+        height: 100%;
+        overflow: hidden;
   
         @media screen and (max-width: $md-max) {
           width: 80%;
@@ -97,6 +98,13 @@
           font-size: 18px;
           line-height: 22px;
           letter-spacing: 0.05em;
+        }
+
+        span {
+          letter-spacing: 0.1em;
+          transform: translateY(100%);
+          transition: all .5s ease-in-out;
+          display: block;
         }
       }
 
@@ -107,6 +115,8 @@
         font-size: 18px;
         line-height: 21.47px;
         margin-bottom: 23px;
+        height: 100%;
+        overflow: hidden;
   
         @media screen and (max-width: $md-max) {
           width: 80%;
@@ -114,6 +124,12 @@
           font-size: 12px;
           line-height: 14.32px;
           margin-bottom: 13px;
+        }
+
+        span {
+          transform: translateY(100%);
+          transition: all .5s ease-in-out;
+          display: block;
         }
       }
   
@@ -132,6 +148,8 @@
     .video-container {
       width: 100%;
       margin-bottom: 20px;
+      opacity:0;
+      transition: all .5s ease-in-out;
   
       @media screen and (max-width: $md-max) {
         margin-bottom: 8px;
@@ -165,6 +183,8 @@
       justify-content: center;
       overflow: hidden;
       margin-bottom: 95px;
+      opacity:0;
+      transition: all .5s ease-in-out;
   
       @media screen and (max-width: $md-max) {
         display: none;
@@ -242,6 +262,8 @@
         background-size: cover;
         margin-bottom: 8px;
         position: relative;
+        opacity:0;
+        transition: all .5s ease-in-out;
 
         .img-overlay {
           width: 100%;
@@ -345,6 +367,8 @@
         line-height: 48px;
         font-weight: 500;
         letter-spacing: 0.1em;
+        height: 100%;
+        overflow: hidden;
 
         @media screen and (max-width: $md-max) {
           font-size: 18px;
@@ -355,6 +379,12 @@
           span {
             color: $text-secondary;
           }
+        }
+
+        span {
+          transform: translateY(100%);
+          transition: all .5s ease-in-out;
+          display: block;
         }
       }
 
@@ -478,12 +508,20 @@
         font-weight: 700;
         margin-bottom: 34px;
         letter-spacing: 0.05em;
+        height: 100%;
+        overflow: hidden;
 
         @media screen and (max-width: $md-max) {
           font-size: 18px;
           line-height: 20px;
           margin-bottom: 15px;
           width: calc(100% + 15%);
+        }
+         
+        span {
+          transform: translateY(100%);
+          transition: all .5s ease-in-out;
+          display: block;
         }
       }
 
@@ -497,6 +535,11 @@
           width: 48.87px;
         }
       }
+    }
+
+    .featured-item-container {
+      opacity:0;
+      transition: all .5s ease-in-out;
     }
 
     .featured-items {
@@ -577,11 +620,19 @@
         font-size: 26px;
         font-weight: 700;
         line-height: 31.75px;
+        height: 100%;
+        overflow: hidden;
 
         @media screen and (max-width: $md-max) {
           font-size: 18px;
           line-height: 20px;
           max-width: 25%;
+        }
+         
+        span {
+          transform: translateY(100%);
+          transition: all .5s ease-in-out;
+          display: block;
         }
       }
 
@@ -616,6 +667,8 @@
 
       .column {
         margin-bottom: 40px;
+        opacity:0;
+        transition: all .5s ease-in-out;
     
         @media screen and (max-width: $md-max) {
           padding: 0;
@@ -736,8 +789,7 @@
       padding-top: 86px;
       padding-bottom: 90px;
       opacity:0;
-      transform: translateY(100px);
-      transition: all .4s linear;
+      transition: all .5s ease-in-out;
 
       @media screen and (max-width: $md-max) {
         padding-top: 89px;

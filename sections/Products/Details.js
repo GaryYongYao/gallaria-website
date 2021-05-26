@@ -3,22 +3,20 @@ import Cookies from 'js-cookie'
 import { findIndex } from 'lodash'
 import { EnquiryContext } from 'utils/enquiryCookie'
 import { CartContext } from 'utils/cartCookie'
+import { SnackbarContext } from 'components/Snackbar'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import { DropdownUnderline, NumberInput } from 'components'
 
 function Details({ data }) {
   const { setEnquiryAmount, setEnquiryCart } = useContext(EnquiryContext)
   const { setCartAmount, setShoppingCart } = useContext(CartContext)
+  const { setSnackbarState } = useContext(SnackbarContext)
   const { code, name, price, desc, forSale, details, variants, file } = data
-  const [number, setNumber] = useState(0)
+  const [number, setNumber] = useState(1)
   const [selected, setSelected] = useState(variants[0] || '')
   const [info, setInfo] = useState('details')
 
   const addToEnquiry = () => {
-    if (number < 1) {
-      alert('Must add with quantity count')
-      return
-    }
     const newEnquiry = {
       name: data.name,
       price: data.price,
@@ -48,14 +46,13 @@ function Details({ data }) {
     }
     setEnquiryCart(JSON.parse(Cookies.get('enquiries')))
     setEnquiryAmount(JSON.parse(Cookies.get('enquiries')).length)
-    alert('Product added to enquiry')
+    setSnackbarState({
+      open: true,
+      message: 'Added to Enquiry'
+    })
   }
 
   const addToCart = () => {
-    if (number < 1) {
-      alert('Must add with quantity count')
-      return
-    }
     const newCart = {
       name: data.name,
       price: data.price,
@@ -85,7 +82,10 @@ function Details({ data }) {
     }
     setShoppingCart(JSON.parse(Cookies.get('cart')))
     setCartAmount(JSON.parse(Cookies.get('cart')).length)
-    alert('Product added to cart')
+    setSnackbarState({
+      open: true,
+      message: 'Product added to cart'
+    })
   }
 
   return (
@@ -118,13 +118,17 @@ function Details({ data }) {
         <NumberInput input={number} setValue={setNumber} />
       </div>
       <div className={styles['container-button']}>
-        <div
-          className="button-contained"
-          onClick={() => {
-            forSale ? addToCart() : addToEnquiry()
-          }}
-        >
-          {forSale ? 'ADD TO CART' : 'ADD TO ENQUIRY'}
+        {forSale && (
+          <div
+            className="button-contained"
+            onClick={addToCart}
+            style={{ marginBottom: '10px' }}
+          >
+            ADD TO CART
+          </div>
+        )}
+        <div className="button-contained" onClick={addToEnquiry}>
+          ADD TO ENQUIRY
         </div>
       </div>
       <div className={styles['container-title-download']}>

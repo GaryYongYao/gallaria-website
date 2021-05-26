@@ -6,8 +6,10 @@
   100% { transform: translateY(0px); }
 }
 
-.show-from-y {
+.show-opacity {
   opacity: 1 !important;
+}
+
+.show-from-y {
   transform: translateY(0) !important;
-  top: 0 !important;
 }

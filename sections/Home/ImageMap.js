@@ -40,9 +40,9 @@ export default function ImageBox() {
         style={styles['image-map']}
         customStyle={{
           width: '34.50164293537787%',
-          height: '9.537751004016064%',
-          left: '47.609049835706465%',
-          top: '55.82489959839353%'
+          height: '4.837751004016064%',
+          left: '47.809049835706465%',
+          top: '60.62489959839353%'
         }}
       >
         <span style={{ left: '43%', top: '130%' }}>
