@@ -99,7 +99,7 @@ export default function Home({ featured, projects }) {
 
 export async function getStaticProps() {
   const response = await request(queryGetFeatureProducts)
-  const featured = response.data.data.getFeatureProducts
+  const featured = response.data.data.getFeatured
   const projectResponse = await request(queryGetLatestProjects)
   const projects = projectResponse.data.data.getLatestProjects
 

@@ -25,7 +25,7 @@ function Lightbox({ open, selected, setOpen }) {
               />
             )}
             {selected.includes('mp4') && (
-              <video autoPlay loop controls muted preload="auto" playsInline webkit-playsinline>
+              <video autoPlay loop controls muted preload="auto" playsInline>
                 <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>

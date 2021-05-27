@@ -6,7 +6,7 @@ import styles from 'styles/modules/ProductList.module.scss'
 import { Carousel, Filter, List, Sorting } from 'sections/ProductList'
 import { Footer, Header } from 'components'
 import request from 'utils/request'
-import { queryGetProducts, queryGetFeatureProducts, queryGetCategories } from 'utils/graphql'
+import { queryGetProducts, queryGetCarouselProducts, queryGetCategories } from 'utils/graphql'
 import { removeSpace, filterURLRegex } from 'utils/validation'
 
 function Product({ products, featured, categories }) {
@@ -343,8 +343,8 @@ const Pagination = ({ list, current, perPage, changePage }) => {
 export async function getStaticProps() {
   const productsQuery = await request(queryGetProducts)
   const products = productsQuery.data.data.getProducts
-  const featuredQuery = await request(queryGetFeatureProducts)
-  const featured = featuredQuery.data.data.getFeatureProducts
+  const featuredQuery = await request(queryGetCarouselProducts)
+  const featured = featuredQuery.data.data.getCarousel
   const categoriesQuery = await request(queryGetCategories)
   const categoriesRough = categoriesQuery.data.data.getCategories
   const categories = await categoriesRough.map(({ name, sub, series }) => ({

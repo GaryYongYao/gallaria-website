@@ -17,11 +17,20 @@ query {
 
 export const queryGetFeatureProducts = `
 query {
-  getFeatureProducts {
+  getFeatured {
     code
     name
     featureImage
-    primaryImage
+  }
+}
+`
+
+export const queryGetCarouselProducts = `
+query {
+  getCarousel {
+    code
+    name
+    featureImage
   }
 }
 `
