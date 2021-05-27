@@ -35,6 +35,16 @@ query {
 }
 `
 
+export const queryGetCatHighlight = `
+  query {
+    getCatHighlight {
+      title
+      subtitle
+      cat
+    }
+  }
+`
+
 export const queryProductPaths = `
 query {
   getAllProducts {

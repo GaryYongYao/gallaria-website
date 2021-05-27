@@ -5,9 +5,9 @@ import styles from 'styles/modules/Home.module.scss'
 import { Footer, Header, HeaderWhite } from 'components'
 import { Design, Experience, Featured, Hero, Highlight, Project } from 'sections/Home'
 import request from 'utils/request'
-import { queryGetFeatureProducts, queryGetLatestProjects } from 'utils/graphql'
+import { queryGetFeatureProducts, queryGetLatestProjects, queryGetCatHighlight } from 'utils/graphql'
 
-export default function Home({ featured, projects }) {
+export default function Home({ featured, projects, catHighlight }) {
   const [touch, setTouch] = useState(0)
   const [scrolling, setScrolling] = useState(false)
 
@@ -87,6 +87,7 @@ export default function Home({ featured, projects }) {
         scrollToHero={scrollToHero}
         setTouch={setTouch}
         touch={touch}
+        catHighlight={catHighlight}
       />
       <Experience />
       <Featured data={featured} />
@@ -102,8 +103,11 @@ export async function getStaticProps() {
   const featured = response.data.data.getFeatured
   const projectResponse = await request(queryGetLatestProjects)
   const projects = projectResponse.data.data.getLatestProjects
+  const catHighlightResponse = await request(queryGetCatHighlight)
+  const catHighlight = catHighlightResponse.data.data.getCatHighlight[0]
+  console.log(catHighlight)
 
   return {
-    props: { featured, projects }, // will be passed to the page component as props
+    props: { featured, projects, catHighlight }, // will be passed to the page component as props
   }
 }

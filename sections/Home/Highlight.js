@@ -3,7 +3,7 @@ import styles from 'styles/modules/Home.module.scss'
 import { Link } from 'components'
 import { showOpacity, showFromY } from 'utils/animationUtils'
 
-export default function HighlightSection(/* { scrolling, setScrolling, scrollToHero, setTouch, touch } */) {
+export default function HighlightSection({ catHighlight/* , scrolling, setScrolling, scrollToHero, setTouch, touch */ }) {
   const MobileBox = ({ link, img, text }) => (
     <Link href={link} style="col-6">
       <div
@@ -73,41 +73,49 @@ export default function HighlightSection(/* { scrolling, setScrolling, scrollToH
         <div className={styles['text-container']}>
           <div className={styles['title']}>
             <span id="highlight-title-1">
-              Intelligent Bathrooms by Gallaria
+              {catHighlight.title}
             </span>
           </div>
           <div className={styles['desc']}>
             <span id="highlight-desc-1">
-              Hygiene and comfort evolved
+              {catHighlight.subtitle}
             </span>
           </div>
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div id="highlight-video-1" className={`col-1 ${styles['video-container']}`}>
           <video autoPlay loop muted preload="auto" playsInline>
-            <source src="/video/video-1.mp4" type="video/mp4" />
+            <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatVideo/feature-video-1.mp4`} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div id="highlight-cat" className={`col-12 ${styles['flex-container']}`}>
-          <Link href="/products?filterUrl=Wall-Hung" style={styles['item-wrapper']}>
-            <div className={`container ${styles['item-name']}`}>WALL HUNG PAN</div>
+          <Link
+            href={`/products?filterUrl=${catHighlight.cat[0].replace(/\s+/g, '-')}`}
+            style={styles['item-wrapper']}
+            customStyle={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-one.png")` }}
+          >
+            <div className={`container ${styles['item-name']}`}>{catHighlight.cat[0]}</div>
           </Link>
-          <Link href="/products?filterUrl=Floor-pan" style={styles['item-wrapper']}>
-            <div className={`container ${styles['item-name']}`}>FLOOR PAN</div>
+          <Link
+            href={`/products?filterUrl=${catHighlight.cat[1].replace(/\s+/g, '-')}`}
+            style={styles['item-wrapper']}
+            customStyle={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-two.png")` }}
+          >
+            <div className={`container ${styles['item-name']}`}>{catHighlight.cat[1]}</div>
           </Link>
         </div>
         <div className={`col-12 ${styles['mobile-container']}`}>
           <div className="row">
             <MobileBox
-              link="/products?filterUrl=Wall-Hung"
-              img="/images/wall-pan.png"
-              text="WALL HUNG PAN"
+              link={`/products?filterUrl=${catHighlight.cat[0].replace(/\s+/g, '-')}`}
+              img={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-one.png`}
+              text={catHighlight.cat[0]}
             />
             <MobileBox
-              link="/products?filterUrl=Floor-pan"
-              img="/images/floor-pan.png"
-              text="FLOOR PAN"
+              link={`/products?filterUrl=${catHighlight.cat[1].replace(/\s+/g, '-')}`}
+              img={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-two.png`}
+              text={catHighlight.cat[1]}
             />
           </div>
         </div>

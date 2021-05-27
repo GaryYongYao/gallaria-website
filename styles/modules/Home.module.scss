@@ -203,14 +203,8 @@
           background-position: center center;
           background-size: cover;
         
-          &:nth-of-type(1) {
-            // increase width of the item
-            background-image: url('/images/wall-pan.png');
-          }
-        
           &:nth-of-type(2) {
             // increase width of the item
-            background-image: url('/images/floor-pan.png');
             border-left: 0;
             flex-basis: calc(100% * 2/3);
             flex-basis: 66.66%;
@@ -243,6 +237,7 @@
             line-height: 18.4px;
             letter-spacing: 0.05em;
             color: $text-secondary;
+            text-transform: uppercase;
             text-align: right;
           }
       }
