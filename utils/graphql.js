@@ -45,6 +45,21 @@ export const queryGetCatHighlight = `
   }
 `
 
+export const queryGetProductHighlight = `
+  query {
+    getProductHighlight {
+      _id
+      title
+      subtitle
+      products {
+        code
+        name
+        featureImage
+      }
+    }
+  }
+`
+
 export const queryProductPaths = `
 query {
   getAllProducts {

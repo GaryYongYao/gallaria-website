@@ -3,7 +3,7 @@ import styles from 'styles/modules/Home.module.scss'
 import { Link } from 'components'
 import { showOpacity, showFromY } from 'utils/animationUtils'
 
-export default function HighlightSection({ catHighlight/* , scrolling, setScrolling, scrollToHero, setTouch, touch */ }) {
+export default function HighlightSection({ catHighlight, productHighlight/* , scrolling, setScrolling, scrollToHero, setTouch, touch */ }) {
   const MobileBox = ({ link, img, text }) => (
     <Link href={link} style="col-6">
       <div
@@ -58,7 +58,7 @@ export default function HighlightSection({ catHighlight/* , scrolling, setScroll
     return () => {
       window.removeEventListener('scroll', showElement)
     }
-  }, [])
+  }, [productHighlight])
 
   return (
     <div
@@ -124,71 +124,49 @@ export default function HighlightSection({ catHighlight/* , scrolling, setScroll
         <div className={styles['text-container']}>
           <div className={styles['title']}>
             <span id="highlight-title-2">
-              Smart design and technology has never looked better
+              {productHighlight.title}
             </span>
           </div>
           <div className={styles['desc']}>
             <span id="highlight-desc-2">
-              Discover the future of comfort plus cleanliness
+              {productHighlight.subtitle}
             </span>
           </div>
           <div className={`col-1 ${styles['divider']}`} />
         </div>
         <div id="highlight-video-2" className={`col-1 ${styles['video-container']}`}>
           <video autoPlay loop muted preload="auto" playsInline>
-            <source src="/video/video-2.mp4" type="video/mp4" />
+            <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatVideo/feature-video-2.mp4`} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div className={`col-12 ${styles['images-container']}`}>
           <div className="row">
-            <Link href="/product/DZ1000UNV" style="col-4">
-              <div
-                id="highlight-item-1"
-                className={styles['img-box']}
-                style={{ backgroundImage: 'url("/images/recom-1.png")' }}
-              >
-                <div className={styles['img-overlay']} />
-                <span className={styles['shop-now']}>SHOP NOW</span>
-                <span className={styles['name']}>DANZACOMFORT+</span>
-              </div>
-            </Link>
-            <Link href="/product/EC520" style="col-4">
-              <div
-                id="highlight-item-2"
-                className={styles['img-box']}
-                style={{ backgroundImage: 'url("/images/recom-2.png")' }}
-              >
-                <div className={styles['img-overlay']} />
-                <span className={styles['shop-now']}>SHOP NOW</span>
-                <span className={styles['name']}>ALTARETROFIT</span>
-              </div>
-            </Link>
-            <Link href="/product/EV210" style="col-4">
-              <div
-                id="highlight-item-3"
-                className={styles['img-box']}
-                style={{ backgroundImage: 'url("/images/recom-3.png")' }}
-              >
-                <div className={styles['img-overlay']} />
-                <span className={styles['shop-now']}>SHOP NOW</span>
-                <span className={styles['name']}>EVOCOMFORT+</span>
-              </div>
-            </Link>
+            {productHighlight?.products.map((product, i) => (
+              <Link key={product.code} href={`/product/${product.code}`} style="col-4">
+                <div
+                  id={`highlight-item-${i + 1}`}
+                  className={styles['img-box']}
+                  style={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}${product.featureImage}")` }}
+                >
+                  <div className={styles['img-overlay']} />
+                  <span className={styles['shop-now']}>SHOP NOW</span>
+                  <span className={styles['name']}>{product.name}</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
         <div className={`col-12 ${styles['mobile-container']}`}>
           <div className="row">
-            <MobileBox
-              link="/product/DZ1000UNV"
-              img="/images/recom-1.png"
-              text="DANZACOMFORT+"
-            />
-            <MobileBox
-              link="/product/EC520"
-              img="/images/recom-2.png"
-              text="ALTARETROFIT"
-            />
+            {productHighlight?.products.map((product, i) => i < 2 && (
+              <MobileBox
+                key={product.code}
+                link={`/product/${product.code}`}
+                img={`${process.env.NEXT_PUBLIC_STORAGE_URL}${product.featureImage}`}
+                text={product.name}
+              />
+            ))}
           </div>
         </div>
       </div>
