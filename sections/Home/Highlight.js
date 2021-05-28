@@ -147,7 +147,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
                 <div
                   id={`highlight-item-${i + 1}`}
                   className={styles['img-box']}
-                  style={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}${product.featureImage}")` }}
+                  style={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}")` }}
                 >
                   <div className={styles['img-overlay']} />
                   <span className={styles['shop-now']}>SHOP NOW</span>
@@ -163,7 +163,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
               <MobileBox
                 key={product.code}
                 link={`/product/${product.code}`}
-                img={`${process.env.NEXT_PUBLIC_STORAGE_URL}${product.featureImage}`}
+                img={`url("${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}")`}
                 text={product.name}
               />
             ))}
