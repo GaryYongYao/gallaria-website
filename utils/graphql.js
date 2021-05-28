@@ -60,6 +60,14 @@ export const queryGetProductHighlight = `
   }
 `
 
+export const queryGetLandingMedia = `
+  query {
+    getLandingMedia {
+      media
+    }
+  }
+`
+
 export const queryProductPaths = `
 query {
   getAllProducts {

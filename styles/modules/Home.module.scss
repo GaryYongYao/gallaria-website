@@ -26,7 +26,7 @@
 .section {
   &-hero {
     margin-top: -100px;
-    background: url('/images/hero-landing.png');
+    // background: url('/images/hero-landing.png');
     height: 100vh;
     width: 100%;
     position: relative;
@@ -45,6 +45,10 @@
       width: 100%;
       height: 100%;
       background-color: $primary-light;
+    }
+
+    video {
+      object-fit: cover;
     }
 
     .down-button {

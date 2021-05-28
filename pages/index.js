@@ -5,9 +5,9 @@ import styles from 'styles/modules/Home.module.scss'
 import { Footer, Header, HeaderWhite } from 'components'
 import { Design, Experience, Featured, Hero, Highlight, Project } from 'sections/Home'
 import request from 'utils/request'
-import { queryGetFeatureProducts, queryGetLatestProjects, queryGetCatHighlight, queryGetProductHighlight } from 'utils/graphql'
+import { queryGetFeatureProducts, queryGetLatestProjects, queryGetCatHighlight, queryGetProductHighlight, queryGetLandingMedia } from 'utils/graphql'
 
-export default function Home({ featured, projects, catHighlight, productHighlight }) {
+export default function Home({ featured, projects, catHighlight, productHighlight, landingMedia }) {
   const [touch, setTouch] = useState(0)
   const [scrolling, setScrolling] = useState(false)
 
@@ -69,6 +69,7 @@ export default function Home({ featured, projects, catHighlight, productHighligh
         touchHero={touchHero}
         setTouch={setTouch}
         scrollToContent={scrollToContent}
+        landingMedia={landingMedia}
       />
       <div
         id="header"
@@ -108,8 +109,10 @@ export async function getStaticProps() {
   const catHighlight = catHighlightResponse.data.data.getCatHighlight[0]
   const productHighlightResponse = await request(queryGetProductHighlight)
   const productHighlight = productHighlightResponse.data.data.getProductHighlight[0]
+  const landingMediaResponse = await request(queryGetLandingMedia)
+  const landingMedia = landingMediaResponse.data.data.getLandingMedia
 
   return {
-    props: { featured, projects, catHighlight, productHighlight }, // will be passed to the page component as props
+    props: { featured, projects, catHighlight, productHighlight, landingMedia }, // will be passed to the page component as props
   }
 }
