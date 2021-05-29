@@ -1,8 +1,7 @@
-import Head from 'next/head'
 import { sumBy } from 'lodash'
 import { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
-import { Footer, Header } from 'components'
+import { Footer, Header, HeadMeta } from 'components'
 import { List, Map, Search } from 'sections/Showroom'
 import { filterRegex } from 'utils/validation'
 import request from 'utils/request'
@@ -53,10 +52,15 @@ function Showroom({ showrooms }) {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>Showrooms - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title="Showrooms - Gallaria"
+        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/showrooms"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <Header />
       <Search searchStore={searchStore} search={search} setSearch={clearSearch} />

@@ -1,5 +1,6 @@
 /* eslint-disable */
 const withImages = require('next-images')
+const sitemap = require('nextjs-sitemap-generator')
 const path = require('path')
 const axios = require('axios')
 
@@ -34,6 +35,14 @@ function errorHandler(resolve, reject) {
   }
 }
 
+sitemap({
+  baseUrl: 'https://www.gallaria.com.au',
+  pagesDirectory: __dirname + "/pages",
+  targetDirectory: 'public/',
+  nextConfigPath: __dirname + "/next.config.js",
+  ignoreIndexFiles: true
+})
+
 module.exports = withImages({
   future: {
     webpack5: true,
@@ -42,12 +51,6 @@ module.exports = withImages({
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  /* rewrites: async () => [
-    {
-      source: '/api/:path*',
-      destination: 'https://desksit.chativo.io/api/:path*' // Proxy to Backend
-    }
-  ], */
   /* exportPathMap: async (defaultPathMap) => {
     return {
       '/': { page: '/' }

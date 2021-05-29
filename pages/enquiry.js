@@ -1,6 +1,5 @@
-import Head from 'next/head'
 import { useContext } from 'react'
-import { Footer, Header } from 'components'
+import { Footer, Header, HeadMeta } from 'components'
 import { EnquiryContext } from 'utils/enquiryCookie'
 import { Form, List, NoItem } from 'sections/Enquiry'
 import styles from 'styles/modules/Enquiries.module.scss'
@@ -10,10 +9,15 @@ function Projects() {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>Enquiries Cart - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title="Enquiries - Gallaria"
+        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/enquiry"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <Header />
       <section className={styles['section-title']}>

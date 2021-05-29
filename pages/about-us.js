@@ -1,10 +1,9 @@
-import Head from 'next/head'
 import { useEffect } from 'react'
 import anime from 'animejs'
 // eslint-disable-next-line
 import { Link, Element, Events, scrollSpy, scroller } from 'react-scroll'
 import styles from 'styles/modules/About.module.scss'
-import { Footer, Header } from 'components'
+import { Footer, Header, HeadMeta } from 'components'
 
 function Product() {
   useEffect(() => {
@@ -60,10 +59,15 @@ function Product() {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>About Us - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title="About Us - Gallaria"
+        desc="From our base in Sydney, New South Wales, Gallaria Bathware have been specialising in Bathroom ware for eighteen years. During that time we have built a reputation for quality and integrity, gaining the Watermark Licence and WELS certifications, and supplying thousands of customers with affordable, stylish and beautifully engineered products."
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/about-us"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <Header />
       <div className="container">

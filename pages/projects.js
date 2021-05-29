@@ -1,6 +1,5 @@
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import { Footer, Header, Link } from 'components'
+import { Footer, Header, Link, HeadMeta } from 'components'
 import styles from 'styles/modules/Projects.module.scss'
 import request from 'utils/request'
 import { queryGetProjects } from 'utils/graphql'
@@ -12,10 +11,15 @@ function Projects({ projects }) {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>Projects - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title="Projects - Gallaria"
+        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/enquiry"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <Header />
       <div className="container" style={{ height: '100%' }}>

@@ -1,10 +1,9 @@
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { useRouter } from 'next/router'
 import styles from 'styles/modules/ProductList.module.scss'
 import { Carousel, Filter, List, Sorting } from 'sections/ProductList'
-import { Footer, Header } from 'components'
+import { Footer, Header, HeadMeta } from 'components'
 import request from 'utils/request'
 import { queryGetProducts, queryGetCarouselProducts, queryGetCategories } from 'utils/graphql'
 import { removeSpace, filterURLRegex } from 'utils/validation'
@@ -211,10 +210,15 @@ function Product({ products, featured, categories }) {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>Products - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title="Products - Gallaria"
+        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/products"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <Header />
       <Carousel data={featured} />

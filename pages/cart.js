@@ -1,6 +1,5 @@
-import Head from 'next/head'
 import { useContext } from 'react'
-import { Footer, Header } from 'components'
+import { Footer, Header, HeadMeta } from 'components'
 import { CartContext } from 'utils/cartCookie'
 import { List, NoItem } from 'sections/Cart'
 import styles from 'styles/modules/Cart.module.scss'
@@ -10,11 +9,15 @@ function Projects() {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>Shopping Cart - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-        <script src="https://js.stripe.com/v3/" />
-      </Head>
+      <HeadMeta
+        title="Shopping Cart - Gallaria"
+        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/cart"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <Header />
       <section className={styles['section-title']}>

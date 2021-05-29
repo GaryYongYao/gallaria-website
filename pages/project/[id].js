@@ -1,8 +1,7 @@
-import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styles from 'styles/modules/ProjectDetails.module.scss'
-import { Breadcrumbs, Footer, Header } from 'components'
+import { Breadcrumbs, Footer, Header, HeadMeta } from 'components'
 import request from 'utils/request'
 import { queryProjectPaths, queryGetProjectById, queryGetLatestProjects } from 'utils/graphql'
 import Products from 'sections/ProjectDetails/Products'
@@ -26,10 +25,15 @@ function Project({ data, recommendations }) {
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>{data.name} - Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title={`${data.name} - Gallaria`}
+        desc={data.desc}
+        keywords=""
+        robots="index, follow"
+        url={`https://www.gallaria.com.au/project/${data._id}`}
+        metaOG={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
+        metaTwitter={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
+      />
 
       <Header />
       <Breadcrumbs crumbs={breadcrumbs} />

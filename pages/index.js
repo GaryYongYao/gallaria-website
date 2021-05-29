@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import Head from 'next/head'
 import { Events, animateScroll as scroll } from 'react-scroll'
 import styles from 'styles/modules/Home.module.scss'
-import { Footer, Header, HeaderWhite } from 'components'
+import { Footer, Header, HeaderWhite, HeadMeta } from 'components'
 import { Design, Experience, Featured, Hero, Highlight, Project } from 'sections/Home'
 import request from 'utils/request'
 import { queryGetFeatureProducts, queryGetLatestProjects, queryGetCatHighlight, queryGetProductHighlight, queryGetLandingMedia } from 'utils/graphql'
@@ -54,10 +53,15 @@ export default function Home({ featured, projects, catHighlight, productHighligh
 
   return (
     <div className={styles['container']}>
-      <Head>
-        <title>Gallaria</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadMeta
+        title="Gallaria"
+        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        keywords=""
+        robots="index, follow"
+        url="https://www.gallaria.com.au/"
+        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+      />
 
       <div style={{ width: '100%' }}>
         <HeaderWhite />
