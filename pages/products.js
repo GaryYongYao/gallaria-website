@@ -26,7 +26,7 @@ function Product({ products, featured, categories }) {
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
     const masonryAnimate = mixitup(containerEl)
-    query.filterUrl && masonryAnimate.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => {
+    query.filterUrl && masonryAnimate.filter(`.${removeSpace(query.filterUrl)}`).then(state => {
       filterProducts(state.activeFilter.selector)
       setSelectors(state.activeFilter.selector)
     })
@@ -67,7 +67,7 @@ function Product({ products, featured, categories }) {
   useEffect(() => {
     const { query } = router
     if (query.filterUrl && mixer) {
-      mixer.toggleOn(`.${removeSpace(query.filterUrl)}`).then(state => {
+      mixer.filter(`.${removeSpace(query.filterUrl)}`).then(state => {
         filterProducts(state.activeFilter.selector)
         setSelectors(state.activeFilter.selector)
       })
