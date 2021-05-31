@@ -163,7 +163,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
               <MobileBox
                 key={product.code}
                 link={`/product/${product.code}`}
-                img={`url("${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}")`}
+                img={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}`}
                 text={product.name}
               />
             ))}
