@@ -65,8 +65,8 @@ function Product() {
         keywords=""
         robots="index, follow"
         url="https://www.gallaria.com.au/about-us"
-        metaOG="https://2021.gallaria.com.au/svg/logo-black.svg"
-        metaTwitter="https://2021.gallaria.com.au/svg/logo-black.svg"
+        metaOG="https://www.gallaria.com.au/svg/logo-black.svg"
+        metaTwitter="https://www.gallaria.com.au/svg/logo-black.svg"
       />
 
       <Header />
