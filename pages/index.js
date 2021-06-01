@@ -59,8 +59,8 @@ export default function Home({ featured, projects, catHighlight, productHighligh
         keywords=""
         robots="index, follow"
         url="https://www.gallaria.com.au/"
-        metaOG="https://www.gallaria.com.au/svg/logo-black.svg"
-        metaTwitter="https://www.gallaria.com.au/svg/logo-black.svg"
+        metaOG="/logo.png"
+        metaTwitter="/logo.png"
       />
 
       <div style={{ width: '100%' }}>

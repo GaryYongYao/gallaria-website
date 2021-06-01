@@ -58,8 +58,8 @@ function Showroom({ showrooms }) {
         keywords=""
         robots="index, follow"
         url="https://www.gallaria.com.au/showrooms"
-        metaOG="https://www.gallaria.com.au/svg/logo-black.svg"
-        metaTwitter="https://www.gallaria.com.au/svg/logo-black.svg"
+        metaOG="/logo.png"
+        metaTwitter="/logo.png"
       />
 
       <Header />
