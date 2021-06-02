@@ -2,48 +2,9 @@
 const withImages = require('next-images')
 const sitemap = require('nextjs-sitemap-generator')
 const path = require('path')
-const axios = require('axios')
-
-function request(gql = null, params) {
-  const promise = new Promise((resolve, reject) => {
-    const perms = {
-      url: process.env.NEXT_PUBLIC_SITE_API,
-      method: 'post',
-      responseType: 'json',
-      data: {
-        query: gql,
-        variables: params
-      }
-    }
-
-    axios(perms)
-      .then(successHandler(resolve, reject))
-      .catch(errorHandler(resolve, reject))
-  })
-  return promise
-}
-
-function successHandler(resolve) {
-  return (response) => {
-    resolve(response)
-  }
-}
-
-function errorHandler(resolve, reject) {
-  return (error) => {
-    reject(error.response.data)
-  }
-}
-
-sitemap({
-  baseUrl: 'https://www.gallaria.com.au',
-  pagesDirectory: __dirname + "/pages",
-  targetDirectory: 'public/',
-  nextConfigPath: __dirname + "/next.config.js",
-  ignoreIndexFiles: true
-})
 
 module.exports = withImages({
+  generateBuildId: async () => 'my-build-id',
   future: {
     webpack5: true,
   },
@@ -81,6 +42,16 @@ module.exports = withImages({
         }
       }
     })
+
+    sitemap({
+      baseUrl: 'https://www.gallaria.com.au',
+      pagesDirectory: __dirname + "/.next/server/pages",
+      targetDirectory: 'public/',
+      nextConfigPath: __dirname + "/next.config.js",
+      ignoreIndexFiles: true,
+      ignoredPaths: ["[id]", "[code]"]
+    })
+    
     // Important: return the modified config
     return config
   }

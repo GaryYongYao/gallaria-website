@@ -140,6 +140,22 @@
       }
     }
 
+    .tab {
+      margin-left: 25px;
+
+      @media screen and (max-width: $md-max) {
+        margin-left: 10px;
+      }
+    }
+
+    .tabDouble {
+      margin-left: 50px;
+
+      @media screen and (max-width: $md-max) {
+        margin-left: 20px;
+      }
+    }
+
     &::placeholder {
       color: $text-secondary;
     }
