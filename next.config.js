@@ -5,7 +5,7 @@ const path = require('path')
 
 module.exports = withImages({
   future: {
-    webpack5: true,
+    webpack5: false,
   },
   reactStrictMode: false,
   sassOptions: {
@@ -41,7 +41,7 @@ module.exports = withImages({
         }
       }
     })
-    
+
     // Important: return the modified config
     return config
   }
@@ -49,10 +49,7 @@ module.exports = withImages({
 
 sitemap({
   baseUrl: 'https://www.gallaria.com.au',
-  pagesDirectory: path.resolve(
-    __dirname,
-    'out'
-  ),
+  pagesDirectory: __dirname + "/pages",
   targetDirectory: 'public/',
   nextConfigPath: __dirname + "/next.config.js",
   ignoreIndexFiles: true,
