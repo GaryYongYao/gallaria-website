@@ -45,7 +45,7 @@ module.exports = withImages({
 
     sitemap({
       baseUrl: 'https://www.gallaria.com.au',
-      pagesDirectory: __dirname + "/.next/server/pages",
+      pagesDirectory: __dirname + "/pages",
       targetDirectory: 'public/',
       nextConfigPath: __dirname + "/next.config.js",
       ignoreIndexFiles: true,
