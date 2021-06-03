@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "postbuild": "next-sitemap --config gen-sitemap.js",
-    "export": "next build && yarn postbuild && next export"
+    "export": "next build && next export && yarn postbuild"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.19",
