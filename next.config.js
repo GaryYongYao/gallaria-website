@@ -1,6 +1,5 @@
 /* eslint-disable */
 const withImages = require('next-images')
-const sitemap = require('nextjs-sitemap-generator')
 const path = require('path')
 
 module.exports = withImages({
@@ -45,14 +44,4 @@ module.exports = withImages({
     // Important: return the modified config
     return config
   }
-})
-
-sitemap({
-  baseUrl: 'https://www.gallaria.com.au',
-  pagesDirectory: __dirname + "/pages",
-  targetDirectory: 'public/',
-  nextConfigPath: __dirname + "/next.config.js",
-  ignoreIndexFiles: true,
-  ignoredPaths: ["[id]", "[code]", "/svg", "/images", "/fonts", "/_next"],
-  ignoredExtensions: ['png', 'jpg', 'xml', 'txt']
 })
