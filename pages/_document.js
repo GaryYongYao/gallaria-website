@@ -21,11 +21,11 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
           <script> </script>
-          {/* <script
+          <script
             dangerouslySetInnerHTML={{
               __html: 'var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "cd4d3662a53bdaa92c5d66811da548f98f1efc47d3c30ba6f08544d7d82c6d69", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com.au/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id=\'zsiqwidget\'></div>");'
             }}
-          /> */}
+          />
         </body>
       </Html>
     )

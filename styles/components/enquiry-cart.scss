@@ -1,22 +1,39 @@
-.enquiry-cart {
-  height: 0;
-  overflow: hidden;
-  position: absolute;
-  padding: 0 35px;
-  right: -125%;
-  top: calc(100% + 41px);
-  width: 380px;
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100vh;
   background-color: rgba(26, 26, 26, 0.8);
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+  z-index: 1000;
+
+  &.open {
+    width: 100vw;
+  }
+}
+
+.enquiry-cart {
+  min-height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  padding: 43px 35px;
+  right: 0;
+  top: 0;
+  width: 380px;
+  transform: translateX(100%);
+  background-color: #383838;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  z-index: 1000;
 
   * {
     color: $text-secondary;
   }
 
   &.open {
-    padding: 30px 35px 121px 35px;
-    height: fit-content;
+    transform: translateX(0);
   }
 
   > .cart-title {
@@ -44,8 +61,14 @@
     background-color: $text-secondary;
   }
 
+  .blank {
+    width: 100%;
+    margin: 21.5px 0;
+    background-color: $text-secondary;
+  }
+
   .cart-items {
-    max-height: 420px;
+    max-height: 570px;
     overflow-y: auto;
 
     &::placeholder {
@@ -131,6 +154,31 @@
           }
         }
       }
+    }
+  }
+
+  .total-container {
+    font-size: 10px;
+    line-height: 12.21px;
+    letter-spacing: 0.15em;
+    margin-bottom: 53.11px;
+
+    .value {
+      text-align: right;
+    }
+  }
+
+  .contact {
+    margin-top: 31.24px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.15em;
+
+    a {
+      border-bottom: 1px solid $text-secondary;
+      margin-right: 0;
+      padding-bottom: 4px;
     }
   }
 }
