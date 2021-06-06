@@ -67,14 +67,16 @@ function EnquiryCart({ openEnquiry, setOpenEnquiry }) {
           ))}
         </div>
         <div className="divider" />
-        <div className="total-container row">
-          <div className="col-6">
-            SUBTOTAL:
+        {enquiryAmount > 0 && (
+          <div className="total-container row">
+            <div className="col-6">
+              SUBTOTAL:
+            </div>
+            <div className="col-6 value">
+              AUD ${sumBy(enquiryCart, item => item.price * item.quantity).toFixed(2)}
+            </div>
           </div>
-          <div className="col-6 value">
-            AUD ${sumBy(enquiryCart, item => item.price * item.quantity).toFixed(2)}
-          </div>
-        </div>
+        )}
         <Link href="/enquiry" style="button-contained white" customStyle={{ display: 'block' }}>
           ENQUIRE NOW
         </Link>

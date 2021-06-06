@@ -65,14 +65,16 @@ function ShoppingCart({ openCart, setOpenCart }) {
           ))}
         </div>
         <div className="divider" />
-        <div className="total-container row">
-          <div className="col-6">
-            SUBTOTAL:
+        {cartAmount > 0 && (
+          <div className="total-container row">
+            <div className="col-6">
+              SUBTOTAL:
+            </div>
+            <div className="col-6 value">
+              AUD ${sumBy(shoppingCart, item => item.price * item.quantity).toFixed(2)}
+            </div>
           </div>
-          <div className="col-6 value">
-            AUD ${sumBy(shoppingCart, item => item.price * item.quantity).toFixed(2)}
-          </div>
-        </div>
+        )}
         <Link href="/cart" style="button-contained white" customStyle={{ display: 'block' }}>
           VIEW CART
         </Link>
