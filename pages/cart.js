@@ -1,11 +1,15 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Footer, Header, HeadMeta } from 'components'
 import { CartContext } from 'utils/cartCookie'
 import { List, NoItem } from 'sections/Cart'
 import styles from 'styles/modules/Cart.module.scss'
 
 function Projects() {
-  const { cartAmount } = useContext(CartContext)
+  const { cartAmount, setOpenCart } = useContext(CartContext)
+
+  useEffect(() => {
+    setOpenCart(false)
+  }, [])
 
   return (
     <div className={styles['container']}>

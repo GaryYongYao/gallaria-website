@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Cookies from 'js-cookie'
 import { EnquiryContext } from 'utils/enquiryCookie'
+import { commaInNumbers } from 'utils/validation'
 import Link from 'components/Link'
 import styles from 'styles/modules/Enquiries.module.scss'
 
@@ -76,7 +77,7 @@ function List() {
                   <div className={styles['info']}>
                     VARIANT: {item.variant || 'N/A'}
                     <br />
-                    AUD: ${item.price.toFixed(2)}
+                    AUD: {commaInNumbers(item.price)}
                     <br />
                     <span className={styles['quantity']}>
                       QTY:&nbsp;

@@ -1,11 +1,15 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Footer, Header, HeadMeta } from 'components'
 import { EnquiryContext } from 'utils/enquiryCookie'
 import { Form, List, NoItem } from 'sections/Enquiry'
 import styles from 'styles/modules/Enquiries.module.scss'
 
 function Projects() {
-  const { enquiryAmount } = useContext(EnquiryContext)
+  const { enquiryAmount, setOpenEnquiry } = useContext(EnquiryContext)
+
+  useEffect(() => {
+    setOpenEnquiry(false)
+  }, [])
 
   return (
     <div className={styles['container']}>

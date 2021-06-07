@@ -74,7 +74,7 @@ function Footer() {
         <div className="footer-right">
           <img src="/svg/logo-black.svg" alt="Logo" className="footer-logo" />
           <div className="company">
-            <p>©2021 GALLARIA PTY. LTD.</p>
+            <p>©2021 GALLARIA PTY LTD</p>
             <p>ALL COPYRIGHTS RESERVED.</p>
           </div>
           <div className="terms-links">

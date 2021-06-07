@@ -3,6 +3,7 @@ import { sumBy } from 'lodash'
 import Cookies from 'js-cookie'
 import { ContactContext } from 'components/ContactWindow'
 import { EnquiryContext } from 'utils/enquiryCookie'
+import { commaInNumbers } from 'utils/validation'
 import Link from './Link'
 
 function EnquiryCart({ openEnquiry, setOpenEnquiry }) {
@@ -38,19 +39,19 @@ function EnquiryCart({ openEnquiry, setOpenEnquiry }) {
           )}
           {enquiryAmount > 0 && enquiryCart.map((item, i) => (
             <div key={item.code} className="item">
-              <div className="image-container">
+              <div className="image-container" onClick={() => setOpenEnquiry(false)}>
                 <Link href={`/product/${item.code}`}>
                   <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
                 </Link>
               </div>
               <div className="text-container">
-                <div className="title">
+                <div className="title" onClick={() => setOpenEnquiry(false)}>
                   <Link href={`/product/${item.code}`}>
                     {item.name}
                   </Link>
                 </div>
                 <div className="info">
-                  AUD: ${item.price.toFixed(2)}
+                  AUD: {commaInNumbers(item.price)}
                   <br />
                   QTY: {item.quantity}
                 </div>
@@ -73,7 +74,7 @@ function EnquiryCart({ openEnquiry, setOpenEnquiry }) {
               SUBTOTAL:
             </div>
             <div className="col-6 value">
-              AUD ${sumBy(enquiryCart, item => item.price * item.quantity).toFixed(2)}
+              AUD {commaInNumbers(sumBy(enquiryCart, item => item.price * item.quantity))}
             </div>
           </div>
         )}

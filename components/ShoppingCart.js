@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Cookies from 'js-cookie'
 import { sumBy } from 'lodash'
 import { CartContext } from 'utils/cartCookie'
+import { commaInNumbers } from 'utils/validation'
 import Link from './Link'
 
 function ShoppingCart({ openCart, setOpenCart }) {
@@ -36,19 +37,19 @@ function ShoppingCart({ openCart, setOpenCart }) {
           )}
           {cartAmount > 0 && shoppingCart.map((item, i) => (
             <div key={item.code} className="item">
-              <div className="image-container">
+              <div className="image-container" onClick={() => setOpenCart(false)}>
                 <Link href={`/product/${item.code}`}>
                   <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
                 </Link>
               </div>
               <div className="text-container">
-                <div className="title">
+                <div className="title" onClick={() => setOpenCart(false)}>
                   <Link href={`/product/${item.code}`}>
                     {item.name}
                   </Link>
                 </div>
                 <div className="info">
-                  AUD: ${item.price.toFixed(2)}
+                  AUD: {commaInNumbers(item.price)}
                   <br />
                   QTY: {item.quantity}
                 </div>
@@ -71,7 +72,7 @@ function ShoppingCart({ openCart, setOpenCart }) {
               SUBTOTAL:
             </div>
             <div className="col-6 value">
-              AUD ${sumBy(shoppingCart, item => item.price * item.quantity).toFixed(2)}
+              AUD {commaInNumbers(sumBy(shoppingCart, item => item.price * item.quantity))}
             </div>
           </div>
         )}

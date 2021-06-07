@@ -10,14 +10,12 @@ import ShoppingCart from './ShoppingCart'
 
 function Header({ setAllowScrolling, landing = false }) {
   const [open, setOpen] = useState(false)
-  const [openEnquiry, setOpenEnquiry] = useState(false)
-  const [openCart, setOpenCart] = useState(false)
   const [search, setSearch] = useState('')
   const [invert, setInvert] = useState(false)
   const headerRef = useRef()
   const router = useRouter()
-  const { enquiryAmount, setEnquiryAmount, setEnquiryCart } = useContext(EnquiryContext)
-  const { cartAmount, setShoppingCart, setCartAmount } = useContext(CartContext)
+  const { enquiryAmount, setEnquiryAmount, setEnquiryCart, openEnquiry, setOpenEnquiry } = useContext(EnquiryContext)
+  const { cartAmount, setShoppingCart, setCartAmount, openCart, setOpenCart } = useContext(CartContext)
   const { setContactOpen } = useContext(ContactContext)
 
   useEffect(() => {

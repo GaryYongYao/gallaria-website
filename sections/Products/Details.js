@@ -3,14 +3,13 @@ import Cookies from 'js-cookie'
 import { findIndex } from 'lodash'
 import { EnquiryContext } from 'utils/enquiryCookie'
 import { CartContext } from 'utils/cartCookie'
-import { SnackbarContext } from 'components/Snackbar'
+import { commaInNumbers } from 'utils/validation'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import { DropdownUnderline, NumberInput } from 'components'
 
 function Details({ data }) {
-  const { setEnquiryAmount, setEnquiryCart } = useContext(EnquiryContext)
-  const { setCartAmount, setShoppingCart } = useContext(CartContext)
-  const { setSnackbarState } = useContext(SnackbarContext)
+  const { setEnquiryAmount, setEnquiryCart, setOpenEnquiry } = useContext(EnquiryContext)
+  const { setCartAmount, setShoppingCart, setOpenCart } = useContext(CartContext)
   const { code, name, price, desc, forSale, details, variants, file } = data
   const [number, setNumber] = useState(1)
   const [selected, setSelected] = useState(variants[0] || '')
@@ -46,10 +45,8 @@ function Details({ data }) {
     }
     setEnquiryCart(JSON.parse(Cookies.get('enquiries')))
     setEnquiryAmount(JSON.parse(Cookies.get('enquiries')).length)
-    setSnackbarState({
-      open: true,
-      message: 'Added to Enquiry'
-    })
+    setOpenCart(false)
+    setOpenEnquiry(true)
   }
 
   const addToCart = () => {
@@ -82,10 +79,8 @@ function Details({ data }) {
     }
     setShoppingCart(JSON.parse(Cookies.get('cart')))
     setCartAmount(JSON.parse(Cookies.get('cart')).length)
-    setSnackbarState({
-      open: true,
-      message: 'Product added to cart'
-    })
+    setOpenEnquiry(false)
+    setOpenCart(true)
   }
 
   return (
@@ -100,7 +95,7 @@ function Details({ data }) {
       </div>
       <div className={styles['container-price']}>
         <span>RRP PRICE:</span>
-        <span>${price.toFixed(2)}</span>
+        <span>{commaInNumbers(price)}</span>
       </div>
       <div className={styles['container-desc']}>
         <span>{desc}</span>

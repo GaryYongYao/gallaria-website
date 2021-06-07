@@ -3,6 +3,7 @@ import { sumBy } from 'lodash'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { CartContext } from 'utils/cartCookie'
+import { commaInNumbers } from 'utils/validation'
 import APIRequest from 'utils/APIRequest'
 import Link from 'components/Link'
 import styles from 'styles/modules/Cart.module.scss'
@@ -121,7 +122,7 @@ function List() {
                   VARIANT: {item.variant || 'N/A'}
                   <br />
                   <span className={styles['mobile-price']}>
-                    AUD: ${item.price.toFixed(2)}
+                    AUD: {commaInNumbers(item.price)}
                     <br />
                   </span>
                 </div>
@@ -136,7 +137,7 @@ function List() {
               </div>
               <div className={`${styles['text-container']} ${styles['hide-mobile']} col-lg-2`}>
                 <div className={`${styles['info']}`} style={{ textAlign: 'center' }}>
-                  AUD: ${item.price.toFixed(2)}
+                  AUD: {commaInNumbers(item.price)}
                 </div>
               </div>
               <div className={`${styles['text-container']} ${styles['hide-mobile']} col-lg-2`}>
@@ -152,6 +153,7 @@ function List() {
                       value={item.quantity}
                       onChange={e => handleChange(e, i)}
                       type="number"
+                      style={{ marginBottom: 0 }}
                     />
                     <span
                       onClick={() => addQuantity(i)}
@@ -164,7 +166,7 @@ function List() {
               </div>
               <div className={`${styles['text-container']} ${styles['hide-mobile']} col-lg-2`}>
                 <div className={`${styles['info']}`} style={{ textAlign: 'right' }}>
-                  AUD: ${(item.price * item.quantity).toFixed(2)}
+                  AUD: {commaInNumbers(item.price * item.quantity)}
                 </div>
               </div>
             </div>
@@ -177,7 +179,7 @@ function List() {
             SUBTOTAL:
           </div>
           <div className={`col-6 col-lg-3 ${styles['value']}`}>
-            AUD ${sumBy(shoppingCart, item => item.price * item.quantity).toFixed(2)}
+            AUD {commaInNumbers(sumBy(shoppingCart, item => item.price * item.quantity))}
           </div>
         </div>
         <div className={`${styles['divider']} ${styles['divider-3']}`} />

@@ -4,6 +4,7 @@ import styles from 'styles/modules/ProductDetail.module.scss'
 import { Breadcrumbs, Footer, Header, HeadMeta } from 'components'
 import { Details, Features, Gallery, Lightbox, Recommendation } from 'sections/Products'
 import request from 'utils/request'
+import { removeSpace } from 'utils/validation'
 import { queryProductPaths, queryGetProductByCode, queryGetRecommendedProducts } from 'utils/graphql'
 import Error from '../_error'
 
@@ -20,7 +21,7 @@ function Product({ data, recommendations }) {
   const [open, setOpen] = useState(false)
 
   const breadcrumbs = [
-    { name: 'BACK TO PRODUCTS', link: '/products' },
+    { name: 'BACK TO PRODUCTS', link: `/products?filterUrl=${removeSpace(data.category).toUpperCase()}` },
     { name: data.name }
   ]
 
