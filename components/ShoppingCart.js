@@ -20,7 +20,7 @@ function ShoppingCart({ openCart, setOpenCart }) {
 
   return (
     <>
-      <div className={`overlay${openCart ? ' open' : ''}`} />
+      <div className={`overlay${openCart ? ' open' : ''}`} onClick={() => setOpenCart(false)} />
       <div className={`shopping-cart${openCart ? ' open' : ''}`}>
         <div className="cart-title">
           <span>

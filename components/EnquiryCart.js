@@ -22,7 +22,7 @@ function EnquiryCart({ openEnquiry, setOpenEnquiry }) {
 
   return (
     <>
-      <div className={`overlay${openEnquiry ? ' open' : ''}`} />
+      <div className={`overlay${openEnquiry ? ' open' : ''}`} onClick={() => setOpenEnquiry(false)} />
       <div className={`enquiry-cart${openEnquiry ? ' open' : ''}`}>
         <div className="cart-title">
           <span>
