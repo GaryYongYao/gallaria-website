@@ -10,7 +10,7 @@ import { DropdownUnderline, NumberInput } from 'components'
 function Details({ data }) {
   const { setEnquiryAmount, setEnquiryCart, setOpenEnquiry } = useContext(EnquiryContext)
   const { setCartAmount, setShoppingCart, setOpenCart } = useContext(CartContext)
-  const { code, name, price, desc, forSale, details, variants, file } = data
+  const { code, altCode, name, price, desc, forSale, details, variants, file } = data
   const [number, setNumber] = useState(1)
   const [selected, setSelected] = useState(variants[0] || '')
   const [info, setInfo] = useState('details')
@@ -87,7 +87,9 @@ function Details({ data }) {
     <div className={`col-lg-5 ${styles['section-details']}`}>
       <div className={styles['container-code']}>
         <span>
-          Code: {code}
+          Code:&nbsp;
+          {code}
+          {!(altCode && altCode.length > 0) ? '' : `${altCode.map(alt => ` | ${alt}`).join('')}`}
         </span>
       </div>
       <div className={styles['container-name']}>

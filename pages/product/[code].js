@@ -17,7 +17,7 @@ function Product({ data, recommendations }) {
   }, [])
 
   if (!data || (data.isDraft && status !== 'preview')) return <Error status={404} />
-  const [selected, setSelected] = useState(data.primaryImage)
+  const [selected, setSelected] = useState(data.images[0])
   const [open, setOpen] = useState(false)
 
   const breadcrumbs = [
@@ -98,9 +98,9 @@ export async function getStaticProps(ctx) {
 
 export async function getStaticPaths() {
   const response = await request(queryProductPaths)
-  const { getAllProducts } = (response.data || {}).data
+  const { getProducts } = (response.data || {}).data
 
-  const paths = await getAllProducts.map(product => ({
+  const paths = await getProducts.map(product => ({
     params: { code: product.code }
   }))
 

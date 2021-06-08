@@ -11,6 +11,7 @@ query {
     series
     isDraft
     createdDate
+    altCode
   }
 }
 `
@@ -70,7 +71,7 @@ export const queryGetLandingMedia = `
 
 export const queryProductPaths = `
 query {
-  getAllProducts {
+  getProducts {
     code
     isDraft
   }
@@ -86,7 +87,8 @@ query getProductByCode($code: String!) {
     price
     desc
     variants
-    category,
+    altCode
+    category
     sub
     details {
       title

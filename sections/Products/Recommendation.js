@@ -24,7 +24,10 @@ function Recommendation({ recommendations }) {
                 <div className={styles['img-overlay']} />
                 <span className={styles['view']}>VIEW PRODUCT</span>
                 <span className={styles['name']}>{recommendation.name}</span>
-                <span className={styles['code']}>Code: {recommendation.code}</span>
+                <span className={styles['code']}>
+                  Code: &nbsp;
+                  {recommendation.code}
+                </span>
               </div>
             </Link>
           </div>
