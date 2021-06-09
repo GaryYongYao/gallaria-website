@@ -26,7 +26,7 @@ function Product({ data, recommendations }) {
   ]
 
   useEffect(() => {
-    setSelected(data.primaryImage)
+    setSelected(data.images[0])
   }, [data.primaryImage])
 
   useEffect(() => {
