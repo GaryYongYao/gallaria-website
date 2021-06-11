@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-function HeadMeta({ title, desc, keywords, robots, url, metaOG, metaTwitter }) {
+function HeadMeta({ title, desc, keywords, robots, url, metaOG, metaTwitter, children }) {
   return (
     <Head>
       <title>{title}</title>
@@ -27,6 +27,7 @@ function HeadMeta({ title, desc, keywords, robots, url, metaOG, metaTwitter }) {
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={desc} />
       <meta property="twitter:image" content={metaTwitter} />
+      {children}
     </Head>
   )
 }

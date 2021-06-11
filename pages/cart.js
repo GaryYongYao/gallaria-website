@@ -21,7 +21,9 @@ function Projects() {
         url="https://www.gallaria.com.au/cart"
         metaOG="/logo.png"
         metaTwitter="/logo.png"
-      />
+      >
+        <script src="https://js.stripe.com/v3/" />
+      </HeadMeta>
 
       <Header />
       <section className={styles['section-title']}>
