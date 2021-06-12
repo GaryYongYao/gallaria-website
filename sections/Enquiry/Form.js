@@ -53,40 +53,48 @@ function List() {
       return
     }
     setSubmit(true)
-    const enquiryInput = {
-      name: formRef.current[0].value,
-      email: formRef.current[1].value,
-      phone: formRef.current[2].value,
-      company: formRef.current[3].value,
-      message: formRef.current[4].value,
-      profile,
-      subject,
-      products: enquiryCart.map(item => ({
-        info: item.id,
-        quantity: item.quantity,
-        variant: item.variant,
-      }))
-    }
 
-    try {
-      const response = await request(mutationSubmitEnquiry, { enquiryInput })
-      const reply = response.data.data.submitEnquiry
-      setSnackbarState({
-        open: true,
-        message: reply,
-      })
-      formRef.current.reset()
-      setSubmit(false)
-      Cookies.remove('enquiries')
-      setEnquiryCart([])
-      setEnquiryAmount(0)
-      router.push('/')
-    } catch (err) {
-      setSnackbarState({
-        open: true,
-        message: err
-      })
-    }
+    const grecaptcha = await window.grecaptcha
+
+    grecaptcha.ready(async () => {
+      const token = await grecaptcha.execute(process.env.NEXT_PUBLIC_CAPTCHA_KEY, { action: 'submit' })
+
+      const enquiryInput = {
+        name: formRef.current[0].value,
+        email: formRef.current[1].value,
+        phone: formRef.current[2].value,
+        company: formRef.current[3].value,
+        message: formRef.current[4].value,
+        profile,
+        subject,
+        products: enquiryCart.map(item => ({
+          info: item.id,
+          quantity: item.quantity,
+          variant: item.variant
+        })),
+        token
+      }
+
+      try {
+        const response = await request(mutationSubmitEnquiry, { enquiryInput })
+        const reply = response.data.data.submitEnquiry
+        setSnackbarState({
+          open: true,
+          message: reply,
+        })
+        formRef.current.reset()
+        setSubmit(false)
+        Cookies.remove('enquiries')
+        setEnquiryCart([])
+        setEnquiryAmount(0)
+        router.push('/')
+      } catch (err) {
+        setSnackbarState({
+          open: true,
+          message: err
+        })
+      }
+    })
   }
 
   return (
