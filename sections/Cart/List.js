@@ -58,7 +58,8 @@ function List() {
     const stripe = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
     APIRequest('POST', '/api/checkout', {
-      email: formRef.current[0].value,
+      phone: formRef.current[0].value,
+      email: formRef.current[1].value,
       line_items: shoppingCart.map(product => ({
         price_data: {
           currency: 'aud',
@@ -185,7 +186,10 @@ function List() {
         <div className={`${styles['divider']} ${styles['divider-3']}`} />
         <form ref={formRef} onSubmit={checkout} className={styles['form']}>
           <div className="row">
-            <div className="col-lg-8" />
+            <div className="col-lg-4" />
+            <div className="col-lg-4">
+              <input className={styles['input']} required name="phone" placeholder="PHONE NUMBER*" pattern="^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$" />
+            </div>
             <div className="col-lg-4">
               <input className={styles['input']} required name="email" placeholder="EMAIL ADDRESS*" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
             </div>

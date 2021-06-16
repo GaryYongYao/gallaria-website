@@ -11,7 +11,17 @@ function Features({ data }) {
         </div>
       </div>
       {features.map(feature => (
-        <img key={feature} src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(feature)}`} />
+        <fragment key={feature}>
+          {!feature.includes('mp4') && (
+            <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(feature).replace('(', '%28').replace(')', '%29')}`} />
+          )}
+          {feature.includes('mp4') && (
+            <video controls>
+              <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(feature).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </fragment>
       ))}
     </div>
   )
