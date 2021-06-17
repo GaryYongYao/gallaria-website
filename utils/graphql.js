@@ -85,6 +85,8 @@ query getProductByCode($code: String!) {
     code
     name
     price
+    baseShipping
+    shipping
     desc
     variants
     altCode

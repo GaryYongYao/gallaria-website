@@ -1,5 +1,5 @@
-import { useContext, useRef, useState } from 'react'
-import { sumBy } from 'lodash'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { sumBy, groupBy } from 'lodash'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { CartContext } from 'utils/cartCookie'
@@ -11,8 +11,30 @@ import styles from 'styles/modules/Cart.module.scss'
 function List() {
   const formRef = useRef()
   const [submit, setSubmit] = useState(false)
+  const [shippingFees, setShippingFees] = useState(0)
   const router = useRouter()
   const { setCartAmount, shoppingCart, setShoppingCart } = useContext(CartContext)
+
+  useEffect(() => {
+    getShipping()
+  }, [shoppingCart])
+
+  const getShipping = () => {
+    const groups = groupBy(shoppingCart, 'category')
+    let ship = 0
+    for (const key of Object.keys(groups)) {
+      const base = groups[key][0].baseShipping
+      const following = groups[key][0].shipping
+      const quantity = sumBy(groups[key], 'quantity') - 1
+      ship += base + (following * quantity)
+    }
+    setShippingFees(ship)
+  }
+
+  const settingCookie = () => {
+    setShoppingCart(JSON.parse(Cookies.get('cart')))
+    setCartAmount(JSON.parse(Cookies.get('cart')).length)
+  }
 
   const removeItem = (e, i) => {
     e.preventDefault()
@@ -20,8 +42,7 @@ function List() {
     cart.splice(i, 1)
     Cookies.set('cart', cart)
 
-    setShoppingCart(JSON.parse(Cookies.get('cart')))
-    setCartAmount(JSON.parse(Cookies.get('cart')).length)
+    settingCookie()
   }
 
   const addQuantity = (i) => {
@@ -29,8 +50,7 @@ function List() {
     cart[i].quantity += 1
     Cookies.set('cart', cart)
 
-    setShoppingCart(JSON.parse(Cookies.get('cart')))
-    setCartAmount(JSON.parse(Cookies.get('cart')).length)
+    settingCookie()
   }
 
   const removeQuantity = (i) => {
@@ -38,8 +58,7 @@ function List() {
     if (cart[i].quantity - 1 > 0) cart[i].quantity -= 1
     Cookies.set('cart', cart)
 
-    setShoppingCart(JSON.parse(Cookies.get('cart')))
-    setCartAmount(JSON.parse(Cookies.get('cart')).length)
+    settingCookie()
   }
 
   const handleChange = (e, i) => {
@@ -48,29 +67,39 @@ function List() {
     if (!e.target.value) cart[i].quantity = 1
     Cookies.set('cart', cart)
 
-    setShoppingCart(JSON.parse(Cookies.get('cart')))
-    setCartAmount(JSON.parse(Cookies.get('cart')).length)
+    settingCookie()
   }
 
   const checkout = e => {
     e.preventDefault()
     setSubmit(true)
     const stripe = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+    const line_items = shoppingCart.map(product => ({
+      price_data: {
+        currency: 'aud',
+        product_data: {
+          name: product.name,
+          images: [`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
+        },
+        unit_amount: product.price * 100,
+      },
+      quantity: product.quantity
+    }))
+    line_items.push({
+      price_data: {
+        currency: 'aud',
+        product_data: {
+          name: 'Shipping Fees'
+        },
+        unit_amount: shippingFees * 100,
+      },
+      quantity: 1
+    })
 
     APIRequest('POST', '/api/checkout', {
       phone: formRef.current[0].value,
       email: formRef.current[1].value,
-      line_items: shoppingCart.map(product => ({
-        price_data: {
-          currency: 'aud',
-          product_data: {
-            name: product.name,
-            images: [`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
-          },
-          unit_amount: product.price * 100,
-        },
-        quantity: product.quantity
-      }))
+      line_items
     })
       .then((response) => response.data)
       .then((session) => stripe.redirectToCheckout({ sessionId: session.id }))
@@ -174,6 +203,15 @@ function List() {
           ))}
         </div>
         <div className={`${styles['divider']} ${styles['divider-2']}`} />
+        <div className={`row ${styles['total-container']}`}>
+          <div className="col-5 col-lg-8" />
+          <div className={`col-2 ${styles['label']}`}>
+            SHIPPING FEES:
+          </div>
+          <div className={`col-5 col-lg-2 ${styles['value']}`}>
+            AUD {commaInNumbers(shippingFees)}
+          </div>
+        </div>
         <div className={`row ${styles['total-container']}`}>
           <div className="col-5 col-lg-8" />
           <div className={`col-1 ${styles['label']}`}>

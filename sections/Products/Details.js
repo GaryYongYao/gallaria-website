@@ -53,6 +53,9 @@ function Details({ data }) {
     const newCart = {
       name: data.name,
       price: data.price,
+      baseShipping: data.baseShipping,
+      shipping: data.shipping,
+      category: data.category,
       id: data._id,
       code: data.code,
       image: data.primaryImage,
