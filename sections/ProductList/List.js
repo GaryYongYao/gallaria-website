@@ -27,7 +27,7 @@ function List({ data, displayList, perPage }) {
     <div className={styles['section-list']}>
       <div className="container">
         <div className={`${styles['masonry']} masonry`}>
-          {data.map((d) => !d.isDraft && (
+          {data.map((d) => (!d.isDraft && (d.primaryImage || d.images)) && (
             <div
               key={d.name}
               data-name={d.name}
@@ -35,7 +35,7 @@ function List({ data, displayList, perPage }) {
               className={`${getClass(d.code, d.name, d.category, d.sub, d.series, d.altCode)} ${getPage(d.code)}`}
             >
               <Link href={`/product/${d.code}`}>
-                <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(d.primaryImage || d.images[0])}`} />
+                <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(d.primaryImage || (d.images || [])[0])}`} />
                 <div className={styles['overlay']} />
                 <span className={styles['code']}>Code: {d.code}</span>
                 <span className={styles['name']}>{d.name}</span>

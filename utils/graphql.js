@@ -12,6 +12,7 @@ query {
     isDraft
     createdDate
     altCode
+    images
   }
 }
 `
