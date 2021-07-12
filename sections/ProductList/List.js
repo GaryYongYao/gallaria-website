@@ -34,7 +34,7 @@ function List({ data, displayList, perPage }) {
               data-date={d.createdDate}
               className={`${getClass(d.code, d.name, d.category, d.sub, d.series, d.altCode)} ${getPage(d.code)}`}
             >
-              <Link href={`/product/${d.code}`}>
+              <Link href={`/product/${encodeURIComponent(d.code)}`}>
                 <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(d.primaryImage || (d.images || [])[0])}`} />
                 <div className={styles['overlay']} />
                 <span className={styles['code']}>Code: {d.code}</span>

@@ -81,9 +81,9 @@ function Product({ data, recommendations }) {
 export async function getStaticProps(ctx) {
   const { code, res } = ctx.params
 
-  const response = await request(queryGetProductByCode, { code })
+  const response = await request(queryGetProductByCode, { code: decodeURIComponent(code) })
   const data = response.data.data.getProductByCode
-  const reList = await request(queryGetRecommendedProducts, { code })
+  const reList = await request(queryGetRecommendedProducts, { code: decodeURIComponent(code) })
   const recommendations = reList.data.data.getRecommendedProducts
   if (!data && res) {
     return {
@@ -101,7 +101,7 @@ export async function getStaticPaths() {
   const { getProducts } = (response.data || {}).data
 
   const paths = await getProducts.map(product => ({
-    params: { code: product.code }
+    params: { code: encodeURI(product.code) }
   }))
 
   return {
