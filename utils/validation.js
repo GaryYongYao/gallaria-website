@@ -23,7 +23,9 @@ export const filterRegex = (match, item) => {
   return re.test(item)
 }
 
-export const removeSpace = (str) => str.replace(/ /g, '-').replace(/\+/g, 'plus').toLowerCase()
+export const removeSpace = (str) => {
+  return str?.replace(/ /g, '-').replace(/\+/g, 'plus').toLowerCase()
+}
 
 export const commaInNumbers = (price) => {
   const internationalNumberFormat = new Intl.NumberFormat('en-au', { style: 'currency', currency: 'AUD' })
