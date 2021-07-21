@@ -1,4 +1,5 @@
 import styles from 'styles/modules/ProductDetail.module.scss'
+import Image from 'next/image'
 
 function Features({ data }) {
   const { features } = data
@@ -11,9 +12,15 @@ function Features({ data }) {
         </div>
       </div>
       {features.map(feature => (
-        <fragment key={feature}>
+        <div key={feature}>
           {!feature.includes('mp4') && (
-            <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(feature).replace('(', '%28').replace(')', '%29')}`} />
+            <div style={{ width: '100%', paddingTop: '50%', position: 'relative' }}>
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(feature).replace('(', '%28').replace(')', '%29')}`}
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
           )}
           {feature.includes('mp4') && (
             <video controls>
@@ -21,7 +28,7 @@ function Features({ data }) {
               Your browser does not support the video tag.
             </video>
           )}
-        </fragment>
+        </div>
       ))}
     </div>
   )

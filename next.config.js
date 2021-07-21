@@ -3,6 +3,12 @@ const withImages = require('next-images')
 const path = require('path')
 
 module.exports = withImages({
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  images: {
+    domains: [process.env.NEXT_PUBLIC_MEDIA_URL],
+  },
   future: {
     webpack5: false,
   },

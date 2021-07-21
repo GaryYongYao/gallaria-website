@@ -21,7 +21,7 @@ function Lightbox({ open, selected, setOpen }) {
           <div>
             {!selected.includes('mp4') && (
               <img
-                src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`}
+                src={`/_next/image?url=${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}&w=3840&q=75`}
               />
             )}
             {selected.includes('mp4') && (

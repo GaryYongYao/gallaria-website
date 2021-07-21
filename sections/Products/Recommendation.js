@@ -1,5 +1,6 @@
 // import { useState } from 'react'
 import styles from 'styles/modules/ProductDetail.module.scss'
+import Image from 'next/image'
 import { Link } from 'components'
 
 function Recommendation({ recommendations }) {
@@ -19,8 +20,13 @@ function Recommendation({ recommendations }) {
             <Link href={`/product/${recommendation.code}`}>
               <div
                 className={styles['image']}
-                style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(recommendation.primaryImage)}')` }}
+                // style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(recommendation.primaryImage)}')` }}
               >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(recommendation.primaryImage).replace('(', '%28').replace(')', '%29')}`}
+                  layout="fill"
+                  objectFit="cover"
+                />
                 <div className={styles['img-overlay']} />
                 <span className={styles['view']}>VIEW PRODUCT</span>
                 <span className={styles['name']}>{recommendation.name}</span>
