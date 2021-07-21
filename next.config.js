@@ -8,6 +8,8 @@ module.exports = withImages({
   },
   images: {
     domains: [process.env.NEXT_PUBLIC_MEDIA_URL],
+    loader: 'imgix',
+    path: ''
   },
   future: {
     webpack5: false,
