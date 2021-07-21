@@ -7,9 +7,7 @@ module.exports = withImages({
     ignoreDuringBuilds: true
   },
   images: {
-    domains: [process.env.NEXT_PUBLIC_MEDIA_URL],
-    loader: 'imgix',
-    path: ''
+    domains: [process.env.NEXT_PUBLIC_MEDIA_URL]
   },
   future: {
     webpack5: false,
