@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import Image from 'next/image'
 import Carousel from 'react-multi-carousel'
 import styles from 'styles/modules/ProductDetail.module.scss'
 import 'react-multi-carousel/lib/styles.css'
@@ -30,11 +29,7 @@ function Gallery({ data, selected, setSelected, setOpen }) {
       <div>
         <div className={styles['selected-image']} onClick={() => setOpen(true)}>
           {!selected.includes('mp4') && (
-            <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`}
-              layout="fill"
-              objectFit="contain"
-            />
+            <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
           )}
           {selected.includes('mp4') && (
             <video autoPlay loop muted preload="auto" playsInline>
@@ -55,13 +50,8 @@ function Gallery({ data, selected, setSelected, setOpen }) {
                     key={image}
                     onClick={() => setSelected(image)}
                     className={`${(selected === image) ? styles['selected'] : ''}`}
-                  >
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')}`}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
+                    style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')})` }}
+                  />
                 )}
                 {image.includes('mp4') && (
                   <div className={styles['video-thumbnail']} onClick={() => setSelected(image)}>
