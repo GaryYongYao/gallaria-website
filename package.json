@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prebuild": "node generate-media.js",
     "postbuild": "next-sitemap --config gen-sitemap.js",
-    "export": "next build && next export && yarn postbuild"
+    "export": "yarn prebuild && next build && next export && yarn postbuild"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.19",
     "animejs": "^3.2.1",
     "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "file-system": "^2.2.2",
     "fullpage.js": "^3.1.1",
     "google-map-react": "^2.1.9",
     "js-cookie": "^2.2.1",
