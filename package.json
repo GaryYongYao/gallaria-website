@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prebuild": "node generate-media.js",
+    "gen-media": "node generate-media.js",
     "postbuild": "next-sitemap --config gen-sitemap.js",
-    "export": "yarn prebuild && next build && next export && yarn postbuild"
+    "export": "next build && next export && yarn gen-media && yarn postbuild"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.19",

@@ -3,7 +3,7 @@ const http = require('https')
 const axios = require('axios')
 require('dotenv').config()
 
-const baseDir = 'public/media'
+const baseDir = 'out/media'
 
 const queryGetLandingMedia = `
   query {
