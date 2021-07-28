@@ -79,7 +79,7 @@ function List() {
         currency: 'aud',
         product_data: {
           name: product.name,
-          images: [`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
+          images: [`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
         },
         unit_amount: product.price * 100,
       },
@@ -138,7 +138,7 @@ function List() {
             <div key={item.code} className={`row ${styles['item']}`}>
               <div className={`${styles['image-container']} col-4 col-lg-3`}>
                 <Link href={`/product/${item.code}`}>
-                  <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
+                  <img src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
                 </Link>
               </div>
               <div className={`${styles['text-container']} col-8 col-lg-3`}>

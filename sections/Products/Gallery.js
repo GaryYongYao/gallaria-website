@@ -29,11 +29,11 @@ function Gallery({ data, selected, setSelected, setOpen }) {
       <div>
         <div className={styles['selected-image']} onClick={() => setOpen(true)}>
           {!selected.includes('mp4') && (
-            <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
+            <img width="100%" src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} />
           )}
           {selected.includes('mp4') && (
             <video autoPlay loop muted preload="auto" playsInline>
-              <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
+              <source src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           )}
@@ -50,7 +50,7 @@ function Gallery({ data, selected, setSelected, setOpen }) {
                     key={image}
                     onClick={() => setSelected(image)}
                     className={`${(selected === image) ? styles['selected'] : ''}`}
-                    style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')})` }}
+                    style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')})` }}
                   />
                 )}
                 {image.includes('mp4') && (
@@ -61,7 +61,7 @@ function Gallery({ data, selected, setSelected, setOpen }) {
                       preload="auto"
                       playsInline
                     >
-                      <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
+                      <source src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(image).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                     <div className={styles['video-overlay']} />

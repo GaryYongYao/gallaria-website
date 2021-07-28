@@ -37,7 +37,7 @@ function CarouselSection({ data }) {
                 <div
                   className={styles['item']}
                   style={{
-                    backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(d.featureImage)}')`
+                    backgroundImage: `url('${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(d.featureImage)}')`
                   }}
                 />
                 <span className={styles['name']}>{d.name}</span>

@@ -30,7 +30,7 @@ function Projects({ projects }) {
               <div
                 className={styles['item-container']}
                 style={{
-                  backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(l.cover)}')`
+                  backgroundImage: `url('${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(l.cover)}')`
                 }}
               >
                 <div className={styles['item-overlay']} />

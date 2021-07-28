@@ -85,7 +85,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
         </div>
         <div id="highlight-video-1" className={`col-1 ${styles['video-container']}`}>
           <video autoPlay loop muted preload="auto" playsInline>
-            <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatVideo/feature-video-1.mp4`} type="video/mp4" />
+            <source src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}featureCatVideo/feature-video-1.mp4`} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -93,14 +93,14 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
           <Link
             href={`/products?filterUrl=${catHighlight.cat[0].replace(/\s+/g, '-')}`}
             style={styles['item-wrapper']}
-            customStyle={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-one.png")` }}
+            customStyle={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_MEDIA_FOLDER}featureCatImg/cat-one.png")` }}
           >
             <div className={`container ${styles['item-name']}`}>{catHighlight.cat[0]}</div>
           </Link>
           <Link
             href={`/products?filterUrl=${catHighlight.cat[1].replace(/\s+/g, '-')}`}
             style={styles['item-wrapper']}
-            customStyle={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-two.png")` }}
+            customStyle={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_MEDIA_FOLDER}featureCatImg/cat-two.png")` }}
           >
             <div className={`container ${styles['item-name']}`}>{catHighlight.cat[1]}</div>
           </Link>
@@ -109,12 +109,12 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
           <div className="row">
             <MobileBox
               link={`/products?filterUrl=${catHighlight.cat[0].replace(/\s+/g, '-')}`}
-              img={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-one.png`}
+              img={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}featureCatImg/cat-one.png`}
               text={catHighlight.cat[0]}
             />
             <MobileBox
               link={`/products?filterUrl=${catHighlight.cat[1].replace(/\s+/g, '-')}`}
-              img={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatImg/cat-two.png`}
+              img={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}featureCatImg/cat-two.png`}
               text={catHighlight.cat[1]}
             />
           </div>
@@ -136,7 +136,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
         </div>
         <div id="highlight-video-2" className={`col-1 ${styles['video-container']}`}>
           <video autoPlay loop muted preload="auto" playsInline>
-            <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}featureCatVideo/feature-video-2.mp4`} type="video/mp4" />
+            <source src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}featureCatVideo/feature-video-2.mp4`} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -147,7 +147,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
                 <div
                   id={`highlight-item-${i + 1}`}
                   className={styles['img-box']}
-                  style={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}")` }}
+                  style={{ backgroundImage: `url("${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}")` }}
                 >
                   <div className={styles['img-overlay']} />
                   <span className={styles['shop-now']}>SHOP NOW</span>
@@ -163,7 +163,7 @@ export default function HighlightSection({ catHighlight, productHighlight/* , sc
               <MobileBox
                 key={product.code}
                 link={`/product/${product.code}`}
-                img={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}`}
+                img={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(product.featureImage).replace('(', '%28').replace(')', '%29')}`}
                 text={product.name}
               />
             ))}

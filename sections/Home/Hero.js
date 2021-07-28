@@ -39,12 +39,12 @@ export default function HeroSection({ scrolling, setScrolling, scrollToContent, 
         setScrolling(true)
         !scrolling && touchHero(e)
       }}
-      style={{ backgroundImage: !background.includes('mp4') && `url('/media/${background}')` }}
+      style={{ backgroundImage: !background.includes('mp4') && `url('${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${background}')` }}
       className={styles['section-hero']}
     >
       {background.includes('mp4') && (
         <video autoPlay loop muted preload="auto" playsInline>
-          <source src={`/media/${background}`} type="video/mp4" />
+          <source src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${background}`} type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
       )}

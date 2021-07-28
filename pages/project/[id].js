@@ -31,8 +31,8 @@ function Project({ data, recommendations }) {
         keywords=""
         robots="index, follow"
         url={`https://www.gallaria.com.au/project/${data._id}`}
-        metaOG={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
-        metaTwitter={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
+        metaOG={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
+        metaTwitter={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
       />
 
       <Header />
@@ -44,7 +44,7 @@ function Project({ data, recommendations }) {
       </div>
       <div className={`${styles['cover-photo']} container`}>
         <img
-          src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
+          src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(data.cover).replace('(', '%28').replace(')', '%29')}`}
         />
       </div>
       <div className={`${styles['info-row']} container`}>
@@ -78,7 +78,7 @@ function Project({ data, recommendations }) {
           </div>
           <div className={`${styles['first-photo']} col-lg-8`}>
             <img
-              src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.photos[0]).replace('(', '%28').replace(')', '%29')}`}
+              src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(data.photos[0]).replace('(', '%28').replace(')', '%29')}`}
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ function Project({ data, recommendations }) {
         {data.photos?.map((photo, i) => i !== 0 && (
           <img
             key={photo}
-            src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(photo).replace('(', '%28').replace(')', '%29')}`}
+            src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(photo).replace('(', '%28').replace(')', '%29')}`}
           />
         ))}
       </div>

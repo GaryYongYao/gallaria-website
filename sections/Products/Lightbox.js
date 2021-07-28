@@ -21,12 +21,12 @@ function Lightbox({ open, selected, setOpen }) {
           <div>
             {!selected.includes('mp4') && (
               <img
-                src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`}
+                src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`}
               />
             )}
             {selected.includes('mp4') && (
               <video autoPlay loop controls muted preload="auto" playsInline>
-                <source src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
+                <source src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(selected).replace('(', '%28').replace(')', '%29')}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             )}

@@ -21,7 +21,7 @@ export default function ProjectSection({ data }) {
           {data.map(project => (
             <div key={project._id} className={`col-lg-6 ${styles['column']}`}>
               <Link href={`/project/${project._id}`} style={styles['photo']}>
-                <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(project.cover)}`} />
+                <img width="100%" src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(project.cover)}`} />
                 <div className={styles['overlay']} />
                 <div className={`container ${styles['date']}`}>
                   <span>{project.date}</span>
@@ -52,7 +52,7 @@ export default function ProjectSection({ data }) {
               <div
                 className={styles['project']}
                 style={{
-                  backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(project.cover)})`
+                  backgroundImage: `url(${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(project.cover)})`
                 }}
               >
                 <div className={styles['overlay']} />

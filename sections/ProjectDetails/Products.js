@@ -41,7 +41,7 @@ function Products({ data }) {
               <div
                 className={styles['product']}
                 style={{
-                  backgroundImage: `url(${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(product.primaryImage).replace('(', '%28').replace(')', '%29')})`
+                  backgroundImage: `url(${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(product.primaryImage).replace('(', '%28').replace(')', '%29')})`
                 }}
               >
                 <div className={styles['overlay']} />

@@ -17,7 +17,7 @@ function Product({ products, featured, categories }) {
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
   const [current, setCurrent] = useState(1)
-  const perPage = 30
+  const perPage = 1
 
   useEffect(() => {
     const { query } = router

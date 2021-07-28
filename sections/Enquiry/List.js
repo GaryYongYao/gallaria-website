@@ -64,7 +64,7 @@ function List() {
               <div key={item.code} className={`col-lg-6 ${styles['item']}`}>
                 <div className={styles['image-container']}>
                   <Link href={`/product/${item.code}`}>
-                    <img src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
+                    <img src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
                   </Link>
                 </div>
                 <div className={styles['text-container']}>

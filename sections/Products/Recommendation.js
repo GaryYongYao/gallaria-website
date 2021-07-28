@@ -19,7 +19,7 @@ function Recommendation({ recommendations }) {
             <Link href={`/product/${recommendation.code}`}>
               <div
                 className={styles['image']}
-                style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(recommendation.primaryImage)}')` }}
+                style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(recommendation.primaryImage)}')` }}
               >
                 <div className={styles['img-overlay']} />
                 <span className={styles['view']}>VIEW PRODUCT</span>

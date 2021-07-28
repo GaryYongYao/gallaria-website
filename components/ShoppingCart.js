@@ -39,7 +39,7 @@ function ShoppingCart({ openCart, setOpenCart }) {
             <div key={item.code} className="item">
               <div className="image-container" onClick={() => setOpenCart(false)}>
                 <Link href={`/product/${item.code}`}>
-                  <img width="100%" src={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
+                  <img width="100%" src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(item.image).replace('(', '%28').replace(')', '%29')}`} />
                 </Link>
               </div>
               <div className="text-container">

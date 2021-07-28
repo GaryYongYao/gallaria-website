@@ -41,8 +41,8 @@ function Product({ data, recommendations }) {
         keywords=""
         robots="index, follow"
         url={`https://www.gallaria.com.au/product/${data.code}`}
-        metaOG={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.primaryImage).replace('(', '%28').replace(')', '%29')}`}
-        metaTwitter={`${process.env.NEXT_PUBLIC_STORAGE_URL}${encodeURIComponent(data.primaryImage).replace('(', '%28').replace(')', '%29')}`}
+        metaOG={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(data.primaryImage).replace('(', '%28').replace(')', '%29')}`}
+        metaTwitter={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(data.primaryImage).replace('(', '%28').replace(')', '%29')}`}
       />
 
       <Header />

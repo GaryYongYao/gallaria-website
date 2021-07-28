@@ -3,13 +3,11 @@ const http = require('https')
 const axios = require('axios')
 require('dotenv').config()
 
-const baseDir = 'out/media'
+const baseDir = process.env.LOCAL ? 'public/media' : 'out/media'
 
-const queryGetLandingMedia = `
+const queryGetMedia = `
   query {
-    getLandingMedia {
-      media
-    }
+    getMedia
   }
 `
 
@@ -25,11 +23,12 @@ const getMedia = async (media) => {
 
 const download = async () => {
   await checkDir(baseDir)
-  const landingMediaResponse = await request(queryGetLandingMedia)
-  const landingMedia = await landingMediaResponse.data.data.getLandingMedia
+  const response = await request(queryGetMedia)
+  const medias = await response.data.data.getMedia
 
-  await landingMedia.forEach(({ media }) => getMedia(media))
-  console.log('done')
+  console.time('Fetch Media')
+  await medias.forEach(media => getMedia(media))
+  console.timeEnd('Fetch Media')
 }
 
 const checkDir = (folder) => {
