@@ -77,7 +77,7 @@ function Footer() {
             <p>©2021 GALLARIA PTY LTD</p>
             <p>ALL COPYRIGHTS RESERVED.</p>
           </div>
-          {/* <div className="terms-links">
+          <div className="terms-links">
             <a
               href="#"
               onClick={e => {
@@ -88,7 +88,7 @@ function Footer() {
             >
               PRIVACY POLICY
             </a>
-            <span>/</span>
+            {/* <span>/</span>
             <a
               href="#"
               onClick={e => {
@@ -98,8 +98,8 @@ function Footer() {
               }}
             >
               TERMS & CONDITIONS
-            </a>
-          </div> */}
+            </a> */}
+          </div>
         </div>
       </div>
     </footer>

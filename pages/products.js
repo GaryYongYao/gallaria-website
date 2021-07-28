@@ -25,7 +25,15 @@ function Product({ products, featured, categories }) {
     // eslint-disable-next-line
     const mixitup = require('mixitup')
     const containerEl = document.querySelector('.masonry')
-    const masonryAnimate = mixitup(containerEl)
+    const masonryAnimate = mixitup(containerEl, {
+      animation: {
+        effects: 'fade translateZ(-100px)',
+        easing: 'ease-in-out'
+      },
+      controls: {
+        toggleLogic: 'and'
+      }
+    })
     query.filterUrl && masonryAnimate.filter(`.${removeSpace(query.filterUrl)}`).then(state => {
       filterProducts(state.activeFilter.selector)
       setSelectors(state.activeFilter.selector)
@@ -255,7 +263,7 @@ const Pagination = ({ list, current, perPage, changePage }) => {
     let calc = Math.floor(list.length / perPage)
     if (list.length % perPage > 0) calc += 1
     setTotal(calc)
-  }, [])
+  }, [list])
 
   return (
     <div className={styles['pagination']}>
