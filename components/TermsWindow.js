@@ -45,7 +45,7 @@ export function TermsWindow() {
           >
             PRIVACY POLICY
           </a>
-          <a
+          {/* <a
             href="#"
             onClick={e => {
               e.preventDefault()
@@ -54,7 +54,7 @@ export function TermsWindow() {
             className={terms === 'terms' ? 'selected' : ''}
           >
             TERMS & CONDITIONS
-          </a>
+          </a> */}
         </div>
         <div id="terms-window-content" className="terms-window-content">
           {terms === 'policy' && <Policy />}
