@@ -16,6 +16,7 @@ function Product({ products, featured, categories }) {
   const [toFilterOff, setFilterOff] = useState([])
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState('')
+  const [multiFilterClass, setMultiFilterClass] = useState('')
   const [current, setCurrent] = useState(1)
   const perPage = 1
 
@@ -141,8 +142,17 @@ function Product({ products, featured, categories }) {
       )
       return match
     })
+    const multiFilter = currentSelectors.split('.')
+    multiFilter.shift()
+    setMultiFilterClass(multiFilter.join('AND'))
     setDisplayProducts(display)
   }
+
+  useEffect(() => {
+    if (mixer) {
+      mixer.filter(`.${multiFilterClass}`)
+    }
+  }, [multiFilterClass])
 
   useEffect(() => {
     const targets = toFilterOff
@@ -167,7 +177,6 @@ function Product({ products, featured, categories }) {
             setFilterOff([])
             filterProducts(state.activeFilter.selector)
             setSelectors(state.activeFilter.selector)
-            console.log(state.activeFilter.selector)
           })
 
           return 1
@@ -191,8 +200,36 @@ function Product({ products, featured, categories }) {
       )
     } else if (mixer) {
       const { selector } = mixer.getState().activeFilter
-      selector.includes(filter)
-        ? mixer.toggleOff(`.${filter}`).then(() => {
+      console.log(selector.includes(filter))
+      if (selector.includes(filter)) {
+        if (selector.includes('AND')) {
+          const currentClassWithPage = selector.split('.')
+          currentClassWithPage.shift()
+          const currentClass = currentClassWithPage.filter(s => s.includes('AND'))
+          const splitClass = currentClass[0].split('AND')
+          const newClasses = splitClass.filter(s => !s.includes(filter))
+          mixer.filter(`.${newClasses.join('AND')}`).then(() => {
+            setCurrent(prev => {
+              mixer.toggleOff(`.page-${prev}`).then(state => {
+                filterProducts(state.activeFilter.selector)
+                setSelectors(state.activeFilter.selector)
+              })
+              return 1
+            })
+          })
+        } else {
+          mixer.toggleOff(`.${filter}`).then(() => {
+            setCurrent(prev => {
+              mixer.toggleOff(`.page-${prev}`).then(state => {
+                filterProducts(state.activeFilter.selector)
+                setSelectors(state.activeFilter.selector)
+              })
+              return 1
+            })
+          })
+        }
+      } else {
+        mixer.toggleOn(`.${filter}`).then(() => {
           setCurrent(prev => {
             mixer.toggleOff(`.page-${prev}`).then(state => {
               filterProducts(state.activeFilter.selector)
@@ -202,16 +239,7 @@ function Product({ products, featured, categories }) {
             return 1
           })
         })
-        : mixer.toggleOn(`.${filter}`).then(() => {
-          setCurrent(prev => {
-            mixer.toggleOff(`.page-${prev}`).then(state => {
-              filterProducts(state.activeFilter.selector)
-              setSelectors(state.activeFilter.selector)
-            })
-
-            return 1
-          })
-        })
+      }
     }
     setFilter('')
   }, [filter])
@@ -242,7 +270,7 @@ function Product({ products, featured, categories }) {
           setSelected={setSelected}
         />
       </div>
-      <List data={products} displayList={displayProducts} perPage={perPage} />
+      <List data={products} multiFilterClass={multiFilterClass} displayList={displayProducts} perPage={perPage} />
       {displayProducts.length > perPage && (
         <Pagination
           list={displayProducts}

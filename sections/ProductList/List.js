@@ -3,7 +3,7 @@ import { findIndex } from 'lodash'
 import { Link } from 'components'
 import { removeSpace } from 'utils/validation'
 
-function List({ data, displayList, perPage }) {
+function List({ data, displayList, multiFilterClass, perPage }) {
   const getPage = (code) => {
     let value = 0
     const index = findIndex(displayList, ['code', code])
@@ -32,7 +32,7 @@ function List({ data, displayList, perPage }) {
               key={d.name}
               data-name={d.name}
               data-date={d.createdDate}
-              className={`${getClass(d.code, d.name, d.category, d.sub, d.series, d.altCode)} ${getPage(d.code)}`}
+              className={`${getClass(d.code, d.name, d.category, d.sub, d.series, d.altCode)} ${getPage(d.code)} ${multiFilterClass}`}
             >
               <Link href={`/product/${encodeURIComponent(d.code)}`}>
                 <img src={`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(d.primaryImage || (d.images || [])[0])}`} />
