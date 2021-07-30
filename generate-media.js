@@ -1,6 +1,7 @@
 const fs = require('fs')
 const http = require('https')
 const axios = require('axios')
+// eslint-disable-next-line
 require('dotenv').config()
 
 const baseDir = process.env.LOCAL ? 'public/media' : 'out/media'

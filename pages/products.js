@@ -18,7 +18,7 @@ function Product({ products, featured, categories }) {
   const [selectors, setSelectors] = useState('')
   const [multiFilterClass, setMultiFilterClass] = useState('')
   const [current, setCurrent] = useState(1)
-  const perPage = 1
+  const perPage = 30
 
   useEffect(() => {
     const { query } = router
@@ -35,6 +35,7 @@ function Product({ products, featured, categories }) {
         toggleLogic: 'and'
       }
     })
+    !(query.search && query.filterUrl) && masonryAnimate.filter('.page-1')
     query.filterUrl && masonryAnimate.filter(`.${removeSpace(query.filterUrl)}`).then(state => {
       filterProducts(state.activeFilter.selector)
       setSelectors(state.activeFilter.selector)
@@ -149,9 +150,7 @@ function Product({ products, featured, categories }) {
   }
 
   useEffect(() => {
-    if (mixer) {
-      mixer.filter(`.${multiFilterClass}`)
-    }
+    if (mixer) mixer.filter(`.${multiFilterClass}`)
   }, [multiFilterClass])
 
   useEffect(() => {
@@ -200,7 +199,6 @@ function Product({ products, featured, categories }) {
       )
     } else if (mixer) {
       const { selector } = mixer.getState().activeFilter
-      console.log(selector.includes(filter))
       if (selector.includes(filter)) {
         if (selector.includes('AND')) {
           const currentClassWithPage = selector.split('.')
