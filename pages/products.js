@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { animateScroll as scroll } from 'react-scroll'
+// eslint-disable-next-line
+import { Element, scroller } from 'react-scroll'
 import { useRouter } from 'next/router'
+import { pull, sortBy, reverse } from 'lodash'
 import styles from 'styles/modules/ProductList.module.scss'
 import { Carousel, Filter, List, Sorting } from 'sections/ProductList'
 import { Footer, Header, HeadMeta } from 'components'
@@ -10,235 +12,121 @@ import { removeSpace, filterURLRegex } from 'utils/validation'
 
 function Product({ products, featured, categories }) {
   const router = useRouter()
-  const [mixer, setMixer] = useState(() => {})
   const [selected, setSelected] = useState({ name: 'DEFAULT', value: 'default:asc' })
   const [filter, setFilter] = useState('')
   const [toFilterOff, setFilterOff] = useState([])
   const [displayProducts, setDisplayProducts] = useState(products)
-  const [selectors, setSelectors] = useState('')
-  const [multiFilterClass, setMultiFilterClass] = useState('')
+  const [selectors, setSelectors] = useState([])
   const [current, setCurrent] = useState(1)
   const perPage = 30
 
-  useEffect(() => {
-    const { query } = router
-    document.body.className = ''
-    // eslint-disable-next-line
-    const mixitup = require('mixitup')
-    const containerEl = document.querySelector('.masonry')
-    const masonryAnimate = mixitup(containerEl, {
-      animation: {
-        effects: 'fade translateZ(-100px)',
-        easing: 'ease-in-out'
-      },
-      controls: {
-        toggleLogic: 'and'
-      }
-    })
-    !(query.search && query.filterUrl) && masonryAnimate.filter('.page-1')
-    query.filterUrl && masonryAnimate.filter(`.${removeSpace(query.filterUrl)}`).then(state => {
-      filterProducts(state.activeFilter.selector)
-      setSelectors(state.activeFilter.selector)
-    })
-    if (query.search) {
-      masonryAnimate.filter('all').then(() => {
-        const toFilter = []
-        const format = removeSpace(query.search)
-        const re = new RegExp(format, 'i');
-
-        [].forEach.call(document.getElementsByClassName('mix'), ele => {
-          [].forEach.call(ele.classList, eleClass => {
-            if (re.test(eleClass)) {
-              toFilter.push(`.${eleClass}`)
-            }
-          })
-        })
-        masonryAnimate.toggleOn(toFilter.join(', ')).then(state => {
-          filterProducts(state.activeFilter.selector)
-          setSelectors(state.activeFilter.selector)
-        })
-        const display = products.filter(prod => {
-          const match = (
-            filterURLRegex(query.search, prod.name)
-            || filterURLRegex(query.search, prod.code)
-            || filterURLRegex(query.search, prod.category)
-            || filterURLRegex(query.search, prod.sub)
-            || filterURLRegex(query.search, prod.series)
-          )
-          return match
-        })
-        setDisplayProducts(display)
-      })
-    }
-
-    setMixer(masonryAnimate)
-  }, [])
-
-  useEffect(() => {
-    const { query } = router
-    if (query.filterUrl && mixer) {
-      mixer.filter(`.${removeSpace(query.filterUrl)}`).then(state => {
-        filterProducts(state.activeFilter.selector)
-        setSelectors(state.activeFilter.selector)
-      })
-    }
-    if (query.search && mixer) {
-      mixer.filter('all').then(() => {
-        const toFilter = []
-        const format = removeSpace(query.search)
-        const re = new RegExp(format, 'i');
-
-        [].forEach.call(document.getElementsByClassName('mix'), ele => {
-          [].forEach.call(ele.classList, eleClass => {
-            if (re.test(eleClass)) {
-              toFilter.push(`.${eleClass}`)
-            }
-          })
-        })
-        mixer.toggleOn(toFilter.join(', ')).then(state => setSelectors(state.activeFilter.selector))
-        const display = products.filter(prod => {
-          const match = (
-            filterURLRegex(query.search, prod.name)
-            || filterURLRegex(query.search, prod.code)
-            || filterURLRegex(query.search, prod.category)
-            || filterURLRegex(query.search, prod.sub)
-            || filterURLRegex(query.search, prod.series)
-          )
-          return match
-        })
-        setDisplayProducts(display)
-      })
-    }
-  }, [router])
-
-  const changePage = (next) => {
-    scroll.scrollToTop()
-    mixer.toggleOn(`.page-${next}`).then(() => {
-      setCurrent(prev => {
-        mixer.toggleOff(`.page-${prev}`).then(state => {
-          setSelectors(state.activeFilter.selector)
-        })
-
-        return next
-      })
-    })
-  }
-
-  useEffect(() => {
-    mixer && mixer.sort(selected.value)
-  }, [selected])
-
-  useEffect(() => {
-    mixer && mixer.toggleOn('.page-1').then(state => setSelectors(state.activeFilter.selector))
-  }, [displayProducts])
-
   const filterProducts = (currentSelectors) => {
+    if (currentSelectors.length < 1) {
+      setDisplayProducts(products)
+      console.log('no filter')
+      return
+    }
+
     const display = products.filter(prod => {
       const match = (
-        currentSelectors === '.mix'
-        || currentSelectors === ''
-        || currentSelectors.includes(removeSpace(prod.category))
+        currentSelectors.includes(removeSpace(prod.category))
         || (prod.sub && currentSelectors.includes(removeSpace(prod.sub)))
         || (prod.series && currentSelectors.includes(removeSpace(prod.series || '')))
       )
       return match
     })
-    const multiFilter = currentSelectors.split('.')
-    multiFilter.shift()
-    setMultiFilterClass(multiFilter.join('AND'))
     setDisplayProducts(display)
   }
 
-  useEffect(() => {
-    if (mixer) mixer.filter(`.${multiFilterClass}`)
-  }, [multiFilterClass])
-
-  useEffect(() => {
-    const targets = toFilterOff
-    if (targets.length < 1) return
-    if (targets.length > 0) {
-      mixer.toggleOff(targets[0]).then(() => {
-        setCurrent(prev => {
-          mixer.toggleOff(`.page-${prev}`).then(state => {
-            targets.length === 1 && setFilterOff([])
-            filterProducts(state.activeFilter.selector)
-            setSelectors(state.activeFilter.selector)
-          })
-
-          return 1
-        })
-      })
+  const urlFilter = async () => {
+    const { query } = router
+    if (query.filterUrl) {
+      filterProducts([removeSpace(query.filterUrl)])
+      setSelectors([removeSpace(query.filterUrl)])
     }
-    if (targets.length > 1) {
-      mixer.toggleOff(targets[1]).then(() => {
-        setCurrent(prev => {
-          mixer.toggleOff(`.page-${prev}`).then(state => {
-            setFilterOff([])
-            filterProducts(state.activeFilter.selector)
-            setSelectors(state.activeFilter.selector)
-          })
-
-          return 1
-        })
+    if (query.search) {
+      const display = products.filter(prod => {
+        const match = (
+          filterURLRegex(query.search, prod.name)
+          || filterURLRegex(query.search, prod.code)
+          || filterURLRegex(query.search, prod.category)
+          || filterURLRegex(query.search, prod.sub)
+          || filterURLRegex(query.search, prod.series)
+        )
+        return match
       })
+      setDisplayProducts(display)
     }
-  }, [selectors])
+  }
+
+  useEffect(() => {
+    document.body.className = ''
+    urlFilter()
+  }, [])
+
+  useEffect(() => {
+    urlFilter()
+  }, [router])
+
+  useEffect(() => {
+    setCurrent(1)
+  }, [displayProducts])
+
+  const changePage = (next) => {
+    scroller.scrollTo('scrollContainer', {
+      duration: 800,
+      smooth: true
+    })
+    setCurrent(next)
+  }
+
+  useEffect(() => {
+    let sortedDisplay = displayProducts
+    switch (selected.value) {
+    case 'name:asc':
+      sortedDisplay = sortBy(displayProducts, ['name'])
+      break
+    case 'name:desc':
+      sortedDisplay = reverse(sortBy(displayProducts, ['name']))
+      break
+    case 'date:desc':
+      sortedDisplay = reverse(sortBy(displayProducts, ['createdDate']))
+      break
+    case 'date:asc':
+      sortedDisplay = sortBy(displayProducts, ['createdDate'])
+      break
+    default:
+      sortedDisplay = reverse(sortBy(displayProducts, ['createdDate']))
+    }
+    setDisplayProducts([...sortedDisplay])
+  }, [selected])
 
   useEffect(() => {
     if (filter === '') return
-    if (filter === 'all' && mixer) {
-      mixer.filter('.mix').then(
-        setCurrent(prev => {
-          mixer.toggleOff(`.page-${prev}`).then(state => {
-            filterProducts(state.activeFilter.selector)
-            setSelectors(state.activeFilter.selector)
-          })
-
-          return 1
-        })
-      )
-    } else if (mixer) {
-      const { selector } = mixer.getState().activeFilter
-      if (selector.includes(filter)) {
-        if (selector.includes('AND')) {
-          const currentClassWithPage = selector.split('.')
-          currentClassWithPage.shift()
-          const currentClass = currentClassWithPage.filter(s => s.includes('AND'))
-          const splitClass = currentClass[0].split('AND')
-          const newClasses = splitClass.filter(s => !s.includes(filter))
-          mixer.filter(`.${newClasses.join('AND')}`).then(() => {
-            setCurrent(prev => {
-              mixer.toggleOff(`.page-${prev}`).then(state => {
-                filterProducts(state.activeFilter.selector)
-                setSelectors(state.activeFilter.selector)
-              })
-              return 1
-            })
-          })
-        } else {
-          mixer.toggleOff(`.${filter}`).then(() => {
-            setCurrent(prev => {
-              mixer.toggleOff(`.page-${prev}`).then(state => {
-                filterProducts(state.activeFilter.selector)
-                setSelectors(state.activeFilter.selector)
-              })
-              return 1
-            })
-          })
-        }
-      } else {
-        mixer.toggleOn(`.${filter}`).then(() => {
-          setCurrent(prev => {
-            mixer.toggleOff(`.page-${prev}`).then(state => {
-              filterProducts(state.activeFilter.selector)
-              setSelectors(state.activeFilter.selector)
-            })
-
-            return 1
-          })
-        })
-      }
+    if (filter === 'all') {
+      setDisplayProducts(products)
+      setSelectors([])
+      setCurrent(1)
+      setFilter('')
+      return
     }
+    const newSelectors = selectors
+
+    if (selectors.includes(filter)) {
+      pull(newSelectors, filter)
+      setCurrent(1)
+    } else {
+      newSelectors.push(filter)
+      setCurrent(1)
+    }
+
+    if (toFilterOff.length > 0) {
+      toFilterOff.forEach(item => pull(newSelectors, item))
+      console.log(newSelectors)
+    }
+    filterProducts(newSelectors)
+    setSelectors(newSelectors)
+    setFilterOff([])
     setFilter('')
   }, [filter])
 
@@ -256,6 +144,9 @@ function Product({ products, featured, categories }) {
 
       <Header />
       <Carousel data={featured} />
+      <Element name="scrollContainer" className="position-relative visibility-hidden" style={{ top: '-186px' }}>
+        scroll
+      </Element>
       <div className={`container ${styles['section-options']}`}>
         <Filter
           categories={categories || []}
@@ -268,7 +159,11 @@ function Product({ products, featured, categories }) {
           setSelected={setSelected}
         />
       </div>
-      <List data={products} multiFilterClass={multiFilterClass} displayList={displayProducts} perPage={perPage} />
+      <List
+        current={current}
+        displayList={displayProducts}
+        perPage={perPage}
+      />
       {displayProducts.length > perPage && (
         <Pagination
           list={displayProducts}

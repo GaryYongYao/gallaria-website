@@ -28,7 +28,7 @@ function Filter({ selected, setSelected }) {
   useOutsideAlerter(wrapperRef, buttonRef, setOpen)
 
   const variants = [
-    { name: 'DEFAULT', value: 'default:asc' },
+    { name: 'DEFAULT', value: 'default' },
     { name: 'A - Z', value: 'name:asc' },
     { name: 'Z - A', value: 'name:desc' },
     { name: 'DATE:  NEW - OLD', value: 'date:desc' },

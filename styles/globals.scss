@@ -191,3 +191,18 @@ h3 {
 .letter {
   letter-spacing: -0.04em;
 }
+
+/* .xblock {
+  width: 33% !important;
+} */
+
+@keyframes comeIn {
+  0% { transform: scale(0) }
+  100% { transform: scale(1) }
+}
+
+.xmasonry .xblock {
+  animation: comeIn ease 0.5s;
+  animation-iteration-count: 1;
+  transition: left .3s ease, top .3s ease;
+}

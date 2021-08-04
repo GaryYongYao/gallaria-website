@@ -44,7 +44,12 @@ function Filter({ categories, setFilter, selection, setFilterOff }) {
               <Fragment key={name}>
                 <div
                   className={styles['item']}
-                  onClick={() => setFilter(id)}
+                  onClick={() => {
+                    const subId = sub.map(s => s.id)
+                    const seriesId = series.map(s => s.id)
+                    setFilter(id)
+                    setFilterOff([...subId, ...seriesId])
+                  }}
                 >
                   <span className={selection.includes(id) ? styles['selected'] : ''}>
                     {name}
@@ -69,8 +74,9 @@ function Filter({ categories, setFilter, selection, setFilterOff }) {
                       <div
                         className={`${styles['sub-item']}${openSub ? ` ${styles['sub-item-open']}` : ''}`}
                         onClick={() => {
+                          const seriesId = series.map(se => se.id)
                           setFilter(s.id)
-                          setFilterOff([`.${id}`])
+                          setFilterOff([id, ...seriesId])
                         }}
                       >
                         <span
@@ -96,7 +102,7 @@ function Filter({ categories, setFilter, selection, setFilterOff }) {
                           className={`${styles['series-item']}${(openSeries && openSub) ? ` ${styles['series-item-open']}` : ''}`}
                           onClick={() => {
                             setFilter(item.id)
-                            setFilterOff([`.${id}`, `.${s.id}`])
+                            setFilterOff([id, s.id])
                           }}
                         >
                           <span className={(selection.includes(s.id) || selection.includes(item.id) || selection.includes(id)) ? styles['selected'] : ''}>

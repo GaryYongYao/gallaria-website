@@ -585,6 +585,98 @@
       margin-bottom: 55px;
     }
 
+    .item {
+      display: inline-block;
+      margin: 0 0 1em;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-left: 2%;
+      margin-right: 2%;
+
+      @media screen and (max-width: $md-max) {
+        border-radius: 0;
+      }
+
+      img {
+        width: 100%;
+
+        @media screen and (max-width: $md-max) {
+          border-radius: 10px;
+          overflow: hidden;
+        }
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: all 0.3s ease-in-out;
+
+        @media screen and (max-width: $md-max) {
+          display: none;
+        }
+      }
+
+      .code {
+        position: absolute;
+        top: 24.64px;
+        left: 5%;
+        font-size: 14px;
+        line-height: 16.7px;
+        color: $text-secondary;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        @media screen and (max-width: $md-max) {
+          opacity: 1;
+          position: initial;
+          display: block;
+          margin-top: 6px;
+          font-size: 6px;
+          line-height: 7.16px;
+          color: $text-primary;
+        }
+      }
+
+      .name {
+        position: absolute;
+        bottom: 19.36px;
+        left: 5%;
+        font-size: 18px;
+        line-height: 21.98px;
+        font-weight: 700;
+        color: $text-secondary;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        @media screen and (max-width: $md-max) {
+          opacity: 1;
+          position: initial;
+          display: block;
+          margin-top: 3px;
+          font-size: 8px;
+          line-height: 9.77px;
+          color: $text-primary;
+        }
+      }
+      
+      &:hover {
+        .overlay {
+          background-color: $primary-light;
+        }
+
+        .code {
+          opacity: 1;
+        }
+
+        .name {
+          opacity: 1;
+        }
+      }
+    }
+
     .masonry {
       column-count: 3;
       column-gap: 1em;
@@ -593,97 +685,6 @@
     
       @media screen and (max-width: $md-max) {
         column-count: 2;
-      }
-
-      .item {
-        display: inline-block;
-        margin: 0 0 1em;
-        width: 100%;
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-
-        @media screen and (max-width: $md-max) {
-          border-radius: 0;
-        }
-
-        img {
-          width: 100%;
-
-          @media screen and (max-width: $md-max) {
-            border-radius: 10px;
-            overflow: hidden;
-          }
-        }
-
-        .overlay {
-          position: absolute;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          transition: all 0.3s ease-in-out;
-
-          @media screen and (max-width: $md-max) {
-            display: none;
-          }
-        }
-
-        .code {
-          position: absolute;
-          top: 24.64px;
-          left: 5%;
-          font-size: 14px;
-          line-height: 16.7px;
-          color: $text-secondary;
-          opacity: 0;
-          transition: all 0.3s ease-in-out;
-
-          @media screen and (max-width: $md-max) {
-            opacity: 1;
-            position: initial;
-            display: block;
-            margin-top: 6px;
-            font-size: 6px;
-            line-height: 7.16px;
-            color: $text-primary;
-          }
-        }
-
-        .name {
-          position: absolute;
-          bottom: 19.36px;
-          left: 5%;
-          font-size: 18px;
-          line-height: 21.98px;
-          font-weight: 700;
-          color: $text-secondary;
-          opacity: 0;
-          transition: all 0.3s ease-in-out;
-
-          @media screen and (max-width: $md-max) {
-            opacity: 1;
-            position: initial;
-            display: block;
-            margin-top: 3px;
-            font-size: 8px;
-            line-height: 9.77px;
-            color: $text-primary;
-          }
-        }
-        
-        &:hover {
-          .overlay {
-            background-color: $primary-light;
-          }
-
-          .code {
-            opacity: 1;
-          }
-
-          .name {
-            opacity: 1;
-          }
-        }
       }
     }
   }
