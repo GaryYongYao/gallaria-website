@@ -29,6 +29,7 @@ function List({ current, displayList, perPage }) {
 
   useEffect(() => {
     setWidthSize(null)
+    console.log(displayList)
   }, [displayList])
 
   useEffect(() => {

@@ -17,13 +17,13 @@ function Product({ products, featured, categories }) {
   const [toFilterOff, setFilterOff] = useState([])
   const [displayProducts, setDisplayProducts] = useState(products)
   const [selectors, setSelectors] = useState([])
+  const [initial, setInitial] = useState(true)
   const [current, setCurrent] = useState(1)
   const perPage = 30
 
   const filterProducts = (currentSelectors) => {
     if (currentSelectors.length < 1) {
       setDisplayProducts(products)
-      console.log('no filter')
       return
     }
 
@@ -40,6 +40,7 @@ function Product({ products, featured, categories }) {
 
   const urlFilter = async () => {
     const { query } = router
+
     if (query.filterUrl) {
       filterProducts([removeSpace(query.filterUrl)])
       setSelectors([removeSpace(query.filterUrl)])
@@ -55,6 +56,9 @@ function Product({ products, featured, categories }) {
         )
         return match
       })
+
+      console.log('display before change')
+      console.log(display)
       setDisplayProducts(display)
     }
   }
@@ -98,7 +102,9 @@ function Product({ products, featured, categories }) {
     default:
       sortedDisplay = reverse(sortBy(displayProducts, ['createdDate']))
     }
-    setDisplayProducts([...sortedDisplay])
+
+    if (initial) setInitial(false)
+    else setDisplayProducts([...sortedDisplay])
   }, [selected])
 
   useEffect(() => {
@@ -120,10 +126,8 @@ function Product({ products, featured, categories }) {
       setCurrent(1)
     }
 
-    if (toFilterOff.length > 0) {
-      toFilterOff.forEach(item => pull(newSelectors, item))
-      console.log(newSelectors)
-    }
+    if (toFilterOff.length > 0) toFilterOff.forEach(item => pull(newSelectors, item))
+
     filterProducts(newSelectors)
     setSelectors(newSelectors)
     setFilterOff([])
