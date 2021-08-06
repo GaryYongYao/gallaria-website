@@ -14,8 +14,12 @@ const queryGetMedia = `
 
 const getMedia = async (media) => {
   const folders = await media.split('/')
+  let folderName = ''
   await folders.forEach(async (f, i) => {
-    if (i !== folders.length - 1) await checkDir(`${baseDir}/${f}`)
+    if (i !== folders.length - 1) {
+      folderName = `${folderName}/${f}`
+      await checkDir(`${baseDir}${folderName}`)
+    }
   })
   const file = await fs.createWriteStream(`${baseDir}/${media}`)
 
