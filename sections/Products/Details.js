@@ -101,7 +101,7 @@ function Details({ data }) {
       <div className={styles['container-price']}>
         <span>RRP:</span>
         <span>{commaInNumbers(price)} </span>
-        <span>({priceDesc})</span>
+        {priceDesc && <span>({priceDesc})</span>}
       </div>
       <div className={styles['container-desc']}>
         <span dangerouslySetInnerHTML={{ __html: desc.replace(/\n/g, '<br />') }} />
