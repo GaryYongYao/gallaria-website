@@ -105,6 +105,8 @@ query getProductByCode($code: String!) {
     primaryImage
     features
     isDraft
+    link3d
+    priceDesc
   }
 }
 `

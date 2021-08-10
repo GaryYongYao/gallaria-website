@@ -10,7 +10,7 @@ import { DropdownUnderline, NumberInput } from 'components'
 function Details({ data }) {
   const { setEnquiryAmount, setEnquiryCart, setOpenEnquiry } = useContext(EnquiryContext)
   const { setCartAmount, setShoppingCart, setOpenCart } = useContext(CartContext)
-  const { code, altCode, name, price, desc, forSale, details, variants, file } = data
+  const { code, altCode, name, price, desc, forSale, details, variants, file, priceDesc, link3d } = data
   const [number, setNumber] = useState(1)
   const [selected, setSelected] = useState(variants[0] || '')
   const [info, setInfo] = useState('details')
@@ -99,11 +99,18 @@ function Details({ data }) {
         <h3>{name}</h3>
       </div>
       <div className={styles['container-price']}>
-        <span>RRP PRICE:</span>
-        <span>{commaInNumbers(price)}</span>
+        <span>RRP:</span>
+        <span>{commaInNumbers(price)} </span>
+        <span>({priceDesc})</span>
       </div>
       <div className={styles['container-desc']}>
-        <span>{desc}</span>
+        <span dangerouslySetInnerHTML={{ __html: desc.replace(/\n/g, '<br />') }} />
+        {link3d && (
+          <>
+            <br />
+            <a href={link3d}><span>See More</span></a>
+          </>
+        )}
       </div>
       <div className={styles['container-variant']}>
         {variants.length > 0 && (
