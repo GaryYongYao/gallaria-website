@@ -79,7 +79,7 @@ function List() {
         currency: 'aud',
         product_data: {
           name: product.name,
-          images: [`${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
+          images: [`https://www.gallaria.com.au/${process.env.NEXT_PUBLIC_MEDIA_FOLDER}${encodeURIComponent(product.image).replace('(', '%28').replace(')', '%29')}`],
         },
         unit_amount: product.price * 100,
       },
