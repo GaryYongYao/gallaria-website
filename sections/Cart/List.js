@@ -75,6 +75,7 @@ function List() {
     setSubmit(true)
     const stripe = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
     const line_items = shoppingCart.map(product => ({
+      description: `${product.variant} / ${product.code}`,
       price_data: {
         currency: 'aud',
         product_data: {
