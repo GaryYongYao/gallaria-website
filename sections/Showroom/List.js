@@ -34,7 +34,7 @@ function List({ list, selected, setSelected, setZoom, setCenter, scrollToTop }) 
           key={l.name}
           className={`${styles['location-box']}${selected.name === l.name ? ` ${styles['selected']}` : ''}`}
           onClick={() => {
-            setZoom(12)
+            setZoom(13)
             setCenter(l.position)
             if (screen.width < 992) scrollToTop()
             setSelected(l)

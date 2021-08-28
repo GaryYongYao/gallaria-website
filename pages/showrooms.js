@@ -1,4 +1,3 @@
-import { sumBy } from 'lodash'
 import { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { Footer, Header, HeadMeta } from 'components'
@@ -13,13 +12,11 @@ function Showroom({ showrooms }) {
   const [displayList, setDisplayList] = useState(showrooms)
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(showrooms[0])
-  const [zoom, setZoom] = useState(8)
-  const centerCal = [sumBy(showrooms, o => o.position[0]) / showrooms.length, sumBy(showrooms, o => o.position[1]) / showrooms.length]
-  const [center, setCenter] = useState(centerCal)
+  const [zoom, setZoom] = useState(13)
+  const [center, setCenter] = useState(showrooms[0].position)
 
   useEffect(() => {
     document.body.className = ''
-    console.log(list)
   }, [])
 
   const scrollToTop = () => {
@@ -36,7 +33,7 @@ function Showroom({ showrooms }) {
     if (display.length > 0) {
       if (screen.width < 992) scrollToTop()
       setSelected(display[0])
-      setZoom(12)
+      setZoom(13)
       setCenter(display[0].position)
     } else {
       setSelected({})

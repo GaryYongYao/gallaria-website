@@ -18,6 +18,8 @@ function Map({ list, zoom, center, searchStore, search, setSearch }) {
         {list.map(showroom => (
           <CustomMarker
             key={showroom.name}
+            center={center}
+            position={showroom.position}
             lat={showroom.position[0]}
             lng={showroom.position[1]}
           />
@@ -40,14 +42,15 @@ function Map({ list, zoom, center, searchStore, search, setSearch }) {
   )
 }
 
-const CustomMarker = () => (
+const CustomMarker = ({ position, center }) => (
   <img
-    src="/svg/marker.svg"
+    src={position === center ? '/svg/marker.svg' : '/svg/marker-non-selected.svg'}
     height="61px"
     width="61px"
     style={{
       position: 'absolute',
-      transform: 'translate(-50%, -100%)'
+      transform: 'translate(-50%, -100%)',
+      zIndex: position === center ? 1 : 0
     }}
   />
 )
