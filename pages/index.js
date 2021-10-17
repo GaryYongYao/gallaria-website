@@ -55,9 +55,9 @@ export default function Home({ featured, projects, catHighlight, productHighligh
     <div className={styles['container']}>
       <HeadMeta
         title="Gallaria"
-        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        desc="Designed and based in Sydney, NSW , Australia, Gallaria specialises in the complete high end luxurious experience for bathroom products. Ranging from our smart toilet range ( Intelligent bathrooms), modern contemporary toilets and our  marble / solid surface basins and baths. Providing the ideal solution to compliment any of your architecture needs."
         keywords=""
-        robots="index, follow"
+        robots="index, follow, noimageindex"
         url="https://www.gallaria.com.au/"
         metaOG="/logo.png"
         metaTwitter="/logo.png"

@@ -51,7 +51,7 @@ function Showroom({ showrooms }) {
     <div className={styles['container']}>
       <HeadMeta
         title="Showrooms - Gallaria"
-        desc="INTELLIGENT BATHROOMS BY GALLARIA"
+        desc="Intelligent Toilets by Gallaria; Visit one of our many showrooms across Australia to view our products, Or call us - (02) 8985 2619"
         keywords=""
         robots="index, follow"
         url="https://www.gallaria.com.au/showrooms"
