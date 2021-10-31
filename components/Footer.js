@@ -79,6 +79,13 @@ function Footer() {
           </div>
           <div className="terms-links">
             <a
+              href="/Gallaria_Retail_Warranty_Policy_Ver_2.pdf"
+              download="Gallaria_Retail_Warranty_Policy_Ver_2.pdf"
+            >
+              WARRANTY POLICY
+            </a>
+            <span>/</span>
+            <a
               href="#"
               onClick={e => {
                 e.preventDefault()
