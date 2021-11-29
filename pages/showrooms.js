@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { Footer, Header, HeadMeta } from 'components'
 import { List, Map, Search } from 'sections/Showroom'
-import { filterRegex } from 'utils/validation'
+// import { filterRegex } from 'utils/validation'
+import { getDistance } from 'geolib'
+import APIRequest from 'utils/APIRequest'
 import request from 'utils/request'
 import { queryGetLocations } from 'utils/graphql'
 import styles from 'styles/modules/Showrooms.module.scss'
@@ -17,15 +19,44 @@ function Showroom({ showrooms }) {
 
   useEffect(() => {
     document.body.className = ''
+    console.log(showrooms)
   }, [])
 
   const scrollToTop = () => {
     scroll.scrollToTop()
   }
 
+  const find_closest_markers = async (event) => {
+    const markers_distances = []
+    await displayList.map(async (item, i) => {
+      const { position } = item
+      const d = await getDistance(
+        { latitude: position[0], longitude: position[1] },
+        event
+      )
+      markers_distances[i] = { distance: d, marker: item }
+    })
+
+    const closest_markers = markers_distances.sort((a, b) => a.distance - b.distance)
+    if (screen.width < 992) scrollToTop()
+    setSelected(closest_markers[0].marker)
+    setZoom(13)
+    setCenter(closest_markers[0].marker.position)
+  }
+
   const searchStore = () => {
     if (!search) return
-    const display = list.filter(l => (
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(search)}&key=${process.env.NEXT_PUBLIC_GOOGLE_API}`
+
+    APIRequest('GET', url)
+      .then(res => {
+        const { results } = res.data
+        const { lat, lng } = results[0].geometry.location
+
+        find_closest_markers({ latitude: lat, longitude: lng })
+      })
+
+    /* const display = list.filter(l => (
       filterRegex(search, l.address)
       || filterRegex(search, l.name)
     ))
@@ -39,7 +70,7 @@ function Showroom({ showrooms }) {
       setSelected({})
       setZoom()
       setCenter([-25.274398, 133.775136])
-    }
+    } */
   }
 
   const clearSearch = (v) => {
