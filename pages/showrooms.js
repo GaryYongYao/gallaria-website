@@ -107,6 +107,8 @@ function Showroom({ showrooms }) {
               list={displayList}
               zoom={zoom}
               center={center}
+              setSelected={setSelected}
+              setCenter={setCenter}
               searchStore={searchStore}
               search={search}
               setSearch={setSearch}
