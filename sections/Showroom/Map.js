@@ -1,5 +1,6 @@
 import GoogleMapReact from 'google-map-react'
 import styles from 'styles/modules/Showrooms.module.scss'
+import { scroller } from 'react-scroll'
 import { mapStyles } from './constant'
 
 function Map({ list, zoom, center, searchStore, search, setSearch, setSelected, setCenter }) {
@@ -51,6 +52,12 @@ const CustomMarker = item => {
   const handleClick = () => {
     setSelected(showroom)
     setCenter(showroom.position)
+    scroller.scrollTo(`${showroom._id}`, {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      containerId: 'scroll-list'
+    })
   }
 
   return (

@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { animateScroll as scroll } from 'react-scroll'
+import { useContext, useEffect, useState } from 'react'
+import { animateScroll as scroll, scroller } from 'react-scroll'
 import { Footer, Header, HeadMeta } from 'components'
 import { List, Map, Search } from 'sections/Showroom'
-// import { filterRegex } from 'utils/validation'
 import { getDistance } from 'geolib'
 import APIRequest from 'utils/APIRequest'
 import request from 'utils/request'
 import { queryGetLocations } from 'utils/graphql'
 import styles from 'styles/modules/Showrooms.module.scss'
+import { SnackbarContext } from 'components/Snackbar'
 
 function Showroom({ showrooms }) {
   const [list] = useState(showrooms)
@@ -16,17 +16,17 @@ function Showroom({ showrooms }) {
   const [selected, setSelected] = useState(showrooms[0])
   const [zoom, setZoom] = useState(13)
   const [center, setCenter] = useState(showrooms[0].position)
+  const { setSnackbarState } = useContext(SnackbarContext)
 
   useEffect(() => {
     document.body.className = ''
-    console.log(showrooms)
   }, [])
 
   const scrollToTop = () => {
     scroll.scrollToTop()
   }
 
-  const find_closest_markers = async (event) => {
+  const nearestMarker = async (event) => {
     const markers_distances = []
     await displayList.map(async (item, i) => {
       const { position } = item
@@ -37,45 +37,46 @@ function Showroom({ showrooms }) {
       markers_distances[i] = { distance: d, marker: item }
     })
 
-    const closest_markers = markers_distances.sort((a, b) => a.distance - b.distance)
+    const closest = markers_distances.sort((a, b) => a.distance - b.distance)
     if (screen.width < 992) scrollToTop()
-    setSelected(closest_markers[0].marker)
+    setDisplayList(closest.map(({ marker }) => marker))
+    setSelected(closest[0].marker)
     setZoom(13)
-    setCenter(closest_markers[0].marker.position)
+    setCenter(closest[0].marker.position)
+    scroller.scrollTo(closest[0].marker._id, {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      containerId: 'scroll-list'
+    })
   }
 
   const searchStore = () => {
-    if (!search) return
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(search)}&key=${process.env.NEXT_PUBLIC_GOOGLE_API}`
+    if (!search) {
+      setDisplayList(list)
+      return
+    }
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(search)}&components=country:AU&key=${process.env.NEXT_PUBLIC_GOOGLE_API}`
 
     APIRequest('GET', url)
       .then(res => {
         const { results } = res.data
+        if (results.length < 1) {
+          setSnackbarState({
+            open: true,
+            message: 'Location not found, please try another search',
+          })
+          return
+        }
         const { lat, lng } = results[0].geometry.location
 
-        find_closest_markers({ latitude: lat, longitude: lng })
+        nearestMarker({ latitude: lat, longitude: lng })
       })
-
-    /* const display = list.filter(l => (
-      filterRegex(search, l.address)
-      || filterRegex(search, l.name)
-    ))
-    setDisplayList(display)
-    if (display.length > 0) {
-      if (screen.width < 992) scrollToTop()
-      setSelected(display[0])
-      setZoom(13)
-      setCenter(display[0].position)
-    } else {
-      setSelected({})
-      setZoom()
-      setCenter([-25.274398, 133.775136])
-    } */
   }
 
   const clearSearch = (v) => {
     setSearch(v)
-    if (v === '')setDisplayList(list)
+    if (v === '') setDisplayList(list)
   }
 
   return (
