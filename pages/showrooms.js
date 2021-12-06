@@ -56,7 +56,9 @@ function Showroom({ showrooms }) {
       setDisplayList(list)
       return
     }
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(search)}&components=country:AU&key=${process.env.NEXT_PUBLIC_GOOGLE_API}`
+    let searchString = search
+    if (!isNaN(search)) searchString = `Postcode ${search} Australia`
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(searchString)}&components=country:AU&key=${process.env.NEXT_PUBLIC_GOOGLE_API}`
 
     APIRequest('GET', url)
       .then(res => {
