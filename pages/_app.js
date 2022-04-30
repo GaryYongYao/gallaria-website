@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SnackbarComponent, SnackbarContext } from 'components/Snackbar'
 import { ContactWindow, ContactContext } from 'components/ContactWindow'
 import { TermsWindow, TermsContext } from 'components/TermsWindow'
 import { EnquiryContext } from 'utils/enquiryCookie'
 import { CartContext } from 'utils/cartCookie'
+import TagManager from 'react-gtm-module'
 import 'styles/globals.scss'
 
 function MyApp({ Component, pageProps }) {
@@ -20,6 +21,10 @@ function MyApp({ Component, pageProps }) {
   const [contactOpen, setContactOpen] = useState(false)
   const [termsOpen, setTermsOpen] = useState(false)
   const [terms, setTerms] = useState('policy')
+
+  useEffect(() => {
+    TagManager.initialize({ gtmId: 'GTM-T5PTP8C' })
+  }, [])
 
   return (
     <SnackbarContext.Provider value={{ snackbarState, setSnackbarState }}>
